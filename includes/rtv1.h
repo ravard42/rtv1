@@ -11,7 +11,7 @@
 # define VP_WIDTH			1.0
 # define VP_HEIGHT			1.0
 # define VP_DIST			1.0
-# define MAX_DIST_PERCEPTION		500
+# define MAX_DIST_PERCEPTION		50000
 
 # define EXIT 65307
  

@@ -17,7 +17,7 @@ int	main()
 	
 	c[0] = 0;
 	c[1] = 0;
-	c[2] = 10;
+	c[2] = 12;
 	r = 1;
 
 	print_sphere(c, r, e, 0x00FF00);
@@ -25,13 +25,20 @@ int	main()
 	n[1] = -2;
 	n[2] = 1;
 
-	print_plan(c, n, e, 0xFF00FF);
+	print_plan(c, n, e, 0x4A4A4A);
 	c[0] += 3;
-	print_sphere(c, r, e, 0xFF0000);
+	print_sphere(c, r, e, 0xFFFF00);
 	c[0] -= 6;
-	c[1] += 3;
-	c[2] += 0.8;
-	print_sphere(c, r, e, 0x0000FF);
+	c[2] -= 3;
+	print_sphere(c, r, e, 0x00FFFF);
+	c[0] = 0;
+	c[1] = 2;
+	c[2] = 0;
+	n[0] = 0;
+	n[1] = -1;
+	n[2] = 0;
+	print_plan(c, n, e, 0xA3A3A3);
+
 	
 	expose(e);
 	return (0);
