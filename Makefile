@@ -1,12 +1,18 @@
 CC = gcc
 NAME = rtv1
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -ggdb
 SRC = srcs/main.c\
-	srcs/expose.c\
+	srcs/init_env.c\
+	srcs/loop.c\
 	srcs/hook.c\
-	srcs/set_dir_dist.c\
+	srcs/ft_norme.c\
+	srcs/set_base.c\
+	srcs/matrix_operation.c\
+	srcs/set_dir.c\
+	srcs/print.c\
 	srcs/print_sphere.c\
 	srcs/print_plan.c\
+	srcs/clear.c\
 
 OBJ = $(SRC:.c=.o)
 
