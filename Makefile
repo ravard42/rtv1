@@ -6,6 +6,7 @@ SRC = srcs/main.c\
 	srcs/loop.c\
 	srcs/hook.c\
 	srcs/ft_norme.c\
+	srcs/rot.c\
 	srcs/set_base.c\
 	srcs/matrix_operation.c\
 	srcs/set_dir.c\

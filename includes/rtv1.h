@@ -15,21 +15,29 @@
 # define MAX_DIST	50000000
 
 # define EXIT 		65307
+# define RECULER 	101
+# define AVANCER 	113
 # define ROT_D 		100
 # define ROT_D2 	65363
 # define ROT_G 		97
 # define ROT_G2 	65361
-# define DROITE 	101
-# define GAUCHE 	113
+# define BAS 		115
+# define BAS2 		65364
+# define HAUT 		119
+# define HAUT2 		65362
  
 /*
 # define EXIT 53
+# define RECULER 14
+# define AVANCER 12
 # define ROT_D 2
 # define ROT_D2 124
 # define ROT_G 0
 # define ROT_G2 123
-# define DROITE 14
-# define GAUCHE 12
+# define BAS 13
+# define BAS2 126
+# define HAUT 1
+# define HAUT2 125
 */
 
 typedef struct		s_scn
@@ -57,10 +65,16 @@ int	expose_hook(t_env *e);
 int	key_hook(int keycode, t_env *e);
 
 
-float	*matrix_product(float *dst, float **mat, float *src);
-float	*matrix_sum(float *a, float *b);
-float	*matrix_subtraction(float *a, float *b);
+float	*matrix_product(float **mat, float *src, float *mp);
+float	*vectorial_sum(float *u, float *v, float *sum);
+float	*vectorial_multi(int i, float *u);
+float	*vectorial_subtraction(float *u, float *v, float *sub);
+float	*vectorial_product(float *u, float *v, float *prod);
 void	ft_norme(float *v);
+void	rot_d(float *eZcam);
+void	rot_g(float *eZcam);
+void	rot_b(float **base);
+void	rot_h(float **base);
 void	set_base(t_scn *s);
 void	set_dir(t_env *e);
 void	print_all(t_env *e);
