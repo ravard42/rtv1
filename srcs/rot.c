@@ -1,104 +1,92 @@
 # include "rtv1.h"
 
-void	rot_d(float *eZcam)
+void	rot(float *n, float *value, float *eZ)
 {
 	int	i;
-	float	**rot_30;
+	float	**rot;
 
 	i = -1;
-	rot_30 = (float **)malloc(sizeof(float *) * 3);	
+	rot = (float **)malloc(sizeof(float *) * 3);	
 	while (++i < 3)
-		rot_30[i] = (float *)malloc(sizeof(float) * 3);	
-	rot_30[0][0] = cos(M_PI / 6); 
-	rot_30[0][1] = sin(-M_PI / 6);
-	rot_30[0][2] = 0;
-	rot_30[1][0] = sin(M_PI / 6);
-	rot_30[1][1] = cos(M_PI / 6);
-	rot_30[1][2] = 0;
-	rot_30[2][0] = 0;
-	rot_30[2][1] = 0;
-	rot_30[2][2] = 1;
-	matrix_product(rot_30, eZcam, eZcam);
+		rot[i] = (float *)malloc(sizeof(float) * 3);	
+	rot[0][0] = cos(value)  + (1 - cos(value)) * (pow(n[0], 2)); 
+	rot[0][1] = (1 - cos(value)) * (n[0] * n[1]) - sin(value) * (-n[2]);
+	rot[0][2] = (1 - cos(value)) * (n[0] * n[2]) - sin(value) * (n[1]);
+	rot[1][0] = (1 - cos(value)) * (n[0] * n[1]) - sin(value) * (n[2]);
+	rot[1][1] = cos(value) + (1 - cos(value)) * (pow(n[1], 2));
+	rot[1][2] = (1 - cos(value)) * (n[1] * n[2]) - sin(value) * (-n[0]);
+	rot[2][0] = (1 - cos(value)) * (n[0] * n[2]) - sin(value) * (-n[1]);
+	rot[2][1] = (1 - cos(value)) * (n[1] * n[2]) - sin(value) * (n[0]);
+	rot[2][2] = cos(value) + (1 - cos(value)) * (pow(n[2], 2));
+	matrix_product(rot, eZ, eZ);
 	i = -1;
 	while (++i < 3)
-		free(rot_30[i]);
-	free(rot_30);
+		free(rot[i]);
+	free(rot);
 }
 
-void	rot_g(float *eZcam)
+void	construct_transfer_mat(float **base)
 {
-	int	i;
-	float	**rot_30;
+	int		sens;
 
-	i = -1;
-	rot_30 = (float **)malloc(sizeof(float *) * 3);	
-	while (++i < 3)
-		rot_30[i] = (float *)malloc(sizeof(float) * 3);	
-	rot_30[0][0] = cos(M_PI / 6); 
-	rot_30[0][1] = sin(M_PI / 6);
-	rot_30[0][2] = 0;
-	rot_30[1][0] = sin(-M_PI / 6);
-	rot_30[1][1] = cos(M_PI / 6);
-	rot_30[1][2] = 0;
-	rot_30[2][0] = 0;
-	rot_30[2][1] = 0;
-	rot_30[2][2] = 1;
-	matrix_product(rot_30, eZcam, eZcam);
-	i = -1;
-	while (++i < 3)
-		free(rot_30[i]);
-	free(rot_30);
-}
-
-
-void	rot_b(float **base)
-{
-	int	i;
-	float	**rot_30;
-
-	i = -1;
-	rot_30 = (float **)malloc(sizeof(float *) * 3);	
-	while (++i < 3)
-		rot_30[i] = (float *)malloc(sizeof(float) * 3);	
-	rot_30[0][0] = cos(M_PI / 6)  + (1 - cos(M_PI / 6)) * (pow(base[0][0], 2)); 
-	rot_30[0][1] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][1]) + sin(M_PI / 6) * (-base[0][2]);
-	rot_30[0][2] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][2]) + sin(M_PI / 6) * (base[0][1]);
-	rot_30[1][0] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][1]) + sin(M_PI / 6) * (base[0][2]);
-	rot_30[1][1] = cos(M_PI / 6) + (1 - cos(M_PI / 6)) * (pow(base[0][1], 2));
-	rot_30[1][2] = (1 - cos(M_PI / 6)) * (base[0][1] * base[0][2]) + sin(M_PI / 6) * (-base[0][0]);
-	rot_30[2][0] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][2]) + sin(M_PI / 6) * (-base[0][1]);
-	rot_30[2][1] = (1 - cos(M_PI / 6)) * (base[0][1] * base[0][2]) + sin(M_PI / 6) * (base[0][0]);
-	rot_30[2][2] = cos(M_PI / 6) + (1 - cos(M_PI / 6)) * (pow(base[0][2], 2));
-	matrix_product(rot_30, base[2], base[2]);
-	i = -1;
-	while (++i < 3)
-		free(rot_30[i]);
-	free(rot_30);
-	
-}
-
-void	rot_h(float **base)
-{
-	int	i;
-	float	**rot_30;
-
-	i = -1;
-	rot_30 = (float **)malloc(sizeof(float *) * 3);	
-	while (++i < 3)
-		rot_30[i] = (float *)malloc(sizeof(float) * 3);	
-	rot_30[0][0] = cos(M_PI / 6)  + (1 - cos(M_PI / 6)) * (pow(base[0][0], 2)); 
-	rot_30[0][1] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][1]) - sin(M_PI / 6) * (-base[0][2]);
-	rot_30[0][2] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][2]) - sin(M_PI / 6) * (base[0][1]);
-	rot_30[1][0] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][1]) - sin(M_PI / 6) * (base[0][2]);
-	rot_30[1][1] = cos(M_PI / 6) + (1 - cos(M_PI / 6)) * (pow(base[0][1], 2));
-	rot_30[1][2] = (1 - cos(M_PI / 6)) * (base[0][1] * base[0][2]) - sin(M_PI / 6) * (-base[0][0]);
-	rot_30[2][0] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][2]) - sin(M_PI / 6) * (-base[0][1]);
-	rot_30[2][1] = (1 - cos(M_PI / 6)) * (base[0][1] * base[0][2]) - sin(M_PI / 6) * (base[0][0]);
-	rot_30[2][2] = cos(M_PI / 6) + (1 - cos(M_PI / 6)) * (pow(base[0][2], 2));
-	matrix_product(rot_30, base[2], base[2]);
-	i = -1;
-	while (++i < 3)
-		free(rot_30[i]);
-	free(rot_30);
-	
+	ft_norme(base[2]);
+	if (base[2][1] == 0 && base[2][2] == 0)
+	{
+		sens = (base[2][0] > 0) ? 1 : -1;
+		base[0][0] = 0;
+		base[0][1] = -sens;
+		base[0][2] = 0;
+		base[1][0] = 0;
+		base[1][1] = 0;
+		base[1][2] = -1;
+	}
+	else if (base[2][0] == 0 && base[2][2] == 0)
+	{
+		sens = (base[2][1] > 0) ? 1 : -1;
+		base[0][0] = sens;
+		base[0][1] = 0;
+		base[0][2] = 0;
+		base[1][0] = 0;
+		base[1][1] = 0;
+		base[1][2] = -1;
+	}
+	else if (base[2][0] == 0 && base[2][1] == 0)
+	{
+		sens = (base[2][2] > 0) ? 1 : -1;
+		base[0][0] = 0;
+		base[0][1] = 1;
+		base[0][2] = 0;
+		base[1][0] = -sens;
+		base[1][1] = 0;
+		base[1][2] = 0;
+	}
+	else if (base[2][0] == 0)
+	{
+		sens = (base[2][1] > 0) ? 1 : -1;
+		base[0][0] = sens;
+		base[0][1] = 0;
+		base[0][2] = 0;
+		base[1][0] = 0;
+		base[1][1] = base[2][2] * sens;
+		base[1][2] = -base[2][1] * sens;
+	}
+	else if (base[2][1] == 0)
+	{
+		sens = (base[2][0] > 0) ? 1 : -1;
+		base[0][0] = 0;
+		base[0][1] = -sens;
+		base[0][2] = 0;
+		base[1][0] = base[2][2] * sens;
+		base[1][1] = 0;
+		base[1][2] = -base[2][0] * sens;
+	}
+	else
+	{
+		sens = (base[2][0] * base[2][1] > 0) ? 1 : -1;
+		base[0][0] = sens / base[2][0];
+		base[0][1] = -sens / base[2][1];
+		base[0][2] = 0;
+		ft_norme(base[0]);
+		vectorial_product(base[2], base[0], base[1]);
+	}
 }
