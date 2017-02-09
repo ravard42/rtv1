@@ -13,6 +13,10 @@ SRC = srcs/main.c\
 	srcs/print.c\
 	srcs/print_sphere.c\
 	srcs/print_plan.c\
+	srcs/rot.c\
+	srcs/matrix_inversion.c\
+	srcs/print_cyl.c\
+	srcs/print_cone.c\
 	srcs/clear.c\
 
 OBJ = $(SRC:.c=.o)

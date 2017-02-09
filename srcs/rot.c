@@ -1,12 +1,14 @@
 # include "rtv1.h"
 
-void	rot(float *n, float *value, float *eZ)
+void	rot(float *n, float value, float *eZ)
 {
 	int	i;
 	float	**rot;
 
-	i = -1;
+	
+	ft_norme(n);
 	rot = (float **)malloc(sizeof(float *) * 3);	
+	i = -1;
 	while (++i < 3)
 		rot[i] = (float *)malloc(sizeof(float) * 3);	
 	rot[0][0] = cos(value)  + (1 - cos(value)) * (pow(n[0], 2)); 

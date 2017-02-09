@@ -80,6 +80,11 @@ void	set_dir(t_env *e);
 void	print_all(t_env *e);
 void	print_sphere(float *center, float r, t_env *e, int color);
 void	print_plan(float *c, float *n, t_env *e, int color);
+void	rot(float *n, float value, float *eZ);
+void	construct_transfer_mat(float **base);
+float 	**inverse(float **mat);
+void	print_cyl(float *origin, float r, float *n, float value, t_env *e, int color);
+void	print_cone(float *origin, float *a, float *n, float value, t_env *e, int color);
 void	clear_img_dist(t_env *e);
 
 #endif

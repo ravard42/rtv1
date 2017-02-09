@@ -1,6 +1,6 @@
 # include "rtv1.h"
 
-void	print_cyl(float *origin, float r, float *n, float value, t_env *e, int color)
+void	print_cone(float *origin, float *a, float *n, float value, t_env *e, int color)
 {
 	float	**mat;
 	int	i;
@@ -37,9 +37,9 @@ void	print_cyl(float *origin, float r, float *n, float value, t_env *e, int colo
 	while (++i < MAX_X * MAX_Y)
 	{
 		tmp = e->s->dist[i];
-		param[0] = pow(new_dir[i][0], 2) + pow(new_dir[i][1], 2);
-		param[1] = 2 * (new_dir[i][0] * (new_cam[0] - origin[0]) + new_dir[i][1] * (new_cam[1] - origin[1]));
-		param[2] = pow(new_cam[0] - origin[0], 2) + pow(new_cam[1] - origin[1], 2) - pow(r, 2);
+		param[0] = pow(new_dir[i][0], 2) / a[0] + pow(new_dir[i][1], 2) / a[1] - pow(new_dir[i][2], 2) / a[2];
+		param[1] = 2 * (new_dir[i][0] * (new_cam[0] - origin[0]) / a[0] + new_dir[i][1] * (new_cam[1] - origin[1]) / a[1] - new_dir[i][2] * (new_cam[2] - origin[2]) / a[2]);
+		param[2] = pow(new_cam[0] - origin[0], 2) / a[0] + pow(new_cam[1] - origin[1], 2) / a[1] - pow(new_cam[2] - origin[2], 2) / a[2];
 		if ((delt = pow(param[1], 2) - 4 * param[0] * param[2]) == 0)
 		{
 			sol[0] = -param[1] / (2 * param[0]);
