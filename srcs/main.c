@@ -1,25 +1,25 @@
 # include "rtv1.h"
 
+int	ft_usage(char *path)
+{
+	char *tmp;
+
+	tmp = ft_strdup(ft_revstr(path));
+	tmp[5] = '\0';
+	if (ft_strcmp("1vtr.", tmp))
+	{	
+		ft_putstr("usage : ./rtv1 demoX.rtv1\n");
+		exit(0);
+	}
+	free(tmp);
+	ft_revstr(path);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
-	t_env		*e;
-	float		cam[3];
-	float		dir_cam[3];
-	int		i;
-
-	if (argc != 7)
-		exit(0);
-	i = 0;
-	while (++i < 4)
-		cam[i - 1] = (float)ft_atoi(argv[i]);
-	while (++i < 8)
-		dir_cam[i - 5] = (float)ft_atoi(argv[i - 1]);
-
-	i = -1;
-	while (++i < 3)
-		printf("cam[%d] = %f && dir_cam[%d] = %f\n", i, cam[i], i, dir_cam[i]);	
-
-	e = init_env(cam, dir_cam);
-	loop(e);
+	if (argc != 2 || !ft_usage(argv[1]))
+			;
+	loop(install(argv[1]));
 	return (0);
 }

@@ -2,14 +2,18 @@ CC = gcc
 NAME = rtv1
 FLAGS = -Wall -Wextra -Werror -ggdb
 SRC = srcs/main.c\
+	srcs/install.c\
+	srcs/analyze.c\
 	srcs/init_env.c\
 	srcs/loop.c\
 	srcs/hook.c\
 	srcs/ft_norme.c\
+	srcs/tools.c\
 	srcs/rot_cam.c\
-	srcs/set_base.c\
+	srcs/set_cam.c\
+	srcs/set_sphere.c\
 	srcs/matrix_operation.c\
-	srcs/set_dir.c\
+	srcs/set_cam_ray_dir.c\
 	srcs/print.c\
 	srcs/print_sphere.c\
 	srcs/print_plan.c\

@@ -18,13 +18,13 @@ void	print_cyl(float *origin, float r, float *n, float value, t_env *e, int colo
 	construct_transfer_mat(mat);
 	inverse(mat);
 	matrix_product(mat, origin, origin);
-	matrix_product(mat, e->s->cam, new_cam);
+	matrix_product(mat, e->c->pos, new_cam);
 	new_dir = (float **)malloc(sizeof(float *) * MAX_X * MAX_Y);
 	i = -1;
 	while (++i < MAX_X * MAX_Y)
 	{
 		new_dir[i] = (float *)malloc(sizeof(float) * 3);
-		matrix_product(mat, e->s->dir[i] , new_dir[i]);
+		matrix_product(mat, e->c->r_dir[i] , new_dir[i]);
 	}
 
 	
@@ -36,14 +36,14 @@ void	print_cyl(float *origin, float r, float *n, float value, t_env *e, int colo
 	i = -1;
 	while (++i < MAX_X * MAX_Y)
 	{
-		tmp = e->s->dist[i];
+		tmp = e->c->r_dist[i];
 		param[0] = pow(new_dir[i][0], 2) + pow(new_dir[i][1], 2);
 		param[1] = 2 * (new_dir[i][0] * (new_cam[0] - origin[0]) + new_dir[i][1] * (new_cam[1] - origin[1]));
 		param[2] = pow(new_cam[0] - origin[0], 2) + pow(new_cam[1] - origin[1], 2) - pow(r, 2);
 		if ((delt = pow(param[1], 2) - 4 * param[0] * param[2]) == 0)
 		{
 			sol[0] = -param[1] / (2 * param[0]);
-			e->s->dist[i] = (sol[0] > VP_DIST  && e->s->dist[i] > sol[0]) ? sol[0] : e->s->dist[i];
+			e->c->r_dist[i] = (sol[0] > VP_DIST  && e->c->r_dist[i] > sol[0]) ? sol[0] : e->c->r_dist[i];
 		}
 		else if (delt > 0)
 		{
@@ -52,15 +52,15 @@ void	print_cyl(float *origin, float r, float *n, float value, t_env *e, int colo
 			if ((sol[0] <= VP_DIST && sol[1] > VP_DIST) || (sol[0] > VP_DIST && sol[1] <= VP_DIST))
 			{
 				sol[2] = (sol[0] > VP_DIST) ? sol[0] : sol[1];
-				e->s->dist[i] = (e->s->dist[i] > sol[2]) ? sol[2] : e->s->dist[i];
+				e->c->r_dist[i] = (e->c->r_dist[i] > sol[2]) ? sol[2] : e->c->r_dist[i];
 			}
 			else if (sol[0] > VP_DIST && sol[1] > VP_DIST)	
 			{
 				sol[2] = (sol[0] <= sol[1]) ? sol[0] : sol[1];
-				e->s->dist[i] = (e->s->dist[i] > sol[2]) ? sol[2] : e->s->dist[i];
+				e->c->r_dist[i] = (e->c->r_dist[i] > sol[2]) ? sol[2] : e->c->r_dist[i];
 			}
 		}
-		if (tmp != e->s->dist[i])
+		if (tmp != e->c->r_dist[i])
 			*((unsigned int *)e->data_img + i) = color;
 	}
 }

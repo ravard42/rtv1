@@ -49,6 +49,8 @@ int				ft_atoi(const char *str)
 	int		len;
 	int		result;
 
+	if (!str || !str[0])
+		return (0);
 	sign = (int *)malloc(sizeof(int));
 	buf = (char *)str;
 	buf = polarity(ft_rm_whitespace(buf), sign);

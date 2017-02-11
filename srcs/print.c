@@ -2,36 +2,16 @@
 
 void		print_all(t_env *e)
 {
-	float		r;
-	float		c[3];
-	float		n[3];
-	float		a[3];
-	
-	r = 1;
-	
-	c[0] = 0;
-	c[1] = 0;
-	c[2] = 0;
-	print_sphere(c, r, e, 0xFFFFFF);
+	t_sph	*tmp;
 
-	c[0] = 5;
-	c[1] = 0;
-	c[2] = 0;
-	print_sphere(c, r, e, 0x0000FF);
-	
-	c[0] = 0;
-	c[1] = 5;
-	c[2] = 0;
-	print_sphere(c, r, e, 0x00FF00);
-	
-	c[0] = 0;
-	c[1] = 0;
-	c[2] = 5;
-	print_sphere(c, r, e, 0xFF0000);
-	
-	
+	tmp = e->o->s;
+	while (tmp != NULL)
+	{
+		print_sphere(tmp->origin, tmp->r, e, tmp->color);
+		tmp = tmp->next;
+	}
 
-	
+	/*	
 	c[0] = 0;
 	c[1] = 0;
 	c[2] = 0;
@@ -70,5 +50,5 @@ void		print_all(t_env *e)
 	a[1] = 1;
 	a[2] = 9;	
 	print_cone(c, a, n, -M_PI / 6, e, 0x00FFFF);
-
+	*/
 }

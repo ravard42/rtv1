@@ -1,6 +1,6 @@
 # include "rtv1.h"
 
-void	set_dir(t_env *e)
+void	set_cam_ray_dir(t_cam *c)
 {
 	int	i;
 	float	norme;
@@ -13,6 +13,6 @@ void	set_dir(t_env *e)
 		tmp[0] = (-1 * VP_WIDTH / 2 + i % MAX_X * VP_WIDTH / MAX_X) / norme;
 		tmp[1] = (-1 * VP_HEIGHT / 2 + i / MAX_Y * VP_HEIGHT / MAX_Y) / norme;
 		tmp[2] = VP_DIST / norme;
-		matrix_product(e->s->base, tmp, e->s->dir[i]);
+		matrix_product(c->base, tmp, c->r_dir[i]);
 	}
 }
