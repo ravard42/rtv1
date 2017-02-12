@@ -15,10 +15,12 @@ t_env		*install(char *path)
 	while (get_next_line(fd, &line) == 1)
 	{
 		tmp = ft_strsplit(line, ' ');
+		if (!tmp)
+			not_a_valid_file();
 		k = analyzer(tmp[0]);
-		if (k == 0 && analyzer_cam(tmp))
+		if (k == 0)
 			set_cam(tmp, e->c);
-		else if (k == 1 && analyzer_sphere(tmp))
+		else if (k == 1)
 			set_sphere(tmp, e->o);
 		/*else if (k == 2 && analyzer_plan(tmp))
 			set_plan(tmp, e->o);
@@ -26,6 +28,7 @@ t_env		*install(char *path)
 			set_cylindree(tmp, e->o);
 		else if (k == 4 && analyzer_cone(tmp))
 			set_cone(tmp, e->o);*/
+		free_split(tmp);
 	}
 	close(fd);
 	return (e);

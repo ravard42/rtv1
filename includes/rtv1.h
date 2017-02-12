@@ -95,10 +95,11 @@ void		not_a_valid_file();
 t_env	*install(char *path);
 void	init_env(t_env *e);
 int	ft_atoi_hexa(char *s);
+int	ft_is_int(char *tmp);
+void	free_split(char **tmp);
 void	load_vect(char *s, float *a);
 int	analyzer(char *tmp);
-int	analyzer_cam(char **tmp);
-int	analyzer_sphere(char **tmp);
+void	not_a_valid_file();
 
 void	set_cam_base(t_cam *c);
 void	set_cam_ray_dir(t_cam *c);

@@ -22,34 +22,3 @@ int		analyzer(char *tmp)
 		not_a_valid_file();
 	return (1);
 }
-
-
-int		analyzer_cam(char **tmp)
-{
-	if (tmp)
-		;
-	return (1);
-}	
-
-int		analyzer_sphere(char **tmp)
-{
-	if (tmp)
-		;
-	return (1);
-}	
-
-/*
-int		analyzer_plan(char **tmp)
-{
-	return (1);
-}	
-
-int		analyzer_cylindre(char **tmp)
-{
-	return (1);
-}	
-
-int		analyzer_cone(char **tmp)
-{
-	return (1);
-} */
