@@ -12,6 +12,7 @@ SRC = srcs/main.c\
 	srcs/rot_cam.c\
 	srcs/set_cam.c\
 	srcs/set_sphere.c\
+	srcs/set_plan.c\
 	srcs/matrix_operation.c\
 	srcs/set_cam_ray_dir.c\
 	srcs/print.c\

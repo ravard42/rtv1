@@ -22,11 +22,11 @@ t_env		*install(char *path)
 			set_cam(tmp, e->c);
 		else if (k == 1)
 			set_sphere(tmp, e->o);
-		/*else if (k == 2 && analyzer_plan(tmp))
+		else if (k == 2)
 			set_plan(tmp, e->o);
-		else if (k == 3 && analyzer_cylindre(tmp))
+		/*else if (k == 3)
 			set_cylindree(tmp, e->o);
-		else if (k == 4 && analyzer_cone(tmp))
+		else if (k == 4)
 			set_cone(tmp, e->o);*/
 		free_split(tmp);
 	}

@@ -60,6 +60,10 @@ typedef struct		s_sph
 
 typedef struct		s_pln
 {
+	float		*origin;
+	float		*nor;
+	int		color;
+	struct s_pln	*next;
 }			t_pln;
 
 typedef struct		s_cyl
@@ -106,6 +110,7 @@ void	set_cam_ray_dir(t_cam *c);
 void	set_cam(char **tmp, t_cam *c);
 
 void	set_sphere(char **tmp, t_obj *o);
+void	set_plan(char **tmp, t_obj *o);
 
 void	loop(t_env *e);
 int	expose_hook(t_env *e);
@@ -123,8 +128,8 @@ void	rot_g(float *eZcam);
 void	rot_b(float **base);
 void	rot_h(float **base);
 void	print_all(t_env *e);
-void	print_sphere(float *center, float r, t_env *e, int color);
-void	print_plan(float *c, float *n, t_env *e, int color);
+void	print_sphere(t_env *e);
+void	print_plan(t_env *e);
 void	rot(float *n, float value, float *eZ);
 void	construct_transfer_mat(float **base);
 float 	**inverse(float **mat);

@@ -1,6 +1,6 @@
 # include "rtv1.h"
 
-void	print_plan(float *c, float *n, t_env *e, int color)
+void	print_plan(t_env *e)
 {
 	int	i;
 	float	tmp[2];
@@ -9,10 +9,10 @@ void	print_plan(float *c, float *n, t_env *e, int color)
 	while (++i < MAX_X * MAX_Y)
 	{
 		tmp[0] = e->c->r_dist[i];
-		tmp[1] = (n[0] * (c[0] - e->c->pos[0]) + n[1] * (c[1] - e->c->pos[1]) + n[2] * (c[2] - e->c->pos[2])) / (n[0] * e->c->r_dir[i][0] + n[1] * e->c->r_dir[i][1] + n[2] * e->c->r_dir[i][2]);
+		tmp[1] = (e->o->p->nor[0] * (e->o->p->origin[0] - e->c->pos[0]) + e->o->p->nor[1] * (e->o->p->origin[1] - e->c->pos[1]) + e->o->p->nor[2] * (e->o->p->origin[2] - e->c->pos[2])) / (e->o->p->nor[0] * e->c->r_dir[i][0] + e->o->p->nor[1] * e->c->r_dir[i][1] + e->o->p->nor[2] * e->c->r_dir[i][2]);
 		e->c->r_dist[i] = (tmp[1] > VP_DIST && tmp[1] < e->c->r_dist[i]) ? tmp[1] : e->c->r_dist[i];
 		if (tmp[0] != e->c->r_dist[i])
-			*((int *)e->data_img + i) = color;
+			*((int *)e->data_img + i) = e->o->p->color;
 
 	}
 }

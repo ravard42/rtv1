@@ -1,35 +1,41 @@
 # include "rtv1.h"
 
+void		save(t_env *e, void **tmp)
+{
+	tmp[0] = e->o->s;
+	tmp[1] = e->o->p;
+	tmp[2] = e->o->cy;
+	tmp[3] = e->o->co;
+}
+
+void		recup(t_env *e, void **tmp)
+{
+	e->o->s = tmp[0];
+	e->o->p = tmp[1];
+	e->o->cy = tmp[2];
+	e->o->co = tmp[3];
+}
+
+
 void		print_all(t_env *e)
 {
-	t_sph	*tmp;
+	void	**tmp;
 
-	tmp = e->o->s;
-	while (tmp != NULL)
+	tmp = (void **)malloc(sizeof(void *) * 4);
+	save(e, tmp);
+	while (e->o->s != NULL)
 	{
-		print_sphere(tmp->origin, tmp->r, e, tmp->color);
-		tmp = tmp->next;
+		print_sphere(e);
+		e->o->s = e->o->s->next;
 	}
+	while (e->o->p != NULL)
+	{
+		print_plan(e);
+		e->o->p = e->o->p->next;
+	}
+	recup(e, tmp);
 
 	/*	
-	c[0] = 0;
-	c[1] = 0;
-	c[2] = 0;
-	n[0] = 0;
-	n[1] = 0;
-	n[2] = 1;
-	print_plan(c, n, e, 0x111111);
-	
-	n[0] = 1;
-	n[1] = 0;
-	n[2] = 0;
-	print_plan(c, n, e, 0x555555);
-	
-	n[0] = 0;
-	n[1] = 1;
-	n[2] = 0;
-	print_plan(c, n, e, 0xAAAAAA);
-
 	c[0] = 5;
 	c[1] = 15;
 	c[2] = 0;
