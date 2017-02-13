@@ -62,7 +62,7 @@ void	set_cam_base(t_cam *c)
 		c->base[0][1] = -sens / c->base[2][1];
 		c->base[0][2] = 0;
 		ft_norme(c->base[0]);
-		vectorial_product(c->base[2], c->base[0], c->base[1]);
+		vectorial_product(c->base[1], c->base[2], c->base[0]);
 	}
 }
 

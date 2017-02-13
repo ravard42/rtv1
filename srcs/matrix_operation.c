@@ -2,7 +2,7 @@
 
 // src et mp peuvent overlap le resultat sera stock ds mp par contre src en sera modifiE et vaudra mp UNIQUEMENT si les pointeur coincident au moment de l appel de la fonction sinon aucun soucis src restera tel quel! 
 
-float	*matrix_product(float **mat, float *src, float *mp)
+float	*matrix_product(float *mp, float **mat, float *src)
 {
 	float 	tmp[3];
 	int	i;
@@ -22,7 +22,15 @@ float	*matrix_product(float **mat, float *src, float *mp)
 	return (mp);
 }
 
-float	*vectorial_sum(float *u, float *v, float *sum)
+float	*vectorial_product(float *prod, float *u, float *v)
+{
+	prod[0] = u[1] * v[2] - u[2] * v[1];
+	prod[1] = u[2] * v[0] - u[0] * v[2];
+	prod[2] = u[0] * v[1] - u[1] * v[0];
+	return (prod);
+}
+
+float	*vectorial_sum(float *sum, float *u, float *v)
 {
 	sum[0] = u[0] + v[0];
 	sum[1] = u[1] + v[1];
@@ -30,14 +38,7 @@ float	*vectorial_sum(float *u, float *v, float *sum)
 	return (sum);
 }
 
-float	*vectorial_multi(int i, float *u)
-{
-	u[0] = i * u[0];
-	u[1] = i * u[1];
-	u[2] = i * u[2];
-	return (u);
-}
-float	*vectorial_subtraction(float *u, float *v, float *sub)
+float	*vectorial_subtraction(float *sub, float *u, float *v)
 {
 	sub[0] = u[0] - v[0];
 	sub[1] = u[1] - v[1];
@@ -45,10 +46,11 @@ float	*vectorial_subtraction(float *u, float *v, float *sub)
 	return (sub);
 }
 
-float	*vectorial_product(float *u, float *v, float *prod)
+float	*vectorial_multi(float *u, int k)
 {
-	prod[0] = u[1] * v[2] - u[2] * v[1];
-	prod[1] = u[2] * v[0] - u[0] * v[2];
-	prod[2] = u[0] * v[1] - u[1] * v[0];
-	return (prod);
+	u[0] = k * u[0];
+	u[1] = k * u[1];
+	u[2] = k * u[2];
+	return (u);
 }
+

@@ -14,4 +14,5 @@ void		init_env(t_env *e)
 	e->o->p = NULL;
 	e->o->cy = NULL;
 	e->o->co = NULL;
+	e->t = NULL;
 }

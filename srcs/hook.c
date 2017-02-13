@@ -19,9 +19,9 @@ int	key_hook(int keycode, t_env *e)
 	if (keycode == EXIT)
 		exit(0);
 	else if (keycode == AVANCER)
-		vectorial_sum(e->c->pos, vectorial_multi(5, tmp), e->c->pos);
+		vectorial_sum(e->c->pos, e->c->pos, vectorial_multi(tmp, 5));
 	else if (keycode == RECULER)
-		vectorial_subtraction(e->c->pos, vectorial_multi(5, tmp), e->c->pos);
+		vectorial_subtraction(e->c->pos, e->c->pos, vectorial_multi(tmp, 5));
 	else if (keycode == ROT_D || keycode == ROT_D2)
 	{	
 		rot_d(e->c->base[2]);
@@ -37,13 +37,13 @@ int	key_hook(int keycode, t_env *e)
 	else if (keycode == BAS || keycode == BAS2)
 	{	
 		rot_b(e->c->base);
-		vectorial_product(e->c->base[2], e->c->base[0], e->c->base[1]);
+		vectorial_product(e->c->base[1], e->c->base[2], e->c->base[0]);
 		set_cam_ray_dir(e->c);
 	}
 	else if (keycode == HAUT || keycode == HAUT2)
 	{	
 		rot_h(e->c->base);
-		vectorial_product(e->c->base[2], e->c->base[0], e->c->base[1]);
+		vectorial_product(e->c->base[1], e->c->base[2], e->c->base[0]);
 		set_cam_ray_dir(e->c);
 	}
 	expose_hook(e);

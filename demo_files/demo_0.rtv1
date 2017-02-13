@@ -1,8 +1,12 @@
 cam {50,50,25} {-2,-2,-1}
-sphere {0,0,0} 5 0xFFFFFF
-sphere {15,0,0} 5 0x0000FF
-sphere {0,15,0} 5 0x00FF00
-sphere {0,0,15} 5 0xFF0000
+sphere {0,0,0} 3 0xFFFFFF
+sphere {15,0,0} 4 0x0000FF
+sphere {0,15,0} 4 0x00FF00
+sphere {0,0,15} 4 0xFF0000
 plan {0,0,0} {0,0,1} 0x111111
 plan {0,0,0} {1,0,0} 0x555555
 plan {0,0,0} {0,1,0} 0xAAAAAA
+cylindre {31,7,0} 3 1 {1,0,0} 0xFF00FF
+cylindre {7,31,0} 3 1 {1,0,0} 0x14C8B0
+cylindre {7,7,25} 3 2 {1,1,0} 0xF7AD00
+cone {37,17,5} 6 {1,0,0} 0xE9FA00

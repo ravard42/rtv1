@@ -1,6 +1,25 @@
 # include "rtv1.h"
 
-void	rot(float *n, float value, float *eZ)
+void	init_transfer_stuff(t_env *e)
+{
+	int	i;
+
+	e->t = (t_trsf *)malloc(sizeof(t_trsf));
+	e->t->mat = (float **)malloc(sizeof(float *) * 3);
+	i = -1;
+	while (++i < 3)
+		e->t->mat[i] = (float *)malloc(sizeof(float) * 3);
+	e->t->cam_pos = (float *)malloc(sizeof(float) * 3);
+	e->t->obj_pos = (float *)malloc(sizeof(float) * 3);
+	e->t->cam_r_dir = (float **)malloc(sizeof(float *) * MAX_X * MAX_Y);
+	i = -1;
+	while (++i < MAX_X * MAX_Y)
+		e->t->cam_r_dir[i] = (float *)malloc(sizeof(float) * 3);
+}
+
+// on effectue la rotation de eZ de value radian par rapport a n et on stock le resultat dans eZ
+
+void	rot(float *eZ, float value, float *n)
 {
 	int	i;
 	float	**rot;
@@ -20,7 +39,7 @@ void	rot(float *n, float value, float *eZ)
 	rot[2][0] = (1 - cos(value)) * (n[0] * n[2]) - sin(value) * (-n[1]);
 	rot[2][1] = (1 - cos(value)) * (n[1] * n[2]) - sin(value) * (n[0]);
 	rot[2][2] = cos(value) + (1 - cos(value)) * (pow(n[2], 2));
-	matrix_product(rot, eZ, eZ);
+	matrix_product(eZ, rot, eZ);
 	i = -1;
 	while (++i < 3)
 		free(rot[i]);
@@ -89,6 +108,23 @@ void	construct_transfer_mat(float **base)
 		base[0][1] = -sens / base[2][1];
 		base[0][2] = 0;
 		ft_norme(base[0]);
-		vectorial_product(base[2], base[0], base[1]);
+		vectorial_product(base[1], base[2], base[0]);
 	}
+}
+
+void		set_transfer_stuff(float rot_val, float *axe_rot, float *obj_pos, t_env *e)
+{
+	int	i;
+	
+	e->t->mat[2][0] = 0;
+	e->t->mat[2][1] = 0;
+	e->t->mat[2][2] = 1;
+	rot(e->t->mat[2], rot_val, axe_rot);
+	construct_transfer_mat(e->t->mat);
+	inverse(e->t->mat);
+	matrix_product(e->t->cam_pos, e->t->mat, e->c->pos);
+	matrix_product(e->t->obj_pos, e->t->mat, obj_pos);
+	i = -1;
+	while (++i < MAX_X * MAX_Y)
+		matrix_product(e->t->cam_r_dir[i], e->t->mat, e->c->r_dir[i]);
 }

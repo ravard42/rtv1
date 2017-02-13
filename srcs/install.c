@@ -24,12 +24,14 @@ t_env		*install(char *path)
 			set_sphere(tmp, e->o);
 		else if (k == 2)
 			set_plan(tmp, e->o);
-		/*else if (k == 3)
-			set_cylindree(tmp, e->o);
+		else if (k == 3)
+			set_cylindre(tmp, e->o);
 		else if (k == 4)
-			set_cone(tmp, e->o);*/
+			set_cone(tmp, e->o);
 		free_split(tmp);
 	}
 	close(fd);
+	if (e->o->cy || e->o->co)
+		init_transfer_stuff(e);
 	return (e);
 }

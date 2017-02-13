@@ -19,9 +19,8 @@ void		recup(t_env *e, void **tmp)
 
 void		print_all(t_env *e)
 {
-	void	**tmp;
+	void	*tmp[4];
 
-	tmp = (void **)malloc(sizeof(void *) * 4);
 	save(e, tmp);
 	while (e->o->s != NULL)
 	{
@@ -33,17 +32,20 @@ void		print_all(t_env *e)
 		print_plan(e);
 		e->o->p = e->o->p->next;
 	}
+	while (e->o->cy != NULL)
+	{
+		print_cylindre(e);
+		e->o->cy = e->o->cy->next;
+	}
+	while (e->o->co != NULL)
+	{
+		print_cone(e);
+		e->o->co = e->o->co->next;
+	}
 	recup(e, tmp);
+	
 
 	/*	
-	c[0] = 5;
-	c[1] = 15;
-	c[2] = 0;
-	n[0] = 1;
-	n[1] = 0;
-	n[2] = 0;
-	print_cyl(c, r, n, M_PI / 6, e, 0xFF00FF);
-	
 	c[0] = 12;
 	c[1] = 12;
 	c[2] = 7;

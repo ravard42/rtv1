@@ -13,6 +13,6 @@ void	set_cam_ray_dir(t_cam *c)
 		tmp[0] = (-1 * VP_WIDTH / 2 + i % MAX_X * VP_WIDTH / MAX_X) / norme;
 		tmp[1] = (-1 * VP_HEIGHT / 2 + i / MAX_Y * VP_HEIGHT / MAX_Y) / norme;
 		tmp[2] = VP_DIST / norme;
-		matrix_product(c->base, tmp, c->r_dir[i]);
+		matrix_product(c->r_dir[i], c->base, tmp);
 	}
 }

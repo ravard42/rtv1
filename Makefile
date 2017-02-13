@@ -13,14 +13,16 @@ SRC = srcs/main.c\
 	srcs/set_cam.c\
 	srcs/set_sphere.c\
 	srcs/set_plan.c\
+	srcs/set_cylindre.c\
+	srcs/set_cone.c\
 	srcs/matrix_operation.c\
 	srcs/set_cam_ray_dir.c\
 	srcs/print.c\
 	srcs/print_sphere.c\
 	srcs/print_plan.c\
-	srcs/rot.c\
 	srcs/matrix_inversion.c\
-	srcs/print_cyl.c\
+	srcs/transfer.c\
+	srcs/print_cylindre.c\
 	srcs/print_cone.c\
 	srcs/clear.c\
 

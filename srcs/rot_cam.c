@@ -18,7 +18,7 @@ void	rot_d(float *eZcam)
 	rot_30[2][0] = 0;
 	rot_30[2][1] = 0;
 	rot_30[2][2] = 1;
-	matrix_product(rot_30, eZcam, eZcam);
+	matrix_product(eZcam, rot_30, eZcam);
 	i = -1;
 	while (++i < 3)
 		free(rot_30[i]);
@@ -43,7 +43,7 @@ void	rot_g(float *eZcam)
 	rot_30[2][0] = 0;
 	rot_30[2][1] = 0;
 	rot_30[2][2] = 1;
-	matrix_product(rot_30, eZcam, eZcam);
+	matrix_product(eZcam, rot_30, eZcam);
 	i = -1;
 	while (++i < 3)
 		free(rot_30[i]);
@@ -69,7 +69,7 @@ void	rot_b(float **base)
 	rot_30[2][0] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][2]) + sin(M_PI / 6) * (-base[0][1]);
 	rot_30[2][1] = (1 - cos(M_PI / 6)) * (base[0][1] * base[0][2]) + sin(M_PI / 6) * (base[0][0]);
 	rot_30[2][2] = cos(M_PI / 6) + (1 - cos(M_PI / 6)) * (pow(base[0][2], 2));
-	matrix_product(rot_30, base[2], base[2]);
+	matrix_product(base[2], rot_30, base[2]);
 	i = -1;
 	while (++i < 3)
 		free(rot_30[i]);
@@ -95,7 +95,7 @@ void	rot_h(float **base)
 	rot_30[2][0] = (1 - cos(M_PI / 6)) * (base[0][0] * base[0][2]) - sin(M_PI / 6) * (-base[0][1]);
 	rot_30[2][1] = (1 - cos(M_PI / 6)) * (base[0][1] * base[0][2]) - sin(M_PI / 6) * (base[0][0]);
 	rot_30[2][2] = cos(M_PI / 6) + (1 - cos(M_PI / 6)) * (pow(base[0][2], 2));
-	matrix_product(rot_30, base[2], base[2]);
+	matrix_product(base[2], rot_30,  base[2]);
 	i = -1;
 	while (++i < 3)
 		free(rot_30[i]);

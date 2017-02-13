@@ -1,15 +1,3 @@
-/*
-# include <stdio.h>
-# include "libft.h"
-# include <math.h>
-
-void		not_a_valid_file()
-{
-	ft_putstr("le fichier demo n'est pas valide\n");
-	exit(0);
-}
-*/
-
 # include "rtv1.h"
 
 void	free_split(char **tmp)
@@ -100,17 +88,3 @@ void	load_vect(char *s, float *a)
 	a[2] = ft_atoi(tmp[2]);
 	free_split(tmp);
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	float	a[3];
-
-	printf("%d\n", ft_atoi_hexa(argv[1]));
-
-	load_vect(argv[2], a);
-	printf("{%f, %f, %f}\n", a[0], a[1], a[2]);
-
-	return (0);
-}
-*/
