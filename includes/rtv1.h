@@ -9,8 +9,8 @@
 # include "libft.h"
 # include <stdio.h>
 
-# define MAX_X		640
-# define MAX_Y		640
+# define MAX_X		400
+# define MAX_Y		400
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
@@ -73,6 +73,7 @@ typedef struct		s_cyl
 	int		val;
 	float		*rot;
 	int		color;
+	float		*borne;
 	struct s_cyl	*next;
 }			t_cyl;
 
@@ -82,6 +83,7 @@ typedef struct		s_con
 	int		val;
 	float		*rot;
 	int		color;
+	float		*borne;
 	struct s_con	*next;
 }			t_con;
 

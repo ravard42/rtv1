@@ -23,11 +23,13 @@ void	set_cylindre(char **tmp, t_obj *o)
 	if (!ft_is_int(tmp[2]))
 		not_a_valid_file();
 	o->cy->r = ft_atoi(tmp[2]);
-	if (!ft_is_int(tmp[3]) || ft_atoi(tmp[3]) == 0)
+	if (!ft_is_int(tmp[3]))
 		not_a_valid_file();
 	o->cy->val = ft_atoi(tmp[3]);
 	o->cy->rot = (float *)malloc(sizeof(float) * 3);
 	load_vect(tmp[4], o->cy->rot);
 	o->cy->color = ft_atoi_hexa(tmp[5]);
+	o->cy->borne = (float *)malloc(sizeof(float) * 3);
+	load_vect(tmp[6], o->cy->borne);
 	o->cy = begin;
 }
