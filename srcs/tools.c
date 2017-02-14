@@ -32,17 +32,17 @@ int	ft_atoi_hexa(char *s)
 	return (ret);
 }
 
-int	ft_is_int(char *tmp)
+int	ft_is_float(char *tmp)
 {
 	int	i;
+	int	k;
 
-	if (!tmp || !(tmp[0] == '-' || (tmp[0] >= '0' && tmp[0] <= '9')))
+	if (!tmp || !((tmp[0] == '-' && tmp[1] != '\0') || (tmp[0] >= '0' && tmp[0] <= '9')))
 			not_a_valid_file();
 	i = 0;
-	if (tmp[0] == '-' && tmp[1] == '\0')
-			not_a_valid_file();
+	k = 0;
 	while (tmp[++i])
-		if (!(tmp[i] >= '0' && tmp[i] <= '9'))
+		if (!((tmp[i] >= '0' && tmp[i] <= '9') || (tmp[i] == '.' && (k += 1) < 2)))
 			not_a_valid_file();
 	return (1);
 }
@@ -52,7 +52,7 @@ int	is_valid_coord(char *str)
 	int	len;
 	int	i;
 	int	k;
-	char	**is_int;
+	char	**is_float;
 
 	len = ft_strlen(str);
 	if (!(str[0] == '{' && str[len - 1] == '}' && str[len] == '\0'))
@@ -65,12 +65,12 @@ int	is_valid_coord(char *str)
 	if (k != 2)
 		not_a_valid_file();
 	str = ft_revstr(ft_revstr(str + 1) + 1);
-	is_int = ft_strsplit(str, ',');
+	is_float = ft_strsplit(str, ',');
 	i = -1;
 	while (++i < 3)
-		if (!is_int || !ft_is_int(is_int[i]))
+		if (!is_float || !ft_is_float(is_float[i]))
 			not_a_valid_file();
-	free_split(is_int);
+	free_split(is_float);
 	return (1);
 }
 
@@ -83,8 +83,8 @@ void	load_vect(char *s, float *a)
 		not_a_valid_file();
 	s += 2;  // voir dans is_valid_coord la manip sur s en double revstr
 	tmp = ft_strsplit(s, ',');
-	a[0] = ft_atoi(tmp[0]);
-	a[1] = ft_atoi(tmp[1]);
-	a[2] = ft_atoi(tmp[2]);
+	a[0] = ft_atof(tmp[0]);
+	a[1] = ft_atof(tmp[1]);
+	a[2] = ft_atof(tmp[2]);
 	free_split(tmp);
 }

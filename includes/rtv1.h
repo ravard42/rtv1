@@ -48,10 +48,12 @@ typedef struct		s_cam
 	float		**base;
 	float		**r_dir;
 	float		*r_dist;
+	void		*obj;
 }			t_cam;
 
 typedef struct		s_sph
 {
+	char		*name;
 	float		*origin;
 	float		r;
 	int		color;
@@ -60,14 +62,17 @@ typedef struct		s_sph
 
 typedef struct		s_pln
 {
+	char		*name;
 	float		*origin;
 	float		*nor;
 	int		color;
+	float		*borne;
 	struct s_pln	*next;
 }			t_pln;
 
 typedef struct		s_cyl
 {
+	char		*name;
 	float		*origin;
 	float		r;
 	int		val;
@@ -79,6 +84,7 @@ typedef struct		s_cyl
 
 typedef struct		s_con
 {
+	char		*name;
 	float		*origin;
 	int		val;
 	float		*rot;
@@ -122,8 +128,9 @@ void		not_a_valid_file();
 t_env	*install(char *path);
 void	init_env(t_env *e);
 int	ft_atoi_hexa(char *s);
-int	ft_is_int(char *tmp);
 void	free_split(char **tmp);
+int	ft_is_float(char *tmp);
+float	ft_atof(char *s);
 void	load_vect(char *s, float *a);
 int	analyzer(char *tmp);
 void	not_a_valid_file();
@@ -147,6 +154,7 @@ float	*vectorial_sum(float *sum, float *u, float *v);
 float	*vectorial_multi(float *u, int k);
 float	*vectorial_subtraction(float *sub, float *u, float *v);
 float	*vectorial_product(float *prod, float *u, float *v);
+float	ft_dist(float *a, float *b);
 void	ft_norme(float *v);
 void	rot_d(float *eZcam);
 void	rot_g(float *eZcam);

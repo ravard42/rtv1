@@ -1,5 +1,15 @@
 # include "rtv1.h"
 
+float	ft_dist(float *a, float *b)
+{
+	float	tmp;
+
+	tmp = sqrt(pow(b[0] - a[0], 2)
+		+ pow(b[1] - a[1], 2)
+		+ pow(b[2] - a[2], 2));
+	return (tmp);
+}
+
 void	ft_norme(float *v)
 {
 	float	tmp;
