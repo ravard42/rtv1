@@ -35,7 +35,7 @@ void	print_plan(t_env *e)
 {
 	int	i;
 	float	rot_value;
-	float	tmp;
+	float	tmp[3];
 	float	sol;
 	
 	rot_value = (e->o->p->val) ? M_PI / e->o->p->val : 0;
@@ -46,11 +46,14 @@ void	print_plan(t_env *e)
 		e->o->p->nor[2] = 1;
 		rot(e->o->p->nor, rot_value, e->o->p->rot);
 		ft_norme(e->o->p->nor);
+		vectorial_sum(e->o->p->origin, e->o->p->origin,
+			vectorial_multi(vectorial_copy(tmp, e->o->p->nor), e->o->p->translate));
+		e->o->p->val = 0;
 	}
 	i = -1;
 	while (++i < MAX_X * MAX_Y)
 	{
-		sol = ((tmp = solve(i, e)) >= VP_DIST) ? tmp : MAX_DIST;
+		sol = ((tmp[0] = solve(i, e)) >= VP_DIST) ? tmp[0] : MAX_DIST;
 		print(i, sol, e);
 	}
 }

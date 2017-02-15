@@ -1,5 +1,13 @@
 # include "rtv1.h"
 
+float	*vectorial_copy(float *dst, float *src)
+{
+	dst[0] = src[0];
+	dst[1] = src[1];
+	dst[2] = src[2];
+	return (dst);
+}
+
 float	*vectorial_sum(float *sum, float *u, float *v)
 {
 	sum[0] = u[0] + v[0];

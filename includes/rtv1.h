@@ -69,6 +69,7 @@ typedef struct		s_pln
 	float		*nor;
 	int		val;
 	float		*rot;
+	float		translate;
 	int		color;
 	float		*borne;
 	struct s_pln	*next;
@@ -154,6 +155,7 @@ int	key_hook(int keycode, t_env *e);
 
 
 float	*matrix_product(float *mp, float **mat, float *src);
+float	*vectorial_copy(float *dst, float *src);
 float	*vectorial_sum(float *sum, float *u, float *v);
 float	*vectorial_multi(float *u, int k);
 float	*vectorial_subtraction(float *sub, float *u, float *v);
