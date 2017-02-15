@@ -24,26 +24,56 @@ int	key_hook(int keycode, t_env *e)
 		vectorial_subtraction(e->c->pos, e->c->pos, vectorial_multi(tmp, 5));
 	else if (keycode == ROT_D || keycode == ROT_D2)
 	{	
-		rot_d(e->c->base[2]);
-		set_cam_base(e->c);
+		if (prevent_vertical_rot(keycode, e->c->base))
+			;
+		else
+		{
+			rot_d(e->c->base[2]);
+			set_cam_base(e->c);
+		}
 		set_cam_ray_dir(e->c);
 	}
 	else if (keycode == ROT_G || keycode == ROT_G2)
 	{	
-		rot_g(e->c->base[2]);
-		set_cam_base(e->c);
+		if (prevent_vertical_rot(keycode, e->c->base))
+			;
+		else
+		{	
+			rot_g(e->c->base[2]);
+			set_cam_base(e->c);
+		}
 		set_cam_ray_dir(e->c);
 	}
 	else if (keycode == BAS || keycode == BAS2)
 	{	
-		rot_b(e->c->base);
-		vectorial_product(e->c->base[1], e->c->base[2], e->c->base[0]);
+		if (prevent_rot(keycode, e))
+		{
+			e->c->base[2][0] = 0;
+			e->c->base[2][1] = 0;
+			e->c->base[2][2] = -1;
+			set_cam_base(e->c);
+		}
+		else
+		{
+			rot_b(e->c->base);
+			vectorial_product(e->c->base[1], e->c->base[2], e->c->base[0]);
+		}
 		set_cam_ray_dir(e->c);
 	}
 	else if (keycode == HAUT || keycode == HAUT2)
 	{	
-		rot_h(e->c->base);
-		vectorial_product(e->c->base[1], e->c->base[2], e->c->base[0]);
+		if (prevent_rot(keycode, e))
+		{
+			e->c->base[2][0] = 0;
+			e->c->base[2][1] = 0;
+			e->c->base[2][2] = 1;
+			set_cam_base(e->c);
+		}
+		else
+		{
+			rot_h(e->c->base);
+			vectorial_product(e->c->base[1], e->c->base[2], e->c->base[0]);
+		}
 		set_cam_ray_dir(e->c);
 	}
 	expose_hook(e);

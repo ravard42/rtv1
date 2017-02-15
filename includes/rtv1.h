@@ -9,12 +9,14 @@
 # include "libft.h"
 # include <stdio.h>
 
-# define MAX_X		400
-# define MAX_Y		400
+# define MAX_X		300
+# define MAX_Y		300
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
 # define MAX_DIST	50000000
+# define ROT		M_PI / 6
+
 
 # define EXIT 		65307
 # define RECULER 	101
@@ -153,11 +155,14 @@ float	*matrix_product(float *mp, float **mat, float *src);
 float	*vectorial_sum(float *sum, float *u, float *v);
 float	*vectorial_multi(float *u, int k);
 float	*vectorial_subtraction(float *sub, float *u, float *v);
+float	scalar_product(float *u, float *v);
 float	*vectorial_product(float *prod, float *u, float *v);
 float	ft_dist(float *a, float *b);
 void	ft_norme(float *v);
+int	prevent_vertical_rot(int keycode, float **base);
 void	rot_d(float *eZcam);
 void	rot_g(float *eZcam);
+int	prevent_rot(int keycode, t_env *e);
 void	rot_b(float **base);
 void	rot_h(float **base);
 void	print_all(t_env *e);

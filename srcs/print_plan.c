@@ -17,7 +17,7 @@ void	print_plan(t_env *e)
 			+ e->o->p->nor[1] * e->c->r_dir[i][1]
 			+ e->o->p->nor[2] * e->c->r_dir[i][2]);
 		sol = (tmp[0] >= VP_DIST) ? tmp[0] : sol;
-		if (sol < e->c->r_dist[i])
+		if (sol <= e->c->r_dist[i] && sol < MAX_DIST)
 		{
 			tmp[0] = e->c->pos[0] + sol * e->c->r_dir[i][0];
 			tmp[1] = e->c->pos[1] + sol * e->c->r_dir[i][1];

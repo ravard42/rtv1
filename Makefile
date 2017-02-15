@@ -9,12 +9,14 @@ SRC = srcs/main.c\
 	srcs/hook.c\
 	srcs/ft_norme.c\
 	srcs/tools.c\
+	srcs/prevent_rot.c\
 	srcs/rot_cam.c\
 	srcs/set_cam.c\
 	srcs/set_sphere.c\
 	srcs/set_plan.c\
 	srcs/set_cylindre.c\
 	srcs/set_cone.c\
+	srcs/vectorial_operation.c\
 	srcs/matrix_operation.c\
 	srcs/set_cam_ray_dir.c\
 	srcs/print.c\

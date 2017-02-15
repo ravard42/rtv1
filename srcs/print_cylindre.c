@@ -41,7 +41,7 @@ static void	print(int i, float sol, t_env *e)
 {
 	float	tmp;
 
-	if (sol < e->c->r_dist[i])
+	if (sol <= e->c->r_dist[i] && sol < MAX_DIST)
 	{
 		tmp = e->t->cam_pos[2] + sol * e->t->cam_r_dir[i][2] - e->t->obj_pos[2];
 		if (e->o->cy->borne[0] == 0
