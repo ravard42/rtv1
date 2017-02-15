@@ -31,7 +31,6 @@ t_env		*install(char *path)
 		free_split(tmp);
 	}
 	close(fd);
-	if (e->o->cy || e->o->co)
-		init_transfer_stuff(e);
+	init_transfer_stuff(e);
 	return (e);
 }

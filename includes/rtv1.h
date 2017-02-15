@@ -9,8 +9,8 @@
 # include "libft.h"
 # include <stdio.h>
 
-# define MAX_X		300
-# define MAX_Y		300
+# define MAX_X		500
+# define MAX_Y		500
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
@@ -67,6 +67,8 @@ typedef struct		s_pln
 	char		*name;
 	float		*origin;
 	float		*nor;
+	int		val;
+	float		*rot;
 	int		color;
 	float		*borne;
 	struct s_pln	*next;
