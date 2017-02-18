@@ -1,5 +1,14 @@
 # include "rtv1.h"
 
+
+float	*set_vect(float *dst, float a, float b, float c)
+{
+	dst[0] = a;
+	dst[1] = b;
+	dst[2] = c;
+	return (dst);
+}
+
 float	*vectorial_copy(float *dst, float *src)
 {
 	dst[0] = src[0];
@@ -24,12 +33,12 @@ float	*vectorial_subtraction(float *sub, float *u, float *v)
 	return (sub);
 }
 
-float	*vectorial_multi(float *u, int k)
+float	*vectorial_multi(float *multi, float k, float *u)
 {
-	u[0] = k * u[0];
-	u[1] = k * u[1];
-	u[2] = k * u[2];
-	return (u);
+	multi[0] = k * u[0];
+	multi[1] = k * u[1];
+	multi[2] = k * u[2];
+	return (multi);
 }
 
 float	scalar_product(float *u, float *v)

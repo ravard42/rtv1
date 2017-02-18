@@ -18,6 +18,8 @@ int		analyzer(char *tmp)
 		return (3);
 	else if (!ft_strcmp("cone", tmp))
 		return (4);
+	else if (!ft_strcmp("light", tmp))
+		return (5);
 	else
 		not_a_valid_file();
 	return (1);

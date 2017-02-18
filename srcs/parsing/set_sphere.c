@@ -18,7 +18,6 @@ void	set_sphere(char **tmp, t_obj *o)
 		o->s = o->s->next;
 	}
 	o->s->next = NULL;
-	o->s->name = "sphere";
 	o->s->origin = (float *)malloc(sizeof(float) * 3);
 	load_vect(tmp[1], o->s->origin);
 	if (!ft_is_float(tmp[2]))

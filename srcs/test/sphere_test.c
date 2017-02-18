@@ -39,7 +39,7 @@ static float	solve(float *param)
 	return (sol);
 }
 
-void	print_sphere(t_env *e)
+int	sphere_test(t_env *e)
 {
 	int	i;
 	float	param[3];
@@ -52,9 +52,10 @@ void	print_sphere(t_env *e)
 		sol = solve(param);
 		if (sol <= e->c->r_dist[i]  && sol < MAX_DIST)
 		{
-			*((unsigned int *)e->data_img + i) = e->o->s->color;
 			e->c->r_dist[i] = sol;
+			e->c->obj[i] = e->o->s;
+			ft_strcpy(e->c->name[i], "sphere");
 		}
-
 	}
+	return (1);
 }

@@ -28,9 +28,10 @@ t_env		*install(char *path)
 			set_cylindre(tmp, e->o);
 		else if (k == 4)
 			set_cone(tmp, e->o);
+		else if (k == 5)
+			set_light(tmp, e);
 		free_split(tmp);
 	}
 	close(fd);
-	init_transfer_stuff(e);
 	return (e);
 }

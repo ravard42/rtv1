@@ -2,30 +2,40 @@ CC = gcc
 NAME = rtv1
 FLAGS = -Wall -Wextra -Werror -ggdb
 SRC = srcs/main.c\
-	srcs/install.c\
-	srcs/analyze.c\
-	srcs/init_env.c\
-	srcs/loop.c\
-	srcs/hook.c\
-	srcs/ft_norme.c\
-	srcs/tools.c\
-	srcs/prevent_rot.c\
-	srcs/rot_cam.c\
-	srcs/set_cam.c\
-	srcs/set_sphere.c\
-	srcs/set_plan.c\
-	srcs/set_cylindre.c\
-	srcs/set_cone.c\
-	srcs/vectorial_operation.c\
-	srcs/matrix_operation.c\
-	srcs/set_cam_ray_dir.c\
+	srcs/parsing/install.c\
+	srcs/parsing/analyze.c\
+	srcs/parsing/tools.c\
+	srcs/parsing/set_cam.c\
+	srcs/parsing/set_cam_ray_dir.c\
+	srcs/parsing/set_sphere.c\
+	srcs/parsing/set_plan.c\
+	srcs/parsing/set_cylindre.c\
+	srcs/parsing/set_cone.c\
+	srcs/parsing/set_light.c\
+	srcs/matrix_and_vector/mat_operation.c\
+	srcs/matrix_and_vector/mat_inversion.c\
+	srcs/matrix_and_vector/transfer.c\
+	srcs/matrix_and_vector/normal.c\
+	srcs/matrix_and_vector/ft_norme.c\
+	srcs/matrix_and_vector/vect_operation.c\
+	srcs/test/sphere_test.c\
+	srcs/test/plan_test.c\
+	srcs/test/cylindre_test.c\
+	srcs/test/cone_test.c\
+	srcs/test/global_test.c\
+	srcs/light_test/sphere_light_test.c\
+	srcs/light_test/plan_light_test.c\
+	srcs/light_test/cylindre_light_test.c\
+	srcs/light_test/cone_light_test.c\
+	srcs/light_test/global_light_test.c\
+	srcs/rotation/rot.c\
+	srcs/rotation/prevent_rot.c\
+	srcs/rotation/rot_cam.c\
+	srcs/mlx_stuff/init_env.c\
+	srcs/mlx_stuff/loop.c\
+	srcs/mlx_stuff/hook.c\
 	srcs/print.c\
-	srcs/print_sphere.c\
-	srcs/print_plan.c\
-	srcs/matrix_inversion.c\
-	srcs/transfer.c\
-	srcs/print_cylindre.c\
-	srcs/print_cone.c\
+	srcs/color.c\
 	srcs/clear.c\
 
 OBJ = $(SRC:.c=.o)

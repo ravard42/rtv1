@@ -78,18 +78,23 @@ void	set_cam(char **tmp, t_cam *c)
 	int	i;
 
 	c->pos = (float *)malloc(sizeof(float) * 3);
-	load_vect(tmp[1], c->pos);
 	c->base = (float **)malloc(sizeof(float *) * 3);
+	c->r_dir = (float **)malloc(sizeof(float *) * MAX_X * MAX_Y);
+	c->r_dist = (float *)malloc(sizeof(float) * MAX_X * MAX_Y);
+	c->obj = (void **)malloc(sizeof(void *) * MAX_X * MAX_Y);
+	c->name = (char **)malloc(sizeof(char *) * MAX_X * MAX_Y);
 	i = -1;
 	while (++i < 3)
 		c->base[i] = (float *)ft_memalloc(sizeof(float) * 3);
+	i = -1;
+	while (++i < MAX_X * MAX_Y)
+	{
+		c->r_dir[i] = (float *)malloc(sizeof(float) * 3);
+		c->name[i] = (char *)ft_memalloc(sizeof(char) * 9);
+	}
+	load_vect(tmp[1], c->pos);
 	load_vect(tmp[2], c->base[2]);
 	ft_norme(c->base[2]);
 	set_cam_base(c);
-	c->r_dir = (float **)malloc(sizeof(float *) * MAX_X * MAX_Y);
-	i = -1;
-	while (++i < MAX_X * MAX_Y)
-		c->r_dir[i] = (float *)malloc(sizeof(float) * 3);
 	set_cam_ray_dir(c);
-	c->r_dist = (float *)malloc(sizeof(float) * MAX_X * MAX_Y);
 }

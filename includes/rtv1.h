@@ -15,6 +15,7 @@
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
 # define MAX_DIST	50000000
+# define PAS		10
 # define ROT		M_PI / 6
 
 
@@ -50,12 +51,12 @@ typedef struct		s_cam
 	float		**base;
 	float		**r_dir;
 	float		*r_dist;
-	void		*obj;
+	void		**obj;
+	char		**name;
 }			t_cam;
 
 typedef struct		s_sph
 {
-	char		*name;
 	float		*origin;
 	float		r;
 	int		color;
@@ -64,7 +65,6 @@ typedef struct		s_sph
 
 typedef struct		s_pln
 {
-	char		*name;
 	float		*origin;
 	float		*nor;
 	int		val;
@@ -75,27 +75,37 @@ typedef struct		s_pln
 	struct s_pln	*next;
 }			t_pln;
 
+typedef struct		s_trsf
+{
+	float		**mat;
+	float		*cam_pos;
+	float		*obj_pos;
+	float		**cam_r_dir;
+}
+			t_trsf;
 typedef struct		s_cyl
 {
-	char		*name;
 	float		*origin;
 	float		r;
 	int		val;
 	float		*rot;
+	float		*axe;
 	int		color;
 	float		*borne;
 	struct s_cyl	*next;
+	t_trsf		*t;
 }			t_cyl;
 
 typedef struct		s_con
 {
-	char		*name;
 	float		*origin;
 	int		val;
 	float		*rot;
+	float		*axe;
 	int		color;
 	float		*borne;
 	struct s_con	*next;
+	t_trsf		*t;
 }			t_con;
 
 typedef struct		s_obj
@@ -106,14 +116,14 @@ typedef struct		s_obj
 	t_con		*co;
 }			t_obj;
 
-typedef struct		s_trsf
+typedef struct		s_lght
 {
-	float		**mat;
-	float		*cam_pos;
-	float		*obj_pos;
-	float		**cam_r_dir;
-}			t_trsf;
-
+	char		*name;
+	float		*origin;
+	int		color;
+	int		scope;
+	struct s_lght	*next;
+}			t_lght;
 
 typedef struct		s_env
 {
@@ -123,67 +133,74 @@ typedef struct		s_env
 	char		*data_img;
 	t_cam		*c;
 	t_obj		*o;
-	t_trsf		*t;
+	t_lght		*l;
 }			t_env;
 
-
-
-void		not_a_valid_file();
-
 t_env	*install(char *path);
-void	init_env(t_env *e);
+int	analyzer(char *tmp);
+void	not_a_valid_file();
 int	ft_atoi_hexa(char *s);
 void	free_split(char **tmp);
 int	ft_is_float(char *tmp);
 float	ft_atof(char *s);
 void	load_vect(char *s, float *a);
-int	analyzer(char *tmp);
-void	not_a_valid_file();
-
 void	set_cam_base(t_cam *c);
 void	set_cam_ray_dir(t_cam *c);
 void	set_cam(char **tmp, t_cam *c);
-
 void	set_sphere(char **tmp, t_obj *o);
 void	set_plan(char **tmp, t_obj *o);
 void	set_cylindre(char **tmp, t_obj *o);
 void	set_cone(char **tmp, t_obj *o);
-
-void	loop(t_env *e);
-int	expose_hook(t_env *e);
-int	key_hook(int keycode, t_env *e);
-
+void	set_light(char **tmp, t_env *e);
 
 float	*matrix_product(float *mp, float **mat, float *src);
+float 	**inverse(float **mat);
+void	construct_transfer_mat(float **base);
+void	set_cyl_transfer(t_cyl *cy);
+void	set_cone_transfer(t_con *co);
+float	*set_vect(float *dst, float a, float b, float c);
 float	*vectorial_copy(float *dst, float *src);
 float	*vectorial_sum(float *sum, float *u, float *v);
-float	*vectorial_multi(float *u, int k);
+float	*vectorial_multi(float *multi, float k, float *u);
 float	*vectorial_subtraction(float *sub, float *u, float *v);
 float	scalar_product(float *u, float *v);
 float	*vectorial_product(float *prod, float *u, float *v);
 float	ft_dist(float *a, float *b);
 void	ft_norme(float *v);
+void	sph_normal(float *nor, float *p, t_sph *s);
+void	cyl_normal(float *nor, float *p, t_cyl *cy);
+void	con_normal(float *nor, float *p, t_con *co);
+
+int	sphere_test(t_env *e);
+int	plan_test(t_env *e);
+int	cylindre_test(t_env *e);
+int	cone_test(t_env *e);
+void	global_test(t_env *e);
+
+int	sphere_light_test(float *p, void *obj, t_sph *s, t_lght *l);
+int	plan_light_test(float *p, void *obj, t_pln *pl, t_lght *l);
+int	cylindre_light_test(float *p, void *obj, t_cyl *cy, t_lght *l);
+int	cone_light_test(float *p, void *obj, t_con *co, t_lght *l);
+void	global_light_test(float *p, void *obj, t_env *e);
+
+void	rot(float *eZ, float value, float *n);
 int	prevent_vertical_rot(int keycode, float **base);
 void	rot_d(float *eZcam);
 void	rot_g(float *eZcam);
 int	prevent_rot(int keycode, t_env *e);
 void	rot_b(float **base);
 void	rot_h(float **base);
-void	print_all(t_env *e);
-void	print_sphere(t_env *e);
-void	print_plan(t_env *e);
 
+void	init_env(t_env *e);
+void	loop(t_env *e);
+int	expose_hook(t_env *e);
+int	key_hook(int keycode, t_env *e);
 
-float 	**inverse(float **mat);
-
-void	init_transfer_stuff(t_env *e);
-void	rot(float *eZ, float value, float *n);
-void	construct_transfer_mat(float **base);
-void	set_transfer_stuff(float rot_val, float *axe_rot, float *obj_pos, t_env *e);
-
-
-void	print_cylindre(t_env *e);
-void	print_cone(t_env *e);
-void	clear_img_dist(t_env *e);
+float	*hexa_to_rgb(float *rgb, int *hexa);
+int	*rgb_to_hexa(int *hexa, float *rgb);
+float	*rgb_to_coef(float *rgb);
+float	*coef_to_rgb(float *coef);
+void	print(t_env *e);
+void	clear_img_dist_obj(t_env *e);
 
 #endif

@@ -1,62 +1,95 @@
 # include "rtv1.h"
 
-void		save(t_env *e, void **tmp)
+static int	*recup_color(int *color, char *name, void *obj)
 {
-	tmp[0] = e->o->s;
-	tmp[1] = e->o->p;
-	tmp[2] = e->o->cy;
-	tmp[3] = e->o->co;
+	if (!ft_strcmp(name, "sphere"))
+		*color = ((t_sph *)obj)->color;
+	else if (!ft_strcmp(name, "plan"))
+		*color = ((t_pln *)obj)->color;
+	else if (!ft_strcmp(name, "cylindre"))
+		*color = ((t_cyl *)obj)->color;
+	else if (!ft_strcmp(name, "cone"))
+		*color = ((t_con *)obj)->color;
+	else if (!ft_strcmp(name, "light"))
+		*color = ((t_lght *)obj)->color;
+	return (color);
 }
 
-void		recup(t_env *e, void **tmp)
+static void	set_normal(float *nor, char *name,  void *obj, float *p)
 {
-	e->o->s = tmp[0];
-	e->o->p = tmp[1];
-	e->o->cy = tmp[2];
-	e->o->co = tmp[3];
+	if (!ft_strcmp(name, "sphere"))
+		sph_normal(nor, p, obj);
+	else if (!ft_strcmp(name, "plan"))
+	{
+		nor[0] = ((t_pln *)obj)->nor[0];
+		nor[1] = ((t_pln *)obj)->nor[1];
+		nor[2] = ((t_pln *)obj)->nor[2];
+	}
+	else if (!ft_strcmp(name, "cylindre"))
+		cyl_normal(nor, p, obj);
+	else if (!ft_strcmp(name, "cone"))
+		con_normal(nor, p, obj);
+	
 }
 
 
-void		print_all(t_env *e)
+static void	put_pixel_light(int i, float *p, void *obj, t_env *e)
 {
-	void	*tmp[4];
+	t_lght	*begin;
+	float	nor[3];
+	float	rayon[3];
+	float	rgb[9];
+	int	n;
+	int	color;
+	float	cos_angle;
 
-	save(e, tmp);
-	while (e->o->s != NULL)
+	begin = e->l;
+	set_normal(nor, e->c->name[i], obj, p);
+	set_vect(rgb, 0, 0, 0);
+	rgb_to_coef(hexa_to_rgb(rgb + 3, recup_color(&color, e->c->name[i], obj)));
+	n = 0;
+	while (e->l)
 	{
-		print_sphere(e);
-		e->o->s = e->o->s->next;
+		vectorial_subtraction(rayon, p, e->l->origin);
+		ft_norme(rayon);
+		if (e->l->scope && (cos_angle = scalar_product(nor, rayon)) < 0)
+		{
+			hexa_to_rgb(rgb + 6, recup_color(&color, "light", e->l));
+			rgb[0] -= cos_angle * rgb[3] * rgb[6]; 
+			rgb[1] -= cos_angle * rgb[4] * rgb[7]; 
+			rgb[2] -= cos_angle * rgb[5] * rgb[8]; 
+		}
+		n++;
+		e->l->scope = 0;
+		e->l = e->l->next;
 	}
-	while (e->o->p != NULL)
-	{
-		print_plan(e);
-		e->o->p = e->o->p->next;
-	}
-	while (e->o->cy != NULL)
-	{
-		print_cylindre(e);
-		e->o->cy = e->o->cy->next;
-	}
-	while (e->o->co != NULL)
-	{
-		print_cone(e);
-		e->o->co = e->o->co->next;
-	}
-	recup(e, tmp);
+	n = (n == 0) ? 1 : n;
+	vectorial_multi(rgb, 1.0 / n, rgb);
+	rgb_to_hexa(&color, rgb);
+	*((int *)e->data_img + i) = color;
+	e->l = begin;
+}
+
+void		print(t_env *e)
+{
+	int	i;
+	float	p[3];
+	int	color;
 	
 
-	/*	
-	c[0] = 12;
-	c[1] = 12;
-	c[2] = 7;
-	n[0] = 1;
-	n[1] = 0;
-	n[2] = 0;
-
-
-	a[0] = 1;
-	a[1] = 1;
-	a[2] = 9;	
-	print_cone(c, a, n, -M_PI / 6, e, 0x00FFFF);
-	*/
+	i = -1;
+	while (++i < MAX_X * MAX_Y)
+	{
+		color = 0;
+		if (e->l == NULL || e->c->obj[i] == NULL)
+			*((int *)e->data_img + i) =
+			*recup_color(&color, e->c->name[i], e->c->obj[i]);
+		else
+		{
+			vectorial_sum(p, e->c->pos,
+				vectorial_multi(p, e->c->r_dist[i], e->c->r_dir[i]));
+			global_light_test(p, e->c->obj[i], e);
+			put_pixel_light(i, p, e->c->obj[i] ,e);
+		}
+	}
 }
