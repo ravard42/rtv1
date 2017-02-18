@@ -29,7 +29,7 @@ SRC = srcs/main.c\
 	srcs/light_test/cone_light_test.c\
 	srcs/light_test/global_light_test.c\
 	srcs/rotation/rot.c\
-	srcs/rotation/prevent_rot.c\
+	srcs/rotation/prevent_rot_cam.c\
 	srcs/rotation/rot_cam.c\
 	srcs/mlx_stuff/init_env.c\
 	srcs/mlx_stuff/loop.c\
