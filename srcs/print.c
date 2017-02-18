@@ -15,10 +15,17 @@ static int	*recup_color(int *color, char *name, void *obj)
 	return (color);
 }
 
-static void	set_normal(float *nor, char *name,  void *obj, float *p)
+static int	set_normal(float *nor, char *name,  void *obj, float *p)
 {
 	if (!ft_strcmp(name, "sphere"))
+	{
 		sph_normal(nor, p, obj);
+		if (((t_sph *)obj)->light)
+		{
+			vectorial_multi(nor, -1, nor);
+			return (1);
+		}
+	}
 	else if (!ft_strcmp(name, "plan"))
 	{
 		nor[0] = ((t_pln *)obj)->nor[0];
@@ -26,9 +33,17 @@ static void	set_normal(float *nor, char *name,  void *obj, float *p)
 		nor[2] = ((t_pln *)obj)->nor[2];
 	}
 	else if (!ft_strcmp(name, "cylindre"))
+	{
 		cyl_normal(nor, p, obj);
+		if (((t_cyl *)obj)->light)
+		{
+			vectorial_multi(nor, -1, nor);
+			return (1);
+		}
+	}
 	else if (!ft_strcmp(name, "cone"))
 		con_normal(nor, p, obj);
+	return (0);
 	
 }
 
@@ -42,9 +57,10 @@ static void	put_pixel_light(int i, float *p, void *obj, t_env *e)
 	int	n;
 	int	color;
 	float	cos_angle;
+	int	light;
 
 	begin = e->l;
-	set_normal(nor, e->c->name[i], obj, p);
+	light = set_normal(nor, e->c->name[i], obj, p);
 	set_vect(rgb, 0, 0, 0);
 	rgb_to_coef(hexa_to_rgb(rgb + 3, recup_color(&color, e->c->name[i], obj)));
 	n = 0;
@@ -65,6 +81,8 @@ static void	put_pixel_light(int i, float *p, void *obj, t_env *e)
 	}
 	n = (n == 0) ? 1 : n;
 	vectorial_multi(rgb, 1.0 / n, rgb);
+	if (light)
+		light_bonus(rgb);
 	rgb_to_hexa(&color, rgb);
 	*((int *)e->data_img + i) = color;
 	e->l = begin;

@@ -9,12 +9,12 @@
 # include "libft.h"
 # include <stdio.h>
 
-# define MAX_X		500
-# define MAX_Y		500
+# define MAX_X		400
+# define MAX_Y		400
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
-# define MAX_DIST	50000000
+# define MAX_DIST	50000000000000
 # define PAS		10
 # define ROT		M_PI / 6
 
@@ -57,6 +57,7 @@ typedef struct		s_cam
 
 typedef struct		s_sph
 {
+	char		light;
 	float		*origin;
 	float		r;
 	int		color;
@@ -85,6 +86,7 @@ typedef struct		s_trsf
 			t_trsf;
 typedef struct		s_cyl
 {
+	char		light;
 	float		*origin;
 	float		r;
 	int		val;
@@ -200,6 +202,7 @@ float	*hexa_to_rgb(float *rgb, int *hexa);
 int	*rgb_to_hexa(int *hexa, float *rgb);
 float	*rgb_to_coef(float *rgb);
 float	*coef_to_rgb(float *coef);
+float	*light_bonus(float *rgb);
 void	print(t_env *e);
 void	clear_img_dist_obj(t_env *e);
 

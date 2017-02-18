@@ -24,5 +24,8 @@ void	set_sphere(char **tmp, t_obj *o)
 		not_a_valid_file();
 	o->s->r = ft_atof(tmp[2]);
 	o->s->color = ft_atoi_hexa(tmp[3]);
+	if (!ft_is_float(tmp[4]))
+		not_a_valid_file();
+	o->s->light = ft_atof(tmp[4]);
 	o->s = begin;
 }

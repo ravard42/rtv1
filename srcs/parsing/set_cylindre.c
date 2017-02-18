@@ -39,5 +39,8 @@ void	set_cylindre(char **tmp, t_obj *o)
 	o->cy->borne = (float *)malloc(sizeof(float) * 3);
 	load_vect(tmp[6], o->cy->borne);
 	set_cyl_transfer(o->cy);
+	if (!ft_is_float(tmp[7]))
+		not_a_valid_file();
+	o->cy->light = ft_atof(tmp[7]);
 	o->cy = begin;
 }

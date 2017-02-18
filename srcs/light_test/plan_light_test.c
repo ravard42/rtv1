@@ -31,7 +31,7 @@ int	plan_light_test(float *p, void *obj, t_pln *pl, t_lght *l)
 		if (scalar_product(pl->nor, dir))
 			sol = solve(l, dir, pl);
 		else
-			return (0);
+			return (1);
 		if ((sol <= 0) || sol >= dist)
 			return (1);
 		else if (pl->borne[0])
