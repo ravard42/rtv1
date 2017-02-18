@@ -38,7 +38,7 @@ static int	set_normal(float *nor, char *name,  void *obj, float *p)
 		if (((t_cyl *)obj)->light)
 		{
 			vectorial_multi(nor, -1, nor);
-			return (1);
+			return (2);
 		}
 	}
 	else if (!ft_strcmp(name, "cone"))
@@ -82,7 +82,12 @@ static void	put_pixel_light(int i, float *p, void *obj, t_env *e)
 	n = (n == 0) ? 1 : n;
 	vectorial_multi(rgb, 1.0 / n, rgb);
 	if (light)
-		light_bonus(rgb);
+	{
+		if (light == 1)
+			light_bonus(rgb, ((t_sph *)obj)->light);
+		else
+			light_bonus(rgb, ((t_cyl *)obj)->light);
+	}
 	rgb_to_hexa(&color, rgb);
 	*((int *)e->data_img + i) = color;
 	e->l = begin;

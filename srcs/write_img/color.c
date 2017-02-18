@@ -33,14 +33,14 @@ float	*coef_to_rgb(float *coef)
 	return (coef);
 }
 
-float	*light_bonus(float *rgb)
+float	*light_bonus(float *rgb, char light)
 {
 	int	i;
 	
 	i = -1;
 	while (++i < 3)
 	{
-		rgb[i] += 2 * rgb[i];
+		rgb[i] += 2 * light * rgb[i];
 		rgb[i] = (rgb[i] > 255) ? 255 : rgb[i];
 	}
 	return (rgb);

@@ -9,8 +9,8 @@
 # include "libft.h"
 # include <stdio.h>
 
-# define MAX_X		400
-# define MAX_Y		400
+# define MAX_X		1000
+# define MAX_Y		1000
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
@@ -202,7 +202,7 @@ float	*hexa_to_rgb(float *rgb, int *hexa);
 int	*rgb_to_hexa(int *hexa, float *rgb);
 float	*rgb_to_coef(float *rgb);
 float	*coef_to_rgb(float *coef);
-float	*light_bonus(float *rgb);
+float	*light_bonus(float *rgb, char light);
 void	print(t_env *e);
 void	clear_img_dist_obj(t_env *e);
 
