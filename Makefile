@@ -34,9 +34,9 @@ SRC = srcs/main.c\
 	srcs/mlx_stuff/init_env.c\
 	srcs/mlx_stuff/loop.c\
 	srcs/mlx_stuff/hook.c\
-	srcs/print.c\
-	srcs/color.c\
-	srcs/clear.c\
+	srcs/write_img/print.c\
+	srcs/write_img/color.c\
+	srcs/write_img/clear.c\
 
 OBJ = $(SRC:.c=.o)
 
