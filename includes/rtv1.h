@@ -9,12 +9,12 @@
 # include "libft.h"
 # include <stdio.h>
 
-# define MAX_X		1000
-# define MAX_Y		1000
+# define MAX_X		500
+# define MAX_Y		500
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
-# define MAX_DIST	50000000000000
+# define MAX_DIST	500000000
 # define PAS		10
 # define ROT		M_PI / 6
 
@@ -57,10 +57,11 @@ typedef struct		s_cam
 
 typedef struct		s_sph
 {
-	char		light;
 	float		*origin;
 	float		r;
 	int		color;
+	char		id_light;
+	float		light_coef;
 	struct s_sph	*next;
 }			t_sph;
 
@@ -68,11 +69,9 @@ typedef struct		s_pln
 {
 	float		*origin;
 	float		*nor;
-	int		val;
-	float		*rot;
-	float		translate;
 	int		color;
 	float		*borne;
+	float		coef;
 	struct s_pln	*next;
 }			t_pln;
 
@@ -86,23 +85,20 @@ typedef struct		s_trsf
 			t_trsf;
 typedef struct		s_cyl
 {
-	char		light;
 	float		*origin;
 	float		r;
-	int		val;
-	float		*rot;
 	float		*axe;
 	int		color;
 	float		*borne;
-	struct s_cyl	*next;
 	t_trsf		*t;
+	char		id_light;
+	float		light_coef;
+	struct s_cyl	*next;
 }			t_cyl;
 
 typedef struct		s_con
 {
 	float		*origin;
-	int		val;
-	float		*rot;
 	float		*axe;
 	int		color;
 	float		*borne;
@@ -123,6 +119,7 @@ typedef struct		s_lght
 	char		*name;
 	float		*origin;
 	int		color;
+	int		id;
 	int		scope;
 	struct s_lght	*next;
 }			t_lght;
@@ -145,10 +142,10 @@ int	ft_atoi_hexa(char *s);
 void	free_split(char **tmp);
 int	ft_is_float(char *tmp);
 float	ft_atof(char *s);
-void	load_vect(char *s, float *a);
+float	*load_vect(char *s, float *a);
+void	set_cam(char **tmp, t_env *e);
 void	set_cam_base(t_cam *c);
 void	set_cam_ray_dir(t_cam *c);
-void	set_cam(char **tmp, t_cam *c);
 void	set_sphere(char **tmp, t_obj *o);
 void	set_plan(char **tmp, t_obj *o);
 void	set_cylindre(char **tmp, t_obj *o);
@@ -202,7 +199,7 @@ float	*hexa_to_rgb(float *rgb, int *hexa);
 int	*rgb_to_hexa(int *hexa, float *rgb);
 float	*rgb_to_coef(float *rgb);
 float	*coef_to_rgb(float *coef);
-float	*light_bonus(float *rgb, char light);
+float	*obj_light_up(float *rgb, float light_coef);
 void	print(t_env *e);
 void	clear_img_dist_obj(t_env *e);
 

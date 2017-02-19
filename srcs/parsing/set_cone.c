@@ -3,7 +3,8 @@
 void	set_cone(char **tmp, t_obj *o)
 {
 	t_con	*begin;
-	float	angle;
+	float	save;
+	float	tmp_vect[3];
 	
 	if (o->co == NULL)
 	{
@@ -23,18 +24,19 @@ void	set_cone(char **tmp, t_obj *o)
 	load_vect(tmp[1], o->co->origin);
 	if (!ft_is_float(tmp[2]))
 		not_a_valid_file();
-	o->co->val = ft_atof(tmp[2]);
-	o->co->rot = (float *)malloc(sizeof(float) * 3);
-	load_vect(tmp[3], o->co->rot);
+	save = ft_atof(tmp[2]);
+	vectorial_sum(o->co->origin, o->co->origin, vectorial_multi(tmp_vect, save, load_vect(tmp[3], tmp_vect)));
 	o->co->axe = (float *)malloc(sizeof(float) * 3);
 	set_vect(o->co->axe, 0, 0, 1);
-	angle = (o->co->val) ? M_PI / o->co->val : 0;
-	if (angle)
-		rot(o->co->axe, angle, o->co->rot);
-	ft_norme(o->co->axe);
-	o->co->color = ft_atoi_hexa(tmp[4]);
+	if (!ft_is_float(tmp[4]))
+		not_a_valid_file();
+	save = ft_atof(tmp[4]);
+	save = (save) ? M_PI / save : 0;
+	if (save)
+		rot(o->co->axe, save, load_vect(tmp[5], tmp_vect));
+	o->co->color = ft_atoi_hexa(tmp[6]);
 	o->co->borne = (float *)malloc(sizeof(float) * 3);
-	load_vect(tmp[5], o->co->borne);
+	load_vect(tmp[7], o->co->borne);
 	set_cone_transfer(o->co);
 	o->co = begin;
 }

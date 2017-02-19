@@ -22,6 +22,9 @@ void	set_light(char **tmp, t_env *e)
 	e->l->origin = (float *)malloc(sizeof(float) * 3);
 	load_vect(tmp[1], e->l->origin);
 	e->l->color = ft_atoi_hexa(tmp[2]);
+	if (!(ft_is_float(tmp[3])))
+		not_a_valid_file();
+	e->l->id = (int)ft_atof(tmp[3]);
 	e->l->scope = 0;
 	e->l = begin;
 }

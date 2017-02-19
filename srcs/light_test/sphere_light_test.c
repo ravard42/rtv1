@@ -48,7 +48,7 @@ int	sphere_light_test(float *p, void *obj, t_sph *s, t_lght *l)
 	float	param[3];
 	float	sol;
 
-	if (obj == s || s->light)
+	if (obj == s || s->id_light > 42 || l->id == s->id_light)
 		return (1);
 	else
 	{

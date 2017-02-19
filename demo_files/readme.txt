@@ -1,11 +1,12 @@
 ex demo_file :
 
 #debut
-cam {20,20,20} {-1,0,0} 				// cam origin direction
-sphere {0,0,0} 1 0xFFFFFF 0				// sphere  origin rayon couleur light
-plan {0,0,0} {0,0,1} 2 {1,0,0} 5 0xFF00FF {1,5,42}	// plan origin normale valeur_rot axe_rot tranlation_axe_rot couleur borne
-cylindre {5,0,0} 1 6 {1,0,0} 0x0000FF {1,-5,5} 0	// cylindre origin rayon valeur_rot axe_rot couleur borne light
-cone {0,5.555,0} 6 {0,1,0} 0x00FF00 {0,0,0} 		// cone origin valeur_rot axe_rot couleur borne
+cam {20,20,20} {-1,0,0} 					// cam origin direction
+light {0,0,0} 0xFFFFFF 42					// light origin couleur id
+sphere {0,0,0} 5 {1,1,1} 1 0xFFFFFF 1 4				// sphere origin val_translate axe_translate rayon couleur id_light light_coef
+plan {0,0,0} 5 {1,0,1} 2 {1,0,0} 5 0xFF00FF {1,5,42}		// plan origin val_translate axe_translate valeur_rot axe_rot tranlation_axe_rot couleur borne
+cylindre {5,0,0} 5 {0,0,0} 6 {1,0,0} 1 0x0000FF {1,-5,5} 0 0	// cylindre origin val_translate axe_translate valeur_rot axe_rot rayon couleur borne id_light light_coef
+cone {0,5.555,0} 5 {0,0,0} 6 {0,1,0} 0x00FF00 {0,0,0} 		// cone origin val_translate axe_ttranslate valeur_rot axe_rot couleur borne
 #fin
 
 pour que le fichier soit valide :
@@ -23,6 +24,9 @@ NB : borne[2] n'est pas utilisE mais reste implementee par soucis de compatibili
 
 5) pour le plan si valeur_rot != 0 alors l'objet se comporte comme les cylindre et les cones avec la nouvelle normale calculee normee et rangE dans e->o->p->nor en faisant une rotation de eZ->(0,0,1) [REPERE INITIAL]  de M_PI/valeur_rot par rapport a axe_rot de plus l'origine sera translatee de tranlsation_axe_rot / a cette nouvelle normale et la normale inversee si la valeur de translation est negative.
 
-6) la valeur light pour les sphere et les cylindre est en general toujours a 0 qui signifie qu'il s agit bien d'un objet. 
-- pour les sphere si  la valeur est a 1 alors l'objet est totalement transparent et est ignorE au moment du calcul des ombres, ca normal devra egalement etre inversee pour que la/les lumieres placee en son centre puissent la faire apparaitre. 
-- Pour les cylindre si la valeur est a 1 alors il revelera totalement ses couleurs quelaue soit l eclairage, par contre il sera bien considerer au moment du calcul des eventuelles ombres portee sur l exterieur. 
+6) la valeur id_light pour les sphere et light pour les cylindre est en general toujours a 0 qui signifie qu'il s agit d'un objet fait de matiere.. 
+- pour les sphere si  la valeur est !0 alors l'objet est  associE a la lumiere ayant le meme id . cela signie qu'elle est consideree comme transparente pour sa lumiere associE ( rem : la sphere laissera passer uniquement sa lumiere) et ca normal sera inversee pour que la lumiere placee en son centre puissent la faire apparaitre. (remarque : le cosinus de l'angle vaudra toujours 1 donc eclairage maximal).
+de plus si l'id > 42, la sphere laisse egalement passer les autres lumiere. (pas d'ombre!! utile pour lune et soleil) 
+- Un cylindre contrairement a la sphere pourra avoir plusieurs lampes associees et sera par defaut insensible aux eclairage exterieur. (pas d 'ombre ni variation de lumiere) 
+Son id le reliant a ses lampes devra necessairement valoir 42. 
+!=42 <=> 0  pour les cylindre (enfin plutot le cylindre du coup, un seul tube de lumiere par map c est deja assez la merde comme ca ;) )

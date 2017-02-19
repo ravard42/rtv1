@@ -75,7 +75,7 @@ int	is_valid_coord(char *str)
 }
 
 
-void	load_vect(char *s, float *a)
+float	*load_vect(char *s, float *a)
 {
 	char	**tmp;
 
@@ -87,4 +87,5 @@ void	load_vect(char *s, float *a)
 	a[1] = ft_atof(tmp[1]);
 	a[2] = ft_atof(tmp[2]);
 	free_split(tmp);
+	return(a);
 }

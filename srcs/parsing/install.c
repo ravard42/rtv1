@@ -19,7 +19,7 @@ t_env		*install(char *path)
 			not_a_valid_file();
 		k = analyzer(tmp[0]);
 		if (k == 0)
-			set_cam(tmp, e->c);
+			set_cam(tmp, e);
 		else if (k == 1)
 			set_sphere(tmp, e->o);
 		else if (k == 2)
@@ -33,5 +33,7 @@ t_env		*install(char *path)
 		free_split(tmp);
 	}
 	close(fd);
+	if (!e->c)
+		not_a_valid_file();
 	return (e);
 }
