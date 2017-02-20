@@ -48,7 +48,7 @@ int	cone_light_test(float *p, void *obj, t_con *co, t_lght *l)
 	float	param[3];
 	float	sol;
 
-	if (obj == co)
+	if (obj == co || co->ombre == 0)
 		return (1);
 	else
 	{
@@ -61,12 +61,12 @@ int	cone_light_test(float *p, void *obj, t_con *co, t_lght *l)
 		set_param(param, co);
 		if ((sol = solve(param)) == -42 || sol >= dist)
 			return (1);
-		else if (co->borne[0])
+		else if (co->borne)
 		{
 			dist = co->t->cam_pos[2] + sol
 				* co->t->cam_r_dir[0][2] - co->t->obj_pos[2];
-			if ((dist < 0 && dist < co->borne[1]) 
-				|| (dist > 0 && dist > co->borne[2]))
+			if ((dist < 0 && dist < co->borne[0]) 
+				|| (dist > 0 && dist > co->borne[1]))
 				return (1);
 		}
 	}

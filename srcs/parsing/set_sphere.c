@@ -1,10 +1,8 @@
 # include <rtv1.h>
 
-void	set_sphere(char **tmp, t_obj *o)
+static t_sph	*init_sphere(t_obj *o)
 {
 	t_sph	*begin;
-	float	val;
-	float	translate[3];
 
 	if (o->s == NULL)
 	{
@@ -19,20 +17,58 @@ void	set_sphere(char **tmp, t_obj *o)
 		o->s->next = (t_sph *)malloc(sizeof(t_sph));
 		o->s = o->s->next;
 	}
+	o->s->origin = (float *)ft_memalloc(sizeof(float) * 3);
+	o->s->color = 0xFFFFFF;
+	o->s->r = 1;
+	o->s->lum = 1;
+	o->s->ombre = 1;
+	o->s->id_light = 0;
 	o->s->next = NULL;
-	o->s->origin = (float *)malloc(sizeof(float) * 3);
-	load_vect(tmp[1], o->s->origin);
-	if (!ft_is_float(tmp[2]))
-		not_a_valid_file();
-	val = ft_atof(tmp[2]);
-	vectorial_sum(o->s->origin, o->s->origin, vectorial_multi(translate, val, load_vect(tmp[3], translate)));
-	if (!ft_is_float(tmp[4]))
-		not_a_valid_file();
-	o->s->r = ft_atof(tmp[4]);
-	o->s->color = ft_atoi_hexa(tmp[5]);
-	if (!(ft_is_float(tmp[6]) && ft_is_float(tmp[7])))
-		not_a_valid_file();
-	o->s->id_light = (int)ft_atof(tmp[6]);
-	o->s->light_coef = ft_atof(tmp[7]);
+	return (begin);
+}
+
+static void	read_input_data(float *tmp_save, char **inp, t_sph *s)
+{
+	if (!ft_strcmp("origin", inp[0]))
+		load_vect(s->origin, inp[1]);
+	else if (!ft_strcmp("rayon", inp[0]))
+		s->r = ft_atof(inp[1]);
+	else if (!ft_strcmp("couleur", inp[0]))
+		s->color = ft_atoi_hexa(inp[1]);
+	else if (!ft_strcmp("tr", inp[0]))
+		tmp_save[0] = ft_atof(inp[1]);
+	else if (!ft_strcmp("tr_dir", inp[0]))
+		load_vect(tmp_save + 1, inp[1]);
+	else if (!ft_strcmp("lum", inp[0]))
+		s->lum = ft_atof(inp[1]);
+	else if (!ft_strcmp("ombre", inp[0]))
+		s->ombre = (int)ft_atof(inp[1]);
+	else if (!ft_strcmp("id_light", inp[0]))
+		s->id_light = ft_atof(inp[1]);
+
+}
+
+void	set_sphere(char **tmp, t_obj *o)
+{
+	t_sph		*begin;
+	char		***input;
+	int		i;
+	float		tmp_save[4];
+
+	begin = init_sphere(o);
+	i = input_number(tmp);
+	input = (char ***)malloc(sizeof(char **) * i);
+	i = 0;
+	while (tmp[++i])
+		input[i - 1] = ft_strsplit(tmp[i], ':');
+	input[i - 1] = NULL;
+	ft_memset(tmp_save, 0, sizeof(float) * 4);
+	i = -1;
+	while (input[++i])
+		read_input_data(tmp_save, input[i], o->s);
+	free_double_split(input);
+	if (tmp_save[0])
+		vectorial_sum(o->s->origin, o->s->origin,
+			vectorial_multi(tmp_save + 1, tmp_save[0], tmp_save + 1));
 	o->s = begin;
 }

@@ -28,12 +28,11 @@ static int	set_normal(float *nor, char *name,  void *obj, float *p)
 		nor[0] = ((t_pln *)obj)->nor[0];
 		nor[1] = ((t_pln *)obj)->nor[1];
 		nor[2] = ((t_pln *)obj)->nor[2];
-		return (3);
 	}
 	else if (!ft_strcmp(name, "cylindre"))
 	{
 		cyl_normal(nor, p, obj);
-		if (((t_cyl *)obj)->id_light == 42)
+		if (((t_cyl *)obj)->id_light)
 			return (2);
 	}
 	else if (!ft_strcmp(name, "cone"))
@@ -64,12 +63,10 @@ static void	put_pixel_light(int i, float *p, void *obj, t_env *e)
 		vectorial_subtraction(rayon, p, e->l->origin);
 		ft_norme(rayon);
 		cos_angle = scalar_product(nor, rayon);
-		if ((obj_light == 1 && e->l->id == ((t_sph *)obj)->id_light) || obj_light == 2)
+		if ((obj_light == 1 && e->l->id == ((t_sph *)obj)->id_light)
+			|| (obj_light == 2 && e->l->id == ((t_cyl *)obj)->id_light))
 			cos_angle = -cos_angle;
-		if ((!obj_light || obj_light == 3
-			|| obj_light == 1
-			|| (obj_light == 2 && e->l->id == 42))
-			&& e->l->scope && cos_angle < 0)
+		if (e->l->scope && cos_angle < 0)
 		{
 			hexa_to_rgb(rgb + 6, recup_color(&color, "light", e->l));
 			rgb[0] -= cos_angle * rgb[3] * rgb[6]; 
@@ -82,12 +79,7 @@ static void	put_pixel_light(int i, float *p, void *obj, t_env *e)
 	}
 	n = (n == 0) ? 1 : n;
 	vectorial_multi(rgb, 1.0 / n, rgb);
-	if (obj_light == 1)
-		obj_light_up(rgb, ((t_sph *)obj)->light_coef);
-	if (obj_light == 2)
-		obj_light_up(rgb, ((t_cyl *)obj)->light_coef);
-	if (obj_light == 3)
-		obj_light_up(rgb, ((t_pln *)obj)->coef);
+	luminosity(rgb, e->c->name[i], obj);
 	rgb_to_hexa(&color, rgb);
 	*((int *)e->data_img + i) = color;
 	e->l = begin;

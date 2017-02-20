@@ -15,9 +15,7 @@ t_env		*install(char *path)
 	while (get_next_line(fd, &line) == 1)
 	{
 		tmp = ft_strsplit(line, ' ');
-		if (!tmp)
-			not_a_valid_file();
-		k = analyzer(tmp[0]);
+		k = analyzer(tmp);
 		if (k == 0)
 			set_cam(tmp, e);
 		else if (k == 1)
@@ -34,6 +32,6 @@ t_env		*install(char *path)
 	}
 	close(fd);
 	if (!e->c)
-		not_a_valid_file();
+		not_a_valid_file("haven't found any cam input informations\n");
 	return (e);
 }

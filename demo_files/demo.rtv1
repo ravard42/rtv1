@@ -1,17 +1,17 @@
-cam {130,-10,80} {-33,4,-8}
-light {90,-30,60} 0xFFFFFF 45
-sphere {90,-30,60} 0 {0,0,0} 5 0xFFFFFF 45 0
-light {90,30,60} 0xFFFFFF 44
-sphere {90,30,60} 0 {0,0,0} 5 0xFFFFFF 44 0
-plan {0,0,0} 0 {0,0,0} 0 {0,0,0} 0 0xAAAAAA {0,4,42} 0
-sphere {0,0,15} 0 {0,0,0} 3 0xFFFFFF 0 0
-plan {0,0,15} 0 {0,0,0} 0 {0,0,0} 0 0xFF00FF {1,5,42} 0
-cylindre {0,0,28} 0 {0,0,0} 0 {5,5,5} 4 0xFFFFFF {1,-5,5} 0 0
-plan {0,0,28} 0 {0,0,0} 0 {0,0,0} -5 0xFF00FF {1,4,42} 0
-plan {0,0,28} 0 {0,0,0} 0 {0,0,0} 5 0xFF00FF {1,4,42} 0
-cone {0,0,45} 0 {1,0,0} 3 {-1,1,0} 0xFF00FF {1,-5,5}
-plan {0,0,45} 0 {1,0,0} 3 {-1,1,0} -5 0xFFFFFF {1,5,42} 0
-plan {0,0,45} 0 {1,0,0} 3 {-1,1,0} 5 0xFFFFFF {1,5,42} 0
-cylindre {40,10,20} 0 {0,0,0} 3 {1,0,0} 4 0xFFFFFF {1,-5,5} 0 0
-plan {40,10,20} 0 {0,0,0} 3 {1,0,0} 5 0xFF00FF {1,4,42} 0
-plan {40,10,20} 0 {0,0,0} 3 {1,0,0} -5 0xFF00FF {1,4,42} 0
+cam origin:{130,-10,80} direction:{-33,4,-8}
+light origin:{90,-30,60} couleur:0xFFFFFF id:45
+sphere origin:{90,-30,60} rayon:5 couleur:0xFFFFFF id_light:45 lum:2 ombre:0
+light origin:{90,30,60} couleur:0xFFFFFF id:43
+sphere origin:{90,30,60} rayon:5 couleur:0xFFFFFF id_light:43 lum:2 ombre:0
+plan couleur:0xAAAAAA
+sphere origin:{0,0,15} rayon:3 couleur:0xFFFFFF
+plan origin:{0,0,15} couleur:0xFF00FF borne:{5,0,0}
+cylindre origin:{0,0,28} rayon:4 couleur:0xFFFFFF borne:{-5,5,0}
+plan origin:{0,0,28} tr_nor:-5 couleur:0xFF00FF borne:{4,0,0}
+plan origin:{0,0,28} tr_nor:5 couleur:0xFF00FF borne:{4,0,0}
+cone origin:{0,0,45} rot:3 rot_dir:{-1,1,0} couleur:0xFF00FF borne:{-5,5,0}
+plan origin:{0,0,45} rot:3 rot_dir:{-1,1,0} tr_nor:-5 couleur:0xFFFFFF borne:{5,0,0}
+plan origin:{0,0,45} rot:3 rot_dir:{-1,1,0} tr_nor:5 couleur:0xFFFFFF borne:{5,0,0}
+cylindre origin:{40,10,20} rot:3 rot_dir:{1,0,0} rayon:4 couleur:0xFFFFFF borne:{-5,5,0}
+plan origin:{40,10,20} rot:3 rot_dir:{1,0,0} tr_nor:5 couleur:0xFF00FF borne:{4,0,0}
+plan origin:{40,10,20} rot:3 rot_dir:{1,0,0} tr_nor:-5 couleur:0xFF00FF borne:{4,0,0}

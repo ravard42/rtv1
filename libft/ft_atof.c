@@ -1,19 +1,25 @@
 # include "libft.h"
 
 
-static int	is_a_float(char *s)
+static int	is_float(char *s)
 {
 	int	i;
 	int	k;
 
-	if (!((s[0] == '-' && s[1] != '\0') || (s[0] >= '0' && s[0] <= '9')))
-		return (0);
+	if (!s || !((s[0] == '-' && s[1] != '\0') || (s[0] >= '0' && s[0] <= '9')))
+	{
+		ft_putstr("libft->ft_atof : is not a float\n");
+		exit(0);
+	}
 	k = 0;
 	i = 0;
 	while (s[++i])
 		if (!((s[i] >= '0' && s[i] <= '9')
 			|| (s[i] == '.' && (k += 1) < 2)))
-			return (0);
+	{
+		ft_putstr("libft->ft_atof : is not a float\n");
+		exit(0);
+	}
 	return (1);
 }
 
@@ -25,7 +31,7 @@ float		ft_atof(char *s)
 	float	ret;
 
 	if (s && s[0])
-		if (!is_a_float(s))
+		if (!is_float(s))
 			return (0);
 	tmp = ft_strsplit(s, '.');
 	if (tmp[1])

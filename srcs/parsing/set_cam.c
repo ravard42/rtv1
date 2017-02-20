@@ -3,8 +3,6 @@
 void	set_cam_base(t_cam *c)
 {
 	int		sens;
-	//float		tmp[3];
-	//float		cos_angle;
 
 	ft_norme(c->base[2]);
 	if (c->base[2][1] == 0 && c->base[2][2] == 0)
@@ -73,14 +71,14 @@ void	set_cam_base(t_cam *c)
 	}
 }
 
-void	set_cam(char **tmp, t_env *e)
+static void	init_cam(t_env *e)
 {
 	int	i;
 
 	if (e->c)
-		not_a_valid_file();
+		not_a_valid_file("multi cam setting is not handle\n");
 	e->c = (t_cam *)malloc(sizeof(t_cam));
-	e->c->pos = (float *)malloc(sizeof(float) * 3);
+	e->c->pos = (float *)ft_memalloc(sizeof(float) * 3);
 	e->c->base = (float **)malloc(sizeof(float *) * 3);
 	e->c->r_dir = (float **)malloc(sizeof(float *) * MAX_X * MAX_Y);
 	e->c->r_dist = (float *)malloc(sizeof(float) * MAX_X * MAX_Y);
@@ -95,8 +93,29 @@ void	set_cam(char **tmp, t_env *e)
 		e->c->r_dir[i] = (float *)malloc(sizeof(float) * 3);
 		e->c->name[i] = (char *)ft_memalloc(sizeof(char) * 9);
 	}
-	load_vect(tmp[1], e->c->pos);
-	load_vect(tmp[2], e->c->base[2]);
+}
+
+void	set_cam(char **tmp, t_env *e)
+{
+	char	***input;
+	int	i;
+
+	init_cam(e);
+	i = input_number(tmp);
+	input = (char ***)malloc(sizeof(char **) * i);
+	i = 0;
+	while (tmp[++i])
+		input[i - 1] = ft_strsplit(tmp[i], ':');
+	input[i - 1] = NULL;
+	i = -1;
+	while (input[++i])
+	{
+		if (!ft_strcmp("origin", input[i][0]))
+			load_vect(e->c->pos, input[i][1]);
+		else if (!ft_strcmp("direction", input[i][0]))
+			load_vect(e->c->base[2], input[i][1]);
+	}
+	free_double_split(input);
 	ft_norme(e->c->base[2]);
 	set_cam_base(e->c);
 	set_cam_ray_dir(e->c);

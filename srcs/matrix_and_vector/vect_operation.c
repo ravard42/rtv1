@@ -3,6 +3,8 @@
 
 float	*set_vect(float *dst, float a, float b, float c)
 {
+	if (dst == NULL)
+		dst = (float *)malloc(sizeof(float) * 3);
 	dst[0] = a;
 	dst[1] = b;
 	dst[2] = c;

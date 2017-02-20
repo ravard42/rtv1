@@ -15,8 +15,8 @@
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
 # define MAX_DIST	500000000
-# define PAS		10
-# define ROT		M_PI / 6
+# define PAS		25
+# define ROT		M_PI / 5
 
 
 # define EXIT 		65307
@@ -26,6 +26,7 @@
 # define ROT_D2 	65363
 # define ROT_G 		97
 # define ROT_G2 	65361
+# define DEMITOUR	32
 # define BAS 		115
 # define BAS2 		65364
 # define HAUT 		119
@@ -39,6 +40,7 @@
 # define ROT_D2 124
 # define ROT_G 0
 # define ROT_G2 123
+# define DEMITOUR 49
 # define BAS 13
 # define BAS2 126
 # define HAUT 1
@@ -60,8 +62,9 @@ typedef struct		s_sph
 	float		*origin;
 	float		r;
 	int		color;
+	float		lum;
+	int		ombre;
 	char		id_light;
-	float		light_coef;
 	struct s_sph	*next;
 }			t_sph;
 
@@ -70,8 +73,9 @@ typedef struct		s_pln
 	float		*origin;
 	float		*nor;
 	int		color;
+	float		lum;
+	int		ombre;
 	float		*borne;
-	float		coef;
 	struct s_pln	*next;
 }			t_pln;
 
@@ -86,13 +90,14 @@ typedef struct		s_trsf
 typedef struct		s_cyl
 {
 	float		*origin;
-	float		r;
 	float		*axe;
+	float		r;
 	int		color;
+	float		lum;
+	int		ombre;
 	float		*borne;
-	t_trsf		*t;
 	char		id_light;
-	float		light_coef;
+	t_trsf		*t;
 	struct s_cyl	*next;
 }			t_cyl;
 
@@ -101,9 +106,11 @@ typedef struct		s_con
 	float		*origin;
 	float		*axe;
 	int		color;
+	float		lum;
+	int		ombre;
 	float		*borne;
-	struct s_con	*next;
 	t_trsf		*t;
+	struct s_con	*next;
 }			t_con;
 
 typedef struct		s_obj
@@ -136,13 +143,15 @@ typedef struct		s_env
 }			t_env;
 
 t_env	*install(char *path);
-int	analyzer(char *tmp);
-void	not_a_valid_file();
-int	ft_atoi_hexa(char *s);
+int	analyzer(char **tmp);
+void	not_a_valid_file(char *str);
 void	free_split(char **tmp);
+void	free_double_split(char ***input);
+int	input_number(char **tmp);
+int	ft_atoi_hexa(char *s);
 int	ft_is_float(char *tmp);
 float	ft_atof(char *s);
-float	*load_vect(char *s, float *a);
+float	*load_vect(float *a, char *s);
 void	set_cam(char **tmp, t_env *e);
 void	set_cam_base(t_cam *c);
 void	set_cam_ray_dir(t_cam *c);
@@ -199,7 +208,7 @@ float	*hexa_to_rgb(float *rgb, int *hexa);
 int	*rgb_to_hexa(int *hexa, float *rgb);
 float	*rgb_to_coef(float *rgb);
 float	*coef_to_rgb(float *coef);
-float	*obj_light_up(float *rgb, float light_coef);
+float	*luminosity(float *rgb, char *name, t_obj *o);
 void	print(t_env *e);
 void	clear_img_dist_obj(t_env *e);
 

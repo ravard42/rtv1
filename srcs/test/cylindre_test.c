@@ -44,9 +44,9 @@ static void	sol_test(int i, float sol, t_env *e)
 	if (sol <= e->c->r_dist[i] && sol < MAX_DIST)
 	{
 		tmp = e->o->cy->t->cam_pos[2] + sol * e->o->cy->t->cam_r_dir[i][2] - e->o->cy->t->obj_pos[2];
-		if (e->o->cy->borne[0] == 0
-			|| (tmp < 0 && tmp >= e->o->cy->borne[1])
-			|| (tmp >= 0 && tmp <= e->o->cy->borne[2]))
+		if (!e->o->cy->borne
+			|| (tmp < 0 && tmp >= e->o->cy->borne[0])
+			|| (tmp >= 0 && tmp <= e->o->cy->borne[1]))
 		{
 			e->c->r_dist[i] = sol;
 			e->c->obj[i] = e->o->cy;

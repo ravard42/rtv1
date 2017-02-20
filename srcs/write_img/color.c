@@ -33,15 +33,25 @@ float	*coef_to_rgb(float *coef)
 	return (coef);
 }
 
-float	*obj_light_up(float *rgb, float light_coef)
+float	*luminosity(float *rgb, char *name, t_obj *o)
 {
 	int	i;
+	float	coef;
 
+	if (!ft_strcmp("sphere", name))
+		coef = ((t_sph *)o)->lum;
+	else if (!ft_strcmp("plan", name))
+		coef = ((t_pln *)o)->lum;
+	else if  (!ft_strcmp("cylindre", name))
+		coef = ((t_cyl *)o)->lum;
+	else if (!ft_strcmp("cone", name))
+		coef = ((t_con *)o)->lum;
 	i = -1;
 	while (++i < 3)
 	{
-		rgb[i] += light_coef * rgb[i];
+		rgb[i] = coef * rgb[i];
 		rgb[i] = (rgb[i] > 255) ? 255 : rgb[i];
+		rgb[i] = (rgb[i] < 0) ? 0 : rgb[i];
 	}
 	return (rgb);
 }

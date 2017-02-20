@@ -1,13 +1,15 @@
 ex demo_file :
 
 #debut
-cam {20,20,20} {-1,0,0} 					// cam origin direction
-light {0,0,0} 0xFFFFFF 42					// light origin couleur id
-sphere {0,0,0} 5 {1,1,1} 1 0xFFFFFF 1 4				// sphere origin val_translate axe_translate rayon couleur id_light light_coef
-plan {0,0,0} 5 {1,0,1} 2 {1,0,0} 5 0xFF00FF {1,5,42}		// plan origin val_translate axe_translate valeur_rot axe_rot tranlation_axe_rot couleur borne
-cylindre {5,0,0} 5 {0,0,0} 6 {1,0,0} 1 0x0000FF {1,-5,5} 0 0	// cylindre origin val_translate axe_translate valeur_rot axe_rot rayon couleur borne id_light light_coef
-cone {0,5.555,0} 5 {0,0,0} 6 {0,1,0} 0x00FF00 {0,0,0} 		// cone origin val_translate axe_ttranslate valeur_rot axe_rot couleur borne
+cam origin:{20,20,20} direction:{-1,0,0} 				
+light origin:{0,0,0} couleur:0xFFFFFF id:1					
+sphere origin:{0,0,0} trans_val:5 trans_dir:{1,1,1} rayon:1 couleur:0xFFFFFF luminosite:1 id_light:1 ombre:1
+plan origin:{0,0,0} trans_val:5 trans_dir:{1,0,1} rot_val:2 rot_dir:{1,0,0} trans_val_axe:5 couleur:0xFF00FF luminosite:1 borne:{1,5,42} ombre:1
+cylindre origin:{5,0,0} trans_val:5 trans_dir:{0,0,0} rot_val:6 rot_dir:{1,0,0} rayon:1 couleur:0x0000FF luminosite:1 borne:{1,-5,5} id_light:42 ombre:0	
+cone origin:{0,5.555,0} trans_val:5 trans_dir:{0,0,0} rot_val:6 rot_dir:{0,1,0} couleur:0x00FF00 luminosite:1 borne:{0,0,0} ombre:1
 #fin
+
+
 
 pour que le fichier soit valide :
 

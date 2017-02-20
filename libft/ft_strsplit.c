@@ -66,7 +66,7 @@ char	**ft_strsplit(const char *str, char c)
 	if (*word == 0)
 	{
 		ret = (char **)malloc(sizeof(char *));
-		ret = NULL;
+		ret[0] = NULL;
 		return (ret);
 	}
 	else

@@ -46,7 +46,7 @@ int	cylindre_light_test(float *p, void *obj, t_cyl *cy, t_lght *l)
 	float	param[3];
 	float	sol;
 
-	if (obj == cy || cy->id_light == 42)
+	if (obj == cy || l->id == cy->id_light || cy->ombre == 0)
 		return (1);
 	else
 	{
@@ -59,12 +59,12 @@ int	cylindre_light_test(float *p, void *obj, t_cyl *cy, t_lght *l)
 		set_param(param, cy);
 		if ((sol = solve(param)) == -42 || sol >= dist)
 			return (1);
-		else if (cy->borne[0])
+		else if (cy->borne)
 		{
 			dist = cy->t->cam_pos[2] + sol
 				* cy->t->cam_r_dir[0][2] - cy->t->obj_pos[2];
-			if ((dist < 0 && dist < cy->borne[1]) 
-				|| (dist > 0 && dist > cy->borne[2]))
+			if ((dist < 0 && dist < cy->borne[0]) 
+				|| (dist > 0 && dist > cy->borne[1]))
 				return (1);
 		}
 	}

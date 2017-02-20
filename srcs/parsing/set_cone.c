@@ -1,11 +1,9 @@
 # include <rtv1.h>
 
-void	set_cone(char **tmp, t_obj *o)
+static t_con	*init_con(t_obj *o)
 {
 	t_con	*begin;
-	float	save;
-	float	tmp_vect[3];
-	
+
 	if (o->co == NULL)
 	{
 		o->co = (t_con *)malloc(sizeof(t_con));
@@ -19,24 +17,63 @@ void	set_cone(char **tmp, t_obj *o)
 		o->co->next = (t_con *)malloc(sizeof(t_con));
 		o->co = o->co->next;
 	}
-	o->co->next = NULL;
 	o->co->origin = (float *)malloc(sizeof(float) * 3);
-	load_vect(tmp[1], o->co->origin);
-	if (!ft_is_float(tmp[2]))
-		not_a_valid_file();
-	save = ft_atof(tmp[2]);
-	vectorial_sum(o->co->origin, o->co->origin, vectorial_multi(tmp_vect, save, load_vect(tmp[3], tmp_vect)));
-	o->co->axe = (float *)malloc(sizeof(float) * 3);
-	set_vect(o->co->axe, 0, 0, 1);
-	if (!ft_is_float(tmp[4]))
-		not_a_valid_file();
-	save = ft_atof(tmp[4]);
-	save = (save) ? M_PI / save : 0;
-	if (save)
-		rot(o->co->axe, save, load_vect(tmp[5], tmp_vect));
-	o->co->color = ft_atoi_hexa(tmp[6]);
-	o->co->borne = (float *)malloc(sizeof(float) * 3);
-	load_vect(tmp[7], o->co->borne);
+	o->co->axe = set_vect(NULL, 0, 0, 1);
+	o->co->color = 0xFFFFFF;
+	o->co->lum = 1;
+	o->co->ombre = 1;
+	o->co->borne = NULL;
+	o->co->next = NULL;
+	return (begin);
+}
+
+static void	read_input_data(float *tmp_save, char **inp, t_con *co)
+{
+	if (!ft_strcmp("origin", inp[0]))
+		load_vect(co->origin, inp[1]);
+	else if (!ft_strcmp("couleur", inp[0]))
+		co->color = ft_atoi_hexa(inp[1]);
+	else if (!ft_strcmp("tr", inp[0]))
+		tmp_save[0] = ft_atof(inp[1]);
+	else if (!ft_strcmp("tr_dir", inp[0]))
+		load_vect(tmp_save + 1, inp[1]);
+	else if (!ft_strcmp("rot", inp[0]))
+		tmp_save[4] = ft_atof(inp[1]);
+	else if (!ft_strcmp("rot_dir", inp[0]))
+		load_vect(tmp_save + 5, inp[1]);
+	else if (!ft_strcmp("lum", inp[0]))
+		co->lum = ft_atof(inp[1]);
+	else if (!ft_strcmp("ombre", inp[0]))
+		co->ombre = (int)ft_atof(inp[1]);
+	else if (!ft_strcmp("borne", inp[0]))
+		co->borne = load_vect(NULL, inp[1]);
+}
+
+void	set_cone(char **tmp, t_obj *o)
+{
+	t_con	*begin;
+	char	***input;
+	int	i;
+	float	tmp_save[8];
+
+	begin = init_con(o);	
+	i = input_number(tmp);
+	input = (char ***)malloc(sizeof(char **) * i);
+	i = 0;
+	while (tmp[++i])
+		input[i - 1] = ft_strsplit(tmp[i], ':');
+	input[i - 1] = NULL;	
+	ft_memset(tmp_save, 0, sizeof(float) * 8);
+	i = -1;
+	while (input[++i])
+		read_input_data(tmp_save, input[i], o->co);
+	free_double_split(input);
+	if (tmp_save[0])
+		vectorial_sum(o->co->origin, o->co->origin,
+			vectorial_multi(tmp_save + 1, tmp_save[0], tmp_save + 1));
+	if (tmp_save[4])
+		rot(o->co->axe, M_PI / tmp_save[4], tmp_save + 5);
+	ft_norme(o->co->axe);
 	set_cone_transfer(o->co);
 	o->co = begin;
 }

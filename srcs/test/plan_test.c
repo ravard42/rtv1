@@ -20,7 +20,7 @@ static void	sol_test(int i, float sol, t_env *e)
 	if (sol <= e->c->r_dist[i] && sol < MAX_DIST)
 	{
 		vectorial_sum(tmp, e->c->pos, vectorial_multi(tmp, sol, e->c->r_dir[i]));
-		if (!e->o->p->borne[0] || ft_dist(e->o->p->origin, tmp) <= e->o->p->borne[1])
+		if (!e->o->p->borne || ft_dist(e->o->p->origin, tmp) <= e->o->p->borne[0])
 		{
 			e->c->r_dist[i] = sol;
 			e->c->obj[i] = e->o->p;

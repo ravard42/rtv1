@@ -20,7 +20,7 @@ int	plan_light_test(float *p, void *obj, t_pln *pl, t_lght *l)
 	float	tmp[3];
 	float	sol;
 
-	if (obj == pl)
+	if (obj == pl || pl->ombre == 0)
 		return (1);
 	else
 	{
@@ -34,10 +34,10 @@ int	plan_light_test(float *p, void *obj, t_pln *pl, t_lght *l)
 			return (1);
 		if ((sol <= 0) || sol >= dist)
 			return (1);
-		else if (pl->borne[0])
+		else if (pl->borne)
 		{
 			vectorial_sum(tmp, l->origin, vectorial_multi(tmp, sol, dir));
-			if (ft_dist(pl->origin, tmp) > pl->borne[1])
+			if (ft_dist(pl->origin, tmp) > pl->borne[0])
 				return (1);
 		}
 	}

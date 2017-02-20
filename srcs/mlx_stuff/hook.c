@@ -42,6 +42,12 @@ int	key_hook(int keycode, t_env *e)
 		}
 		set_cam_ray_dir(e->c);
 	}
+	else if (keycode == DEMITOUR)
+	{
+		vectorial_multi(e->c->base[2], -1, e->c->base[2]);
+		set_cam_base(e->c);
+		set_cam_ray_dir(e->c);
+	}
 	else if (keycode == BAS || keycode == BAS2)
 	{	
 		if (prevent_rot(keycode, e))
