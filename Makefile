@@ -5,6 +5,7 @@ SRC = srcs/main.c\
 	srcs/parsing/install.c\
 	srcs/parsing/analyze.c\
 	srcs/parsing/tools.c\
+	srcs/parsing/freesplit.c\
 	srcs/parsing/set_cam.c\
 	srcs/parsing/set_cam_ray_dir.c\
 	srcs/parsing/set_sphere.c\

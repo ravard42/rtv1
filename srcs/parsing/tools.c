@@ -10,30 +10,6 @@ int	input_number(char **tmp)
 	return (i);
 }
 
-void	free_split(char **tmp)
-{
-	int	i;
-
-	i = -1;
-	while (tmp[++i])
-		free(tmp[i]);
-	free(tmp);
-}
-
-void	free_double_split(char ***input)
-{
-	int	i;
-
-	i = -1;
-	while (input[++i])
-	{
-		free(input[i][0]);
-		free(input[i][1]);
-		free(input[i]);
-	}
-	free(input);
-}
-
 int	ft_atoi_hexa(char *s)
 {
 	int	ret;
@@ -97,7 +73,6 @@ int	is_valid_coord(char *str)
 	free_split(is_float);
 	return (1);
 }
-
 
 float	*load_vect(float *a, char *s)
 {

@@ -1,12 +1,28 @@
 # include "rtv1.h"
 
 
+static void	set(t_env *e, char **tmp, int k)
+{
+	if (k == 0)
+		set_cam(tmp, e);
+	else if (k == 1)
+		set_sphere(tmp, e->o);
+	else if (k == 2)
+		set_plan(tmp, e->o);
+	else if (k == 3)
+		set_cylindre(tmp, e->o);
+	else if (k == 4)
+		set_cone(tmp, e->o);
+	else if (k == 5)
+		set_light(tmp, e);
+}
+
+
 t_env		*install(char *path)
 {
 	t_env	*e;
 	char	*line;
 	char	**tmp;
-	int	k;
 	int 	fd;
 
 	e = (t_env *)malloc(sizeof(t_env));
@@ -15,19 +31,7 @@ t_env		*install(char *path)
 	while (get_next_line(fd, &line) == 1)
 	{
 		tmp = ft_strsplit(line, ' ');
-		k = analyzer(tmp);
-		if (k == 0)
-			set_cam(tmp, e);
-		else if (k == 1)
-			set_sphere(tmp, e->o);
-		else if (k == 2)
-			set_plan(tmp, e->o);
-		else if (k == 3)
-			set_cylindre(tmp, e->o);
-		else if (k == 4)
-			set_cone(tmp, e->o);
-		else if (k == 5)
-			set_light(tmp, e);
+		set(e, tmp, analyzer(tmp));
 		free_split(tmp);
 	}
 	close(fd);

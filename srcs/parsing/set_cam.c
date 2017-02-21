@@ -116,7 +116,6 @@ void	set_cam(char **tmp, t_env *e)
 			load_vect(e->c->base[2], input[i][1]);
 	}
 	free_double_split(input);
-	ft_norme(e->c->base[2]);
 	set_cam_base(e->c);
 	set_cam_ray_dir(e->c);
 }
