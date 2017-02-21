@@ -1,7 +1,5 @@
 # include "rtv1.h"
 
-// src et mp peuvent overlap le resultat sera stock ds mp par contre src en sera modifiE et vaudra mp UNIQUEMENT si les pointeur coincident au moment de l appel de la fonction sinon aucun soucis src restera tel quel! 
-
 float	*matrix_product(float *mp, float **mat, float *src)
 {
 	float 	tmp[3];

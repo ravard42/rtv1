@@ -1,74 +1,50 @@
 # include "rtv1.h"
 
-void	set_cam_base(t_cam *c)
+static void	z_axe_cam_case(t_cam *c)
 {
 	int		sens;
 
-	ft_norme(c->base[2]);
-	if (c->base[2][1] == 0 && c->base[2][2] == 0)
+	if (c->base[0][0] == 0 && c->base[0][1] == 0 && c->base[0][2] == 0)
 	{
-		sens = (c->base[2][0] > 0) ? 1 : -1;
-		c->base[0][0] = 0;
-		c->base[0][1] = -sens;
-		c->base[0][2] = 0;
-		c->base[1][0] = 0;
-		c->base[1][1] = 0;
-		c->base[1][2] = -1;
+		sens = (c->base[2][2] > 0) ? 1 : -1;
+		set_vect(c->base[0], 0, 1, 0);
+		set_vect(c->base[1], -sens, 0, 0);
 	}
-	else if (c->base[2][0] == 0 && c->base[2][2] == 0)
+	else
+		vectorial_product(c->base[1], c->base[2], c->base[0]);
+}
+
+static void	x_y_z_axe_cam_case(t_cam *c)
+{
+	int		sens;
+
+	if (c->base[2][0] == 0)
 	{
 		sens = (c->base[2][1] > 0) ? 1 : -1;
-		c->base[0][0] = sens;
-		c->base[0][1] = 0;
-		c->base[0][2] = 0;
-		c->base[1][0] = 0;
-		c->base[1][1] = 0;
-		c->base[1][2] = -1;
-	}
-	else if (c->base[2][0] == 0 && c->base[2][1] == 0)
-	{
-		if (c->base[0][0] == 0 && c->base[0][1] == 0 && c->base[0][2] == 0)
-		{
-			sens = (c->base[2][2] > 0) ? 1 : -1;
-			c->base[0][0] = 0;
-			c->base[0][1] = 1;
-			c->base[0][2] = 0;
-			c->base[1][0] = -sens;
-			c->base[1][1] = 0;
-			c->base[1][2] = 0;
-		}
-		else
-			vectorial_product(c->base[1], c->base[2], c->base[0]);
-	}
-	else if (c->base[2][0] == 0)
-	{
-		sens = (c->base[2][1] > 0) ? 1 : -1;
-		c->base[0][0] = sens;
-		c->base[0][1] = 0;
-		c->base[0][2] = 0;
-		c->base[1][0] = 0;
-		c->base[1][1] = c->base[2][2] * sens;
-		c->base[1][2] = -c->base[2][1] * sens;
+		set_vect(c->base[0], sens, 0, 0);
 	}
 	else if (c->base[2][1] == 0)
 	{
-		sens = (c->base[2][0] > 0) ? 1 : -1;
-		c->base[0][0] = 0;
-		c->base[0][1] = -sens;
-		c->base[0][2] = 0;
-		c->base[1][0] = c->base[2][2] * sens;
-		c->base[1][1] = 0;
-		c->base[1][2] = -c->base[2][0] * sens;
+		sens = (c->base[2][0] > 0) ? -1 : 1;
+		set_vect(c->base[0], 0, sens, 0);
 	}
 	else
 	{
 		sens = (c->base[2][0] * c->base[2][1] > 0) ? 1 : -1;
-		c->base[0][0] = sens / c->base[2][0];
-		c->base[0][1] = -sens / c->base[2][1];
-		c->base[0][2] = 0;
-		ft_norme(c->base[0]);
-		vectorial_product(c->base[1], c->base[2], c->base[0]);
+		set_vect(c->base[0], sens / c->base[2][0],
+				-sens / c->base[2][1], 0);
 	}
+	ft_norme(c->base[0]);
+	vectorial_product(c->base[1], c->base[2], c->base[0]);
+}
+
+void	set_cam_base(t_cam *c)
+{
+	ft_norme(c->base[2]);
+	if (c->base[2][0] == 0 && c->base[2][1] == 0)
+		z_axe_cam_case(c);
+	else
+		x_y_z_axe_cam_case(c);
 }
 
 static void	init_cam(t_env *e)

@@ -1,69 +1,45 @@
 # include "rtv1.h"
 
-void	construct_transfer_mat(float **base)
+static void	z_axe_case(float **base)
 {
 	int		sens;
 
-	ft_norme(base[2]);
-	if (base[2][1] == 0 && base[2][2] == 0)
-	{
-		sens = (base[2][0] > 0) ? 1 : -1;
-		base[0][0] = 0;
-		base[0][1] = -sens;
-		base[0][2] = 0;
-		base[1][0] = 0;
-		base[1][1] = 0;
-		base[1][2] = -1;
-	}
-	else if (base[2][0] == 0 && base[2][2] == 0)
+	sens = (base[2][2] > 0) ? 1 : -1;
+	set_vect(base[0], 0, 1, 0);
+	set_vect(base[1], -sens, 0, 0);
+}
+
+static void	x_y_z_axe_case(float **base)
+{
+	int		sens;
+
+	if (base[2][0] == 0)
 	{
 		sens = (base[2][1] > 0) ? 1 : -1;
-		base[0][0] = sens;
-		base[0][1] = 0;
-		base[0][2] = 0;
-		base[1][0] = 0;
-		base[1][1] = 0;
-		base[1][2] = -1;
-	}
-	else if (base[2][0] == 0 && base[2][1] == 0)
-	{
-		sens = (base[2][2] > 0) ? 1 : -1;
-		base[0][0] = 0;
-		base[0][1] = 1;
-		base[0][2] = 0;
-		base[1][0] = -sens;
-		base[1][1] = 0;
-		base[1][2] = 0;
-	}
-	else if (base[2][0] == 0)
-	{
-		sens = (base[2][1] > 0) ? 1 : -1;
-		base[0][0] = sens;
-		base[0][1] = 0;
-		base[0][2] = 0;
-		base[1][0] = 0;
-		base[1][1] = base[2][2] * sens;
-		base[1][2] = -base[2][1] * sens;
+		set_vect(base[0], sens, 0, 0);
 	}
 	else if (base[2][1] == 0)
 	{
-		sens = (base[2][0] > 0) ? 1 : -1;
-		base[0][0] = 0;
-		base[0][1] = -sens;
-		base[0][2] = 0;
-		base[1][0] = base[2][2] * sens;
-		base[1][1] = 0;
-		base[1][2] = -base[2][0] * sens;
+		sens = (base[2][0] > 0) ? -1 : 1;
+		set_vect(base[0], 0, sens, 0);
 	}
 	else
 	{
 		sens = (base[2][0] * base[2][1] > 0) ? 1 : -1;
-		base[0][0] = sens / base[2][0];
-		base[0][1] = -sens / base[2][1];
-		base[0][2] = 0;
-		ft_norme(base[0]);
-		vectorial_product(base[1], base[2], base[0]);
+		set_vect(base[0], sens / base[2][0],
+				-sens / base[2][1], 0);
 	}
+	ft_norme(base[0]);
+	vectorial_product(base[1], base[2], base[0]);
+}
+
+void	construct_transfer_mat(float **base)
+{
+	ft_norme(base[2]);
+	if (base[2][0] == 0 && base[2][1] == 0)
+		z_axe_case(base);
+	else
+		x_y_z_axe_case(base);
 }
 
 void	set_cyl_transfer(t_cyl *cy)

@@ -16,7 +16,7 @@
 # define VP_DIST	1.0
 # define MAX_DIST	500000000
 # define PAS		25
-# define ROT		M_PI / 5
+# define ROT		M_PI / 6
 
 
 # define EXIT 		65307
@@ -192,12 +192,8 @@ int	cone_light_test(float *p, void *obj, t_con *co, t_lght *l);
 void	global_light_test(float *p, void *obj, t_env *e);
 
 void	rot(float *eZ, float value, float *n);
-int	prevent_vertical_rot(int keycode, float **base);
-void	rot_d(float *eZcam);
-void	rot_g(float *eZcam);
-int	prevent_rot(int keycode, t_env *e);
-void	rot_b(float **base);
-void	rot_h(float **base);
+int	prevent_hori_rot(int keycode, float **base);
+int	prevent_vert_rot(int keycode, t_env *e);
 
 void	init_env(t_env *e);
 void	loop(t_env *e);

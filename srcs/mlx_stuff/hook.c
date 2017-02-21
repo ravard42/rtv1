@@ -14,6 +14,7 @@ int	key_hook(int keycode, t_env *e)
 {
 	float 	tmp[3];
 
+	set_vect(tmp, 0, 0, 1);
 	if (keycode == EXIT)
 		exit(0);
 	else if (keycode == AVANCER)
@@ -22,22 +23,22 @@ int	key_hook(int keycode, t_env *e)
 		vectorial_subtraction(e->c->pos, e->c->pos, vectorial_multi(tmp, PAS, e->c->base[2]));
 	else if (keycode == ROT_D || keycode == ROT_D2)
 	{	
-		if (prevent_vertical_rot(keycode, e->c->base))
+		if (prevent_hori_rot(keycode, e->c->base))
 			;
 		else
 		{
-			rot_d(e->c->base[2]);
+			rot(e->c->base[2], -ROT, tmp);
 			set_cam_base(e->c);
 		}
 		set_cam_ray_dir(e->c);
 	}
 	else if (keycode == ROT_G || keycode == ROT_G2)
 	{	
-		if (prevent_vertical_rot(keycode, e->c->base))
+		if (prevent_hori_rot(keycode, e->c->base))
 			;
 		else
 		{	
-			rot_g(e->c->base[2]);
+			rot(e->c->base[2], ROT, tmp);
 			set_cam_base(e->c);
 		}
 		set_cam_ray_dir(e->c);
@@ -50,28 +51,28 @@ int	key_hook(int keycode, t_env *e)
 	}
 	else if (keycode == BAS || keycode == BAS2)
 	{	
-		if (prevent_rot(keycode, e))
+		if (prevent_vert_rot(keycode, e))
 		{
 			set_vect(e->c->base[2], 0, 0, -1);
 			set_cam_base(e->c);
 		}
 		else
 		{
-			rot_b(e->c->base);
+			rot(e->c->base[2], -ROT, e->c->base[0]);
 			vectorial_product(e->c->base[1], e->c->base[2], e->c->base[0]);
 		}
 		set_cam_ray_dir(e->c);
 	}
 	else if (keycode == HAUT || keycode == HAUT2)
 	{	
-		if (prevent_rot(keycode, e))
+		if (prevent_vert_rot(keycode, e))
 		{
 			set_vect(e->c->base[2], 0, 0, 1);
 			set_cam_base(e->c);
 		}
 		else
 		{
-			rot_h(e->c->base);
+			rot(e->c->base[2], ROT, e->c->base[0]);
 			vectorial_product(e->c->base[1], e->c->base[2], e->c->base[0]);
 		}
 		set_cam_ray_dir(e->c);

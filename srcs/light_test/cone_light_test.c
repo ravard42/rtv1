@@ -21,7 +21,7 @@ static float	solve(float *param)
 	float	delt;
 	float	tmp[2];
 	float	sol;
-	
+
 	sol = -42;;
 	if ((delt = pow(param[1], 2) - 4 * param[0] * param[2]) == 0)
 	{
@@ -43,32 +43,27 @@ static float	solve(float *param)
 
 int	cone_light_test(float *p, void *obj, t_con *co, t_lght *l)
 {
-	float	dist;
-	float	dir[3];
+	float	tmp[2];
 	float	param[3];
-	float	sol;
 
 	if (obj == co || co->ombre == 0)
 		return (1);
-	else
+	tmp[0] = ft_dist(p, l->origin);
+	vectorial_subtraction(param, p, l->origin);
+	ft_norme(param);
+	matrix_product(co->t->cam_pos, co->t->mat, l->origin);
+	matrix_product(co->t->obj_pos, co->t->mat, co->origin);
+	matrix_product(co->t->cam_r_dir[0], co->t->mat, param);
+	set_param(param, co);
+	if ((tmp[1] = solve(param)) == -42 || tmp[1] >= tmp[0])
+		return (1);
+	else if (co->borne)
 	{
-		dist = ft_dist(p, l->origin);
-		vectorial_subtraction(dir, p, l->origin);
-		ft_norme(dir);
-		matrix_product(co->t->cam_pos, co->t->mat, l->origin);
-		matrix_product(co->t->obj_pos, co->t->mat, co->origin);
-		matrix_product(co->t->cam_r_dir[0], co->t->mat, dir);
-		set_param(param, co);
-		if ((sol = solve(param)) == -42 || sol >= dist)
+		tmp[0] = co->t->cam_pos[2] + tmp[1]
+			* co->t->cam_r_dir[0][2] - co->t->obj_pos[2];
+		if ((tmp[0] < 0 && tmp[0] < co->borne[0]) 
+			|| (tmp[0] > 0 && tmp[0] > co->borne[1]))
 			return (1);
-		else if (co->borne)
-		{
-			dist = co->t->cam_pos[2] + sol
-				* co->t->cam_r_dir[0][2] - co->t->obj_pos[2];
-			if ((dist < 0 && dist < co->borne[0]) 
-				|| (dist > 0 && dist > co->borne[1]))
-				return (1);
-		}
 	}
 	return (0);
 }

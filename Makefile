@@ -18,6 +18,7 @@ SRC = srcs/main.c\
 	srcs/matrix_and_vector/transfer.c\
 	srcs/matrix_and_vector/normal.c\
 	srcs/matrix_and_vector/ft_norme.c\
+	srcs/matrix_and_vector/vect_manip.c\
 	srcs/matrix_and_vector/vect_operation.c\
 	srcs/test/sphere_test.c\
 	srcs/test/plan_test.c\
@@ -31,7 +32,6 @@ SRC = srcs/main.c\
 	srcs/light_test/global_light_test.c\
 	srcs/rotation/rot.c\
 	srcs/rotation/prevent_rot_cam.c\
-	srcs/rotation/rot_cam.c\
 	srcs/mlx_stuff/init_env.c\
 	srcs/mlx_stuff/loop.c\
 	srcs/mlx_stuff/hook.c\
