@@ -33,6 +33,7 @@ SRC = srcs/main.c\
 	srcs/rotation/rot.c\
 	srcs/rotation/prevent_rot_cam.c\
 	srcs/mlx_stuff/init_env.c\
+	srcs/mlx_stuff/key_hook_func.c\
 	srcs/mlx_stuff/loop.c\
 	srcs/mlx_stuff/hook.c\
 	srcs/write_img/print.c\
@@ -42,8 +43,8 @@ SRC = srcs/main.c\
 OBJ = $(SRC:.c=.o)
 
 INCL = -I includes/ -I /usr/X11/include
-LIB = -L libft/ -lft -L /usr/X11/lib -lXext -lX11 -lmlx
-
+#LIB = -L libft/ -lft -L /usr/X11/lib -lXext -lX11 -lmlx
+LIB = -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
 all : $(NAME)
 
 $(NAME) : ./libft/libft.a $(OBJ)

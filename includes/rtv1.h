@@ -18,7 +18,7 @@
 # define PAS		25
 # define ROT		M_PI / 6
 
-
+/*
 # define EXIT 		65307
 # define RECULER 	101
 # define AVANCER 	113
@@ -31,8 +31,8 @@
 # define BAS2 		65364
 # define HAUT 		119
 # define HAUT2 		65362
- 
-/*
+*/ 
+
 # define EXIT 53
 # define RECULER 14
 # define AVANCER 12
@@ -41,11 +41,11 @@
 # define ROT_G 0
 # define ROT_G2 123
 # define DEMITOUR 49
-# define BAS 13
-# define BAS2 126
-# define HAUT 1
-# define HAUT2 125
-*/
+# define BAS 1
+# define BAS2 125
+# define HAUT 13
+# define HAUT2 126
+
 
 typedef struct		s_cam
 {
@@ -199,6 +199,11 @@ void	init_env(t_env *e);
 void	loop(t_env *e);
 int	expose_hook(t_env *e);
 int	key_hook(int keycode, t_env *e);
+void	rot_d(int keycode, t_env *e);
+void	rot_g(int keycode, t_env *e);
+void	demi_tour(t_env *e);
+void	rot_b(int keycode, t_env *e);
+void	rot_h(int keycode, t_env *e);
 
 float	*hexa_to_rgb(float *rgb, int *hexa);
 int	*rgb_to_hexa(int *hexa, float *rgb);
