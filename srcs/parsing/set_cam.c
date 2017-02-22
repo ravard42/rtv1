@@ -63,6 +63,7 @@ static void	init_cam(t_env *e)
 	i = -1;
 	while (++i < 3)
 		e->c->base[i] = (float *)ft_memalloc(sizeof(float) * 3);
+	set_vect(e->c->base[2], 0, 0, 1);
 	i = -1;
 	while (++i < MAX_X * MAX_Y)
 	{
@@ -88,7 +89,7 @@ void	set_cam(char **tmp, t_env *e)
 	{
 		if (!ft_strcmp("origin", input[i][0]))
 			load_vect(e->c->pos, input[i][1]);
-		else if (!ft_strcmp("direction", input[i][0]))
+		else if (!ft_strcmp("dir", input[i][0]))
 			load_vect(e->c->base[2], input[i][1]);
 	}
 	free_double_split(input);

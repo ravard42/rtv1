@@ -17,7 +17,7 @@ static t_cyl	*init_cyl(t_obj *o)
 		o->cy->next = (t_cyl *)malloc(sizeof(t_cyl));
 		o->cy = o->cy->next;
 	}
-	o->cy->origin = (float *)malloc(sizeof(float) * 3);
+	o->cy->origin = (float *)ft_memalloc(sizeof(float) * 3);
 	o->cy->axe = set_vect(NULL, 0, 0, 1);
 	o->cy->r = 1;
 	o->cy->color = 0xFFFFFF;

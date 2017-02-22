@@ -43,8 +43,8 @@ SRC = srcs/main.c\
 OBJ = $(SRC:.c=.o)
 
 INCL = -I includes/ -I /usr/X11/include
-#LIB = -L libft/ -lft -L /usr/X11/lib -lXext -lX11 -lmlx
-LIB = -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
+LIB = -L libft/ -lft -L /usr/X11/lib -lXext -lX11 -lmlx
+#LIB = -L libft/ -lft -lmlx -framework OpenGL -framework AppKit
 all : $(NAME)
 
 $(NAME) : ./libft/libft.a $(OBJ)

@@ -20,7 +20,7 @@ static t_lght	*init_light(t_env *e)
 	e->l->name = "light";
 	e->l->origin = (float *)ft_memalloc(sizeof(float) * 3);
 	e->l->color = 0xFFFFFF;
-	e->l->id = 0;
+	e->l->id = 42;
 	e->l->scope = 0;
 	e->l->next = NULL;
 	return (begin);

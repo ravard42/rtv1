@@ -1,17 +1,9 @@
-cam origin:{0,0,1000} direction:{-1,-1,0} 
-plan couleur:0x0000FF lum:1
+cam origin:{50,30,40} dir:{-2,-2,-1} 
+plan couleur:0x0000FF
 plan origin:{0,0,2000} rot:1 rot_dir:{1,0,0} couleur:0x330066 lum:2
-ight origin:{2000,2000,1000} couleur:0xFFFFFF id:47
-sphere origin:{2000,2000,1000} rayon:100 couleur:0xFFFF00 id_light:47 lum:1
+light origin:{2000,2000,1000} id:47
+sphere origin:{2000,2000,1000} rayon:100 couleur:0xFFFF00 id_light:47
 cylindre origin:{0,0,7} rayon:5 couleur:0x777777 borne:{-7,7,0}
-plan origin:{0,0,7} tr_nor:7 couleur:0x660000 borne:{5,0,0} lum:1
-ight origin:{0,0,24} couleur:0xFFFFFF id:3
+plan origin:{0,0,7} tr_nor:7 couleur:0x660000 borne:{5,0,0}
+light origin:{0,0,24} id:3
 sphere origin:{0,0,7} tr:17 tr_dir:{0,0,1} rayon:3 couleur:0x00CC00 id_light:3
-plan couleur:0x000000 origin:{0,0,1999} rot:1 rot_dir:{1,0,0} borne:{100,0,0}
-sphere origin:{70,0,1999} couleur:0x0000FF rayon:20
-sphere origin:{0,70,1999} couleur:0x00FF00 rayon:20
-sphere origin:{0,0,1999} couleur:0xFF0000 rayon:20
-plan couleur:0x000000 borne:{100,0,0}
-sphere origin:{70,0,0} couleur:0x0000FF rayon:20
-sphere origin:{0,70,0} couleur:0x00FF00 rayon:20
-sphere origin:{0,0,0} couleur:0xFF0000 rayon:20

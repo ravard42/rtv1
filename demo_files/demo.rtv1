@@ -1,4 +1,4 @@
-cam origin:{130,-10,80} direction:{-33,4,-8}
+cam origin:{130,-10,80} dir:{-33,4,-8}
 light origin:{90,-30,60} couleur:0xFFFFFF id:45
 sphere origin:{90,-30,60} rayon:5 couleur:0xFFFFFF id_light:45 lum:2 ombre:0
 light origin:{90,30,60} couleur:0xFFFFFF id:43

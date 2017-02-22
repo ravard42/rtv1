@@ -17,7 +17,7 @@ static t_con	*init_con(t_obj *o)
 		o->co->next = (t_con *)malloc(sizeof(t_con));
 		o->co = o->co->next;
 	}
-	o->co->origin = (float *)malloc(sizeof(float) * 3);
+	o->co->origin = (float *)ft_memalloc(sizeof(float) * 3);
 	o->co->axe = set_vect(NULL, 0, 0, 1);
 	o->co->color = 0xFFFFFF;
 	o->co->lum = 1;

@@ -25,7 +25,7 @@ int	plan_light_test(float *p, void *obj, t_pln *pl, t_lght *l)
 	ft_norme(dir);
 	tmp[1] = -42;
 	if (!scalar_product(pl->nor, dir))
-		return (0);
+		return (1);
 	tmp[1] = solve(l, dir, pl);
 	if ((tmp[1] <= 0) || tmp[1] >= tmp[0])
 		return (1);

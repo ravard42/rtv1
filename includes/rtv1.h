@@ -9,16 +9,16 @@
 # include "libft.h"
 # include <stdio.h>
 
-# define MAX_X		500
-# define MAX_Y		500
+# define MAX_X		350
+# define MAX_Y		350
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
 # define MAX_DIST	500000000
-# define PAS		25
+# define PAS		15
 # define ROT		M_PI / 6
 
-/*
+
 # define EXIT 		65307
 # define RECULER 	101
 # define AVANCER 	113
@@ -31,8 +31,8 @@
 # define BAS2 		65364
 # define HAUT 		119
 # define HAUT2 		65362
-*/ 
-
+ 
+/*
 # define EXIT 53
 # define RECULER 14
 # define AVANCER 12
@@ -45,7 +45,7 @@
 # define BAS2 125
 # define HAUT 13
 # define HAUT2 126
-
+*/
 
 typedef struct		s_cam
 {
