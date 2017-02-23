@@ -21,6 +21,7 @@ static t_con	*init_con(t_obj *o)
 	o->co->axe = set_vect(NULL, 0, 0, 1);
 	o->co->color = 0xFFFFFF;
 	o->co->lum = 1;
+	o->co->bri = 1;
 	o->co->ombre = 1;
 	o->co->borne = NULL;
 	o->co->next = NULL;
@@ -43,6 +44,8 @@ static void	read_input_data(float *tmp_save, char **inp, t_con *co)
 		load_vect(tmp_save + 5, inp[1]);
 	else if (!ft_strcmp("lum", inp[0]))
 		co->lum = ft_atof(inp[1]);
+	else if (!ft_strcmp("bri", inp[0]))
+		co->bri = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("ombre", inp[0]))
 		co->ombre = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("borne", inp[0]))

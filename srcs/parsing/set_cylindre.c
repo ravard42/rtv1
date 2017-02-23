@@ -22,6 +22,7 @@ static t_cyl	*init_cyl(t_obj *o)
 	o->cy->r = 1;
 	o->cy->color = 0xFFFFFF;
 	o->cy->lum = 1;
+	o->cy->bri = 1;
 	o->cy->ombre = 1;
 	o->cy->borne = NULL;
 	o->cy->id_light = 0;
@@ -47,6 +48,8 @@ static void	read_input_data(float *tmp_save, char **inp, t_cyl *cy)
 		load_vect(tmp_save + 5, inp[1]);
 	else if (!ft_strcmp("lum", inp[0]))
 		cy->lum = ft_atof(inp[1]);
+	else if (!ft_strcmp("bri", inp[0]))
+		cy->bri = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("ombre", inp[0]))
 		cy->ombre = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("borne", inp[0]))

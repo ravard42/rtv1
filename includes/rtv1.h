@@ -17,6 +17,7 @@
 # define MAX_DIST	500000000
 # define PAS		15
 # define ROT		M_PI / 6
+# define BRI		7
 
 
 # define EXIT 		65307
@@ -63,6 +64,7 @@ typedef struct		s_sph
 	float		r;
 	int		color;
 	float		lum;
+	int		bri;
 	int		ombre;
 	char		id_light;
 	struct s_sph	*next;
@@ -74,6 +76,7 @@ typedef struct		s_pln
 	float		*nor;
 	int		color;
 	float		lum;
+	int		bri;
 	int		ombre;
 	float		*borne;
 	struct s_pln	*next;
@@ -94,6 +97,7 @@ typedef struct		s_cyl
 	float		r;
 	int		color;
 	float		lum;
+	int		bri;
 	int		ombre;
 	float		*borne;
 	char		id_light;
@@ -107,6 +111,7 @@ typedef struct		s_con
 	float		*axe;
 	int		color;
 	float		lum;
+	int		bri;
 	int		ombre;
 	float		*borne;
 	t_trsf		*t;

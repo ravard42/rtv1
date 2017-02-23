@@ -4,14 +4,14 @@ sphere origin:{90,-30,60} rayon:5 couleur:0xFFFFFF id_light:45 lum:2 ombre:0
 light origin:{90,30,60} couleur:0xFFFFFF id:43
 sphere origin:{90,30,60} rayon:5 couleur:0xFFFFFF id_light:43 lum:2 ombre:0
 plan couleur:0xAAAAAA
-sphere origin:{0,0,15} rayon:3 couleur:0xFFFFFF
+sphere origin:{0,0,15} rayon:3 couleur:0x999999
 plan origin:{0,0,15} couleur:0xFF00FF borne:{5,0,0}
-cylindre origin:{0,0,28} rayon:4 couleur:0xFFFFFF borne:{-5,5,0}
+cylindre origin:{0,0,28} rayon:4 couleur:0x999999 borne:{-5,5,0}
 plan origin:{0,0,28} tr_nor:-5 couleur:0xFF00FF borne:{4,0,0}
 plan origin:{0,0,28} tr_nor:5 couleur:0xFF00FF borne:{4,0,0}
 cone origin:{0,0,45} rot:3 rot_dir:{-1,1,0} couleur:0xFF00FF borne:{-5,5,0}
-plan origin:{0,0,45} rot:3 rot_dir:{-1,1,0} tr_nor:-5 couleur:0xFFFFFF borne:{5,0,0}
-plan origin:{0,0,45} rot:3 rot_dir:{-1,1,0} tr_nor:5 couleur:0xFFFFFF borne:{5,0,0}
-cylindre origin:{40,10,20} rot:3 rot_dir:{1,0,0} rayon:4 couleur:0xFFFFFF borne:{-5,5,0}
+plan origin:{0,0,45} rot:3 rot_dir:{-1,1,0} tr_nor:-5 couleur:0x999999 borne:{5,0,0}
+plan origin:{0,0,45} rot:3 rot_dir:{-1,1,0} tr_nor:5 couleur:0x999999 borne:{5,0,0}
+cylindre origin:{40,10,20} rot:3 rot_dir:{1,0,0} rayon:4 couleur:0x999999 borne:{-5,5,0}
 plan origin:{40,10,20} rot:3 rot_dir:{1,0,0} tr_nor:5 couleur:0xFF00FF borne:{4,0,0}
 plan origin:{40,10,20} rot:3 rot_dir:{1,0,0} tr_nor:-5 couleur:0xFF00FF borne:{4,0,0}

@@ -1,5 +1,5 @@
-cam origin:{1500,0,20} dir:{-5,0,2}
-\cam origin:{250,0,80} dir:{-5,0,-1}
+\cam origin:{1500,0,20} dir:{-5,0,2}
+cam origin:{250,0,80} dir:{-5,0,-1}
 \cam origin:{80,0,40} dir:{-5,0,-1}
 
 #water

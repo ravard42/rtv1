@@ -21,6 +21,7 @@ static t_sph	*init_sphere(t_obj *o)
 	o->s->color = 0xFFFFFF;
 	o->s->r = 1;
 	o->s->lum = 1;
+	o->s->bri = 1;
 	o->s->ombre = 1;
 	o->s->id_light = 0;
 	o->s->next = NULL;
@@ -41,6 +42,8 @@ static void	read_input_data(float *tmp_save, char **inp, t_sph *s)
 		load_vect(tmp_save + 1, inp[1]);
 	else if (!ft_strcmp("lum", inp[0]))
 		s->lum = ft_atof(inp[1]);
+	else if (!ft_strcmp("bri", inp[0]))
+		s->bri = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("ombre", inp[0]))
 		s->ombre = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("id_light", inp[0]))

@@ -1,11 +1,11 @@
 affectation possible pour les differents objet:
 
 cam : {origin dir}
-sphere : {origin rayon tr tr_dir couleur lum ombre id_light}
-plan : {origin tr tr_dir rot rot_dir tr_nor couleur lum ombre borne}
-cylindre : {origin tr tr_dir rot rot_dir rayon couleur lum ombre borne id_light}
-cone : {origin tr tr_dir rot rot_dir couleur lum ombre borne}
 light : {origin tr tr_dir couleur id}
+sphere : {origin rayon tr tr_dir couleur lum bri ombre id_light}
+plan : {origin tr tr_dir rot rot_dir tr_nor couleur lum bri ombre borne}
+cylindre : {origin tr tr_dir rot rot_dir rayon couleur lum bri ombre borne id_light}
+cone : {origin tr tr_dir rot rot_dir couleur lum bri ombre borne}
 
 valeurs par defaut:
 par defaut les origin sont placee a {0,0,0}  et les vecteurs necessaire a l'utilisation du programme  a {0,0,1}.
@@ -13,9 +13,10 @@ la couleur par defaut est le blanc et les rayon sont placee a 1.
 
 note : gaffe a pas oublier d'affecter dir sinon ca va mater les oiseau severe! 
 
-lum et ombre :
+lum bri et ombre :
 lum est un coef affecter a la couleur du pixel une fois tout les calcules effectuee donc modifie juste l'intensitee de l'objet, il est par defaut a 1.
 ombre est egalement  a 1 par defaut et signie que les objet bloquent la lumiere (sauf si id = id_light avec une certaine lumiere mais c est un cas particulier) . si ombre vaut 0 alors l'objet n'aura aucune ombre portee car il laissera passer toutes les lumieres qui lui arriveront dessus.
+bri est a 1 par defaut et signie que la brillance est active pour l'objet en question
 
 
 

@@ -24,6 +24,7 @@ static t_pln	*init_pln(t_obj *o)
 	o->p->nor = set_vect(NULL, 0, 0, 1);
 	o->p->color = 0xFFFFFF;
 	o->p->lum = 1;
+	o->p->bri = 1;
 	o->p->ombre = 1;
 	o->p->borne = NULL;
 	o->p->next = NULL;
@@ -48,6 +49,8 @@ static void	read_input_data(float *tmp_save, char **inp, t_pln *p)
 		tmp_save[8] = ft_atof(inp[1]);
 	else if (!ft_strcmp("lum", inp[0]))
 		p->lum = ft_atof(inp[1]);
+	else if (!ft_strcmp("bri", inp[0]))
+		p->bri = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("ombre", inp[0]))
 		p->ombre = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("borne", inp[0]))
