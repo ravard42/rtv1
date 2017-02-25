@@ -1,6 +1,6 @@
 cam origin:{50,30,40} dir:{-2,-2,-1} 
 plan couleur:0x0000FF
-plan origin:{0,0,2000} rot:1 rot_dir:{1,0,0} couleur:0x330066 lum:2
+plan origin:{0,0,2000} rot:1 rot_dir:{1,0,0} couleur:0x330066 lum:4 ombre:0 bri:0
 light origin:{2000,2000,1000} id:47
 sphere origin:{2000,2000,1000} rayon:100 couleur:0xFFFF00 id_light:47
 cylindre origin:{0,0,7} rayon:5 couleur:0x777777 borne:{-7,7,0}

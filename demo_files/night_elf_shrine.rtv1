@@ -1,5 +1,5 @@
-\cam origin:{1500,0,20} dir:{-5,0,2}
-cam origin:{250,0,80} dir:{-5,0,-1}
+cam origin:{1500,0,20} dir:{-5,0,2}
+\cam origin:{250,0,80} dir:{-5,0,-1}
 \cam origin:{80,0,40} dir:{-5,0,-1}
 
 #water
@@ -15,10 +15,10 @@ cone origin:{0,0,30} couleur:0x333333 borne:{0,4,0} lum:2
 
 #moon
 light origin:{-2000,-420,500}  id:1
-sphere origin:{-2000,-420,500} rayon:100 couleur:0xFFCC00 id_light:1 ombre:0
+sphere origin:{-2000,-420,500} rayon:100 couleur:0xFFCC00 id_light:1 ombre:0 bri:0
 
 #sky
-plan origin:{0,0,1250} rot:1 rot_dir:{1,0,0} couleur:0x330066 lum:2.5
+plan origin:{0,0,1250} rot:1 rot_dir:{1,0,0} couleur:0x330066 lum:2.5 bri:0
 
 #divine light
 light origin:{0,0,300} id:2
@@ -72,11 +72,11 @@ plan origin:{57,81,34} couleur:0x660000 borne:{4,0,0}
 cone origin:{84,54,40} couleur:0x660000 borne:{0,4,0} lum:2
 plan origin:{84,54,44} couleur:0x660000 borne:{4,0,0}
 light origin:{84,54,54}  id:3
-sphere origin:{84,54,54} rayon:4 couleur:0xFFFFFF id_light:3 lum:3.5
+sphere origin:{84,54,54} rayon:4 couleur:0xFFFFFF id_light:3 lum:3.5 ombre:0
 cone origin:{54,84,40} couleur:0x660000 borne:{0,4,0} lum:2
 plan origin:{54,84,44} couleur:0x660000 borne:{4,0,0}
 light origin:{54,84,54}  id:4
-sphere origin:{54,84,54} rayon:4 couleur:0xFFFFFF id_light:4 lum:3.5
+sphere origin:{54,84,54} rayon:4 couleur:0xFFFFFF id_light:4 lum:3.5 ombre:0
 
 #gate 2
 cylindre origin:{-81,-57,0} rayon:3 couleur:0x333333 borne:{0,30,0} lum:1.5
@@ -93,11 +93,11 @@ plan origin:{-57,-81,34} couleur:0x660000 borne:{4,0,0}
 cone origin:{-84,-54,40} couleur:0x660000 borne:{0,4,0} lum:2
 plan origin:{-84,-54,44} couleur:0x660000 borne:{4,0,0}
 light origin:{-84,-54,54}  id:5
-sphere origin:{-84,-54,54} rayon:4 couleur:0xFFFFFF id_light:5 lum:3.5
+sphere origin:{-84,-54,54} rayon:4 couleur:0xFFFFFF id_light:5 lum:3.5 ombre:0
 cone origin:{-54,-84,40} couleur:0x660000 borne:{0,4,0} lum:2
 plan origin:{-54,-84,44} couleur:0x660000 borne:{4,0,0}
 light origin:{-54,-84,54}  id:6
-sphere origin:{-54,-84,54} rayon:4 couleur:0xFFFFFF id_light:6 lum:3.5
+sphere origin:{-54,-84,54} rayon:4 couleur:0xFFFFFF id_light:6 lum:3.5 ombre:0
 
 #gate 3
 cylindre origin:{81,-57,0} rayon:3 couleur:0x333333 borne:{0,30,0} lum:1.5
@@ -114,11 +114,11 @@ plan origin:{57,-81,34} couleur:0x660000 borne:{4,0,0}
 cone origin:{84,-54,40} couleur:0x660000 borne:{0,4,0} lum:2
 plan origin:{84,-54,44} couleur:0x660000 borne:{4,0,0}
 light origin:{84,-54,54}  id:7
-sphere origin:{84,-54,54} rayon:4 couleur:0xFFFFFF id_light:7 lum:3.5
+sphere origin:{84,-54,54} rayon:4 couleur:0xFFFFFF id_light:7 lum:3.5 ombre:0
 cone origin:{54,-84,40} couleur:0x660000 borne:{0,4,0} lum:2
 plan origin:{54,-84,44} couleur:0x660000 borne:{4,0,0}
 light origin:{54,-84,54}  id:8
-sphere origin:{54,-84,54} rayon:4 couleur:0xFFFFFF id_light:8 lum:3.5
+sphere origin:{54,-84,54} rayon:4 couleur:0xFFFFFF id_light:8 lum:3.5 ombre:0
 
 #gate 4
 cylindre origin:{-81,57,0} rayon:3 couleur:0x333333 borne:{0,30,0} lum:1.5
@@ -135,8 +135,8 @@ plan origin:{-57,81,34} couleur:0x660000 borne:{4,0,0}
 cone origin:{-84,54,40} couleur:0x660000 borne:{0,4,0} lum:2
 plan origin:{-84,54,44} couleur:0x660000 borne:{4,0,0}
 light origin:{-84,54,54}  id:9
-sphere origin:{-84,54,54} rayon:4 couleur:0xFFFFFF id_light:9 lum:3.5
+sphere origin:{-84,54,54} rayon:4 couleur:0xFFFFFF id_light:9 lum:3.5 ombre:0
 cone origin:{-54,84,40} couleur:0x660000 borne:{0,4,0} lum:2
 plan origin:{-54,84,44} couleur:0x660000 borne:{4,0,0}
 light origin:{-54,84,54}  id:10
-sphere origin:{-54,84,54} rayon:4 couleur:0xFFFFFF id_light:10 lum:3.5
+sphere origin:{-54,84,54} rayon:4 couleur:0xFFFFFF id_light:10 lum:3.5 ombre:0

@@ -9,15 +9,16 @@
 # include "libft.h"
 # include <stdio.h>
 
-# define MAX_X		350
-# define MAX_Y		350
+# define MAX_X		1000
+# define MAX_Y		1000
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
 # define MAX_DIST	500000000
 # define PAS		15
 # define ROT		M_PI / 6
-# define BRI		7
+# define BRI_ANGL	0.5
+# define BRI_INT	5
 
 
 # define EXIT 		65307
