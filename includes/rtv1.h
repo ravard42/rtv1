@@ -218,4 +218,13 @@ float	*luminosity(float *rgb, char *name, t_obj *o);
 void	print(t_env *e);
 void	clear_img_dist_obj(t_env *e);
 
+void	free_cam(t_env *e);
+int	free_light(t_env *e);
+int	free_sphere(t_obj *o);
+int	free_all_plan(t_obj *o);
+int	free_all_cylindre(t_obj *o);
+int	free_all_cone(t_obj *o);
+
+int	ft_exit(t_env *e);
+
 #endif

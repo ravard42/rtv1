@@ -1,5 +1,23 @@
 # include "rtv1.h"
 
+int	ft_exit(t_env *e)
+{
+	free_cam(e);
+	free_light(e);
+	free_sphere(e->o);
+	free_all_plan(e->o);
+	free_all_cylindre(e->o);
+	free_all_cone(e->o);
+	free(e->o);
+	e->o = NULL;
+	free(e->data_img);
+	free(e->img);
+	free(e->win);
+	free(e->ptr);
+	free(e);
+	exit(0);
+}
+
 int	expose_hook(t_env *e)
 {
 	clear_img_dist_obj(e);
@@ -14,7 +32,7 @@ int	key_hook(int keycode, t_env *e)
 	float 	tmp[3];
 
 	if (keycode == EXIT)
-		exit(0);
+		ft_exit(e);
 	else if (keycode == AVANCER)
 		vectorial_sum(e->c->pos, e->c->pos,
 				vectorial_multi(tmp, PAS, e->c->base[2]));

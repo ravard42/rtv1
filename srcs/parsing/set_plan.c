@@ -1,8 +1,5 @@
 # include <rtv1.h>
 
-
-# include <rtv1.h>
-
 static t_pln	*init_pln(t_obj *o)
 {
 	t_pln	*begin;

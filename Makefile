@@ -39,6 +39,12 @@ SRC = srcs/main.c\
 	srcs/write_img/print.c\
 	srcs/write_img/color.c\
 	srcs/write_img/clear.c\
+	srcs/free/free_cam.c\
+	srcs/free/free_light.c\
+	srcs/free/free_sphere.c\
+	srcs/free/free_plan.c\
+	srcs/free/free_cylindre.c\
+	srcs/free/free_cone.c\
 
 OBJ = $(SRC:.c=.o)
 

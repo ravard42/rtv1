@@ -33,6 +33,7 @@ t_env		*install(char *path)
 		tmp = ft_strsplit(line, ' ');
 		set(e, tmp, analyzer(tmp));
 		free_split(tmp);
+		free(line);
 	}
 	close(fd);
 	if (!e->c)
