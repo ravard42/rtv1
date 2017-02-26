@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   global_test.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 21:07:04 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 21:07:16 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	save(t_env *e, void **tmp)
+#include "rtv1.h"
+
+static void		save(t_env *e, void **tmp)
 {
 	tmp[0] = e->o->s;
 	tmp[1] = e->o->p;
@@ -8,7 +20,7 @@ static void	save(t_env *e, void **tmp)
 	tmp[3] = e->o->co;
 }
 
-static void	recup(t_env *e, void **tmp)
+static void		recup(t_env *e, void **tmp)
 {
 	e->o->s = tmp[0];
 	e->o->p = tmp[1];
@@ -16,7 +28,7 @@ static void	recup(t_env *e, void **tmp)
 	e->o->co = tmp[3];
 }
 
-void		global_test(t_env *e)
+void			global_test(t_env *e)
 {
 	void	*tmp[4];
 

@@ -1,4 +1,16 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plan_test.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 21:07:21 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 21:19:28 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 static float	solve(int i, t_env *e)
 {
@@ -13,14 +25,16 @@ static float	solve(int i, t_env *e)
 	return (tmp);
 }
 
-static void	sol_test(int i, float sol, t_env *e)
+static void		sol_test(int i, float sol, t_env *e)
 {
 	float	tmp[3];
-	
+
 	if (sol <= e->c->r_dist[i] && sol < MAX_DIST)
 	{
-		vectorial_sum(tmp, e->c->pos, vectorial_multi(tmp, sol, e->c->r_dir[i]));
-		if (!e->o->p->borne || ft_dist(e->o->p->origin, tmp) <= e->o->p->borne[0])
+		vectorial_sum(tmp,
+				e->c->pos, vectorial_multi(tmp, sol, e->c->r_dir[i]));
+		if (!e->o->p->borne
+				|| ft_dist(e->o->p->origin, tmp) <= e->o->p->borne[0])
 		{
 			e->c->r_dist[i] = sol;
 			e->c->obj[i] = e->o->p;
@@ -29,18 +43,21 @@ static void	sol_test(int i, float sol, t_env *e)
 	}
 }
 
-int	plan_test(t_env *e)
+int				plan_test(t_env *e)
 {
-	int	i;
+	int		i;
 	float	tmp;
 	float	sol;
-	
+
 	i = -1;
 	sol = MAX_DIST;
 	while (++i < MAX_X * MAX_Y)
 	{
 		if (scalar_product(e->o->p->nor, e->c->r_dir[i]))
-			sol = ((tmp = solve(i, e)) >= VP_DIST) ? tmp : MAX_DIST;
+		{
+			tmp = solve(i, e);
+			sol = (tmp >= VP_DIST) ? tmp : MAX_DIST;
+		}
 		sol_test(i, sol, e);
 	}
 	return (1);

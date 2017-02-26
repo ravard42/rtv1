@@ -1,4 +1,16 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 21:23:40 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 21:30:22 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 static int	*recup_color(int *color, char *name, void *obj, int *bri)
 {
@@ -25,7 +37,7 @@ static int	*recup_color(int *color, char *name, void *obj, int *bri)
 	return (color);
 }
 
-static int	set_normal(float *nor, char *name,  void *obj, float *p)
+static int	set_normal(float *nor, char *name, void *obj, float *p)
 {
 	if (!ft_strcmp(name, "sphere"))
 	{
@@ -48,20 +60,23 @@ static int	set_normal(float *nor, char *name,  void *obj, float *p)
 	else if (!ft_strcmp(name, "cone"))
 		con_normal(nor, p, obj);
 	return (0);
-
 }
 
-// tmp[0-2] -> return_rgb
-// tmp[3-5] -> material_rgb
-// tmp[6-8] -> light_rgb
-// tmp[9-11] -> nor_vect
-// tmp[12-14] -> rayon_vect
-// tmp[15-17] -> {cos(rayon_incident, normal), angle(rayon_incident, normal) = 2 * angle(rayon_incident, rayon_reflechi), cos(rayon_incident, rayon reflechi)}
-
-//tmp2[0] -> nombre lumiere
-//tmp2[1] -> couleur hexa
-//tmp2[2] -> brillance
-//tmp2[3] -> couplage objet/lumiere
+/*
+** tmp[0-2] -> return_rgb
+** tmp[3-5] -> material_rgb
+** tmp[6-8] -> light_rgb
+** tmp[9-11] -> nor_vect
+** tmp[12-14] -> rayon_vect
+** tmp[15-17] -> {cos(rayon_incident, normal),
+** angle(rayon_incident, normal) = 2 * angle(rayon_incident, rayon_reflechi),
+** cos(rayon_incident, rayon reflechi)}
+**
+**tmpi[0] -> nombre lumiere
+**tmpi[1] -> couleur hexa
+**tmpi[2] -> brillance
+**tmpi[3] -> couplage objet/lumiere
+*/
 
 static void	join_light(float *tmp, int *tmpi, void *obj, t_env *e)
 {
@@ -79,26 +94,29 @@ static void	join_light(float *tmp, int *tmpi, void *obj, t_env *e)
 	if (e->l->scope && tmp[15] > 0)
 	{
 		hexa_to_rgb(tmp + 6, recup_color(&tmpi[1], "light", e->l, NULL));
-		tmp[0] += tmp[15] * tmp[3] * tmp[6] + BRI_INT * pow(tmp[17], 1.0 / BRI_ANGL) * tmp[6]; 
-		tmp[1] += tmp[15] * tmp[4] * tmp[7] + BRI_INT * pow(tmp[17], 1.0 / BRI_ANGL) * tmp[7]; 
-		tmp[2] += tmp[15] * tmp[5] * tmp[8] + BRI_INT * pow(tmp[17], 1.0 / BRI_ANGL) * tmp[8];
+		tmp[0] += tmp[15] * tmp[3] * tmp[6]
+			+ BRI_INT * pow(tmp[17], 1.0 / BRI_ANGL) * tmp[6];
+		tmp[1] += tmp[15] * tmp[4] * tmp[7]
+			+ BRI_INT * pow(tmp[17], 1.0 / BRI_ANGL) * tmp[7];
+		tmp[2] += tmp[15] * tmp[5] * tmp[8]
+			+ BRI_INT * pow(tmp[17], 1.0 / BRI_ANGL) * tmp[8];
 	}
 	tmpi[0]++;
 	e->l->scope = 0;
 }
 
-
 static void	put_pixel_light(int i, float *p, void *obj, t_env *e)
 {
 	t_lght	*begin;
 	float	tmp[18];
-	int	tmpi[4];
+	int		tmpi[4];
 
 	begin = e->l;
-	tmpi[3] = set_normal(tmp + 9 , e->c->name[i], obj, p);
+	tmpi[3] = set_normal(tmp + 9, e->c->name[i], obj, p);
 	set_vect(tmp, 0, 0, 0);
 	tmpi[2] = 0;
-	rgb_to_coef(hexa_to_rgb(tmp + 3, recup_color(&tmpi[1], e->c->name[i], obj, &tmpi[2])));
+	rgb_to_coef(hexa_to_rgb(tmp + 3,
+				recup_color(&tmpi[1], e->c->name[i], obj, &tmpi[2])));
 	tmpi[0] = 0;
 	while (e->l)
 	{
@@ -116,10 +134,9 @@ static void	put_pixel_light(int i, float *p, void *obj, t_env *e)
 
 void		print(t_env *e)
 {
-	int	i;
+	int		i;
 	float	p[3];
-	int	color;
-
+	int		color;
 
 	i = -1;
 	while (++i < MAX_X * MAX_Y)
@@ -133,7 +150,7 @@ void		print(t_env *e)
 			vectorial_sum(p, e->c->pos,
 					vectorial_multi(p, e->c->r_dist[i], e->c->r_dir[i]));
 			global_light_test(p, e->c->obj[i], e);
-			put_pixel_light(i, p, e->c->obj[i] ,e);
+			put_pixel_light(i, p, e->c->obj[i], e);
 		}
 	}
 }

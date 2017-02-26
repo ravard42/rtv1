@@ -1,4 +1,16 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prevent_rot_cam.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 20:57:04 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 20:58:32 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 int	prevent_hori_rot(int keycode, float **base)
 {
@@ -16,9 +28,9 @@ int	prevent_hori_rot(int keycode, float **base)
 		angle = (sin_angle >= 0) ? acos(cos_angle) : -acos(cos_angle);
 		if (keycode == ROT_D || keycode == ROT_D2)
 			set_vect(base[0], cos(angle - ROT), sin(angle - ROT), 0);
-		else 		
+		else
 			set_vect(base[0], cos(angle + ROT), sin(angle + ROT), 0);
-		vectorial_product(base[1], base[2], base[0]);		
+		vectorial_product(base[1], base[2], base[0]);
 		return (1);
 	}
 	return (0);

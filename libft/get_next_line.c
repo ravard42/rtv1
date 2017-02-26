@@ -6,7 +6,7 @@
 /*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/05 16:42:58 by ravard            #+#    #+#             */
-/*   Updated: 2016/10/05 16:51:14 by ravard           ###   ########.fr       */
+/*   Updated: 2017/02/26 21:31:29 by ravard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int		get_next_line(int fd, char **line)
 	if (fd == 1 || fd == 2 || fd < 0 || line == NULL)
 		return (-1);
 	*line = NULL;
-	buf[fd] = (buf[fd] == NULL) ? (char *)ft_memalloc(sizeof(char) * (BUFF_SIZE + 1)) : buf[fd]; 
+	buf[fd] = (buf[fd] == NULL) ?
+		(char *)ft_memalloc(sizeof(char) * (BUFF_SIZE + 1)) : buf[fd];
 	while (buf_process(buf[fd], line) != 1)
 	{
 		cond = (*line != NULL);

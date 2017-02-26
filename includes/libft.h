@@ -6,7 +6,7 @@
 /*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/17 00:52:01 by ravard            #+#    #+#             */
-/*   Updated: 2016/10/12 19:29:37 by ravard           ###   ########.fr       */
+/*   Updated: 2017/02/26 21:38:31 by ravard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char					*ft_strnstr(const char *big,
 int						ft_strcmp(const char *s1, const char *s2);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 int						ft_atoi(const char *str);
-float						ft_atof(char *str);
+float					ft_atof(char *str);
 int						ft_isalpha(int c);
 int						ft_isdigit(int c);
 int						ft_isalnum(int c);
@@ -98,6 +98,6 @@ void					ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void					ft_lstadd(t_list **alst, t_list *new);
 void					ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list					*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-int	get_next_line(int fd, char **line);
+int						get_next_line(int fd, char **line);
 
 #endif

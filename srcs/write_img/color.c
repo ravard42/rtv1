@@ -1,4 +1,16 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 21:23:34 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 21:24:53 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 float	*hexa_to_rgb(float *rgb, int *hexa)
 {
@@ -6,11 +18,10 @@ float	*hexa_to_rgb(float *rgb, int *hexa)
 	rgb[1] = (float)*((unsigned char *)hexa + 1);
 	rgb[2] = (float)*((unsigned char *)hexa);
 	return (rgb);
-}	
+}
 
-int	*rgb_to_hexa(int *hexa, float *rgb)
+int		*rgb_to_hexa(int *hexa, float *rgb)
 {
-
 	*((unsigned char *)hexa + 2) = rgb[0];
 	*((unsigned char *)hexa + 1) = rgb[1];
 	*((unsigned char *)hexa) = rgb[2];
@@ -35,14 +46,14 @@ float	*coef_to_rgb(float *coef)
 
 float	*luminosity(float *rgb, char *name, t_obj *o)
 {
-	int	i;
+	int		i;
 	float	coef;
 
 	if (!ft_strcmp("sphere", name))
 		coef = ((t_sph *)o)->lum;
 	else if (!ft_strcmp("plan", name))
 		coef = ((t_pln *)o)->lum;
-	else if  (!ft_strcmp("cylindre", name))
+	else if (!ft_strcmp("cylindre", name))
 		coef = ((t_cyl *)o)->lum;
 	else if (!ft_strcmp("cone", name))
 		coef = ((t_con *)o)->lum;
