@@ -32,7 +32,7 @@ int	plan_light_test(float *p, void *obj, t_pln *pl, t_lght *l)
 	else if (pl->borne)
 	{
 		vectorial_sum(dir, l->origin, vectorial_multi(dir, tmp[1], dir));
-		if (ft_dist(pl->origin, dir) > pl->borne[0] + 0.1)
+		if (ft_dist(pl->origin, dir) > pl->borne[0] + 0.2)
 			return (1);
 	}
 	return (0);
