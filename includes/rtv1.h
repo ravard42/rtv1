@@ -18,7 +18,7 @@
 # define PAS		15
 # define ROT		M_PI / 6
 # define BRI_ANGL	0.5
-# define BRI_INT	5
+# define BRI_INT	3.5
 
 
 # define EXIT 		65307
