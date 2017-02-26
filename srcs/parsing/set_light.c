@@ -1,4 +1,16 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_light.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 19:26:51 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 19:40:56 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 static t_lght	*init_light(t_env *e)
 {
@@ -26,7 +38,7 @@ static t_lght	*init_light(t_env *e)
 	return (begin);
 }
 
-static void	read_input_data(float *tmp_save, char **inp, t_lght *l)
+static void		read_input_data(float *tmp_save, char **inp, t_lght *l)
 {
 	if (!ft_strcmp("origin", inp[0]))
 		load_vect(l->origin, inp[1]);
@@ -40,12 +52,11 @@ static void	read_input_data(float *tmp_save, char **inp, t_lght *l)
 		load_vect(tmp_save + 1, inp[1]);
 }
 
-
-void	set_light(char **tmp, t_env *e)
+void			set_light(char **tmp, t_env *e)
 {
 	t_lght		*begin;
 	char		***input;
-	int		i;
+	int			i;
 	float		tmp_save[4];
 
 	begin = init_light(e);

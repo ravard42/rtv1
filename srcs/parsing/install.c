@@ -1,7 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   install.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 19:21:08 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 19:30:44 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "rtv1.h"
 
-static void	set(t_env *e, char **tmp, int k)
+static void		set(t_env *e, char **tmp, int k)
 {
 	if (k == 0)
 		set_cam(tmp, e);
@@ -17,13 +28,12 @@ static void	set(t_env *e, char **tmp, int k)
 		set_light(tmp, e);
 }
 
-
-t_env		*install(char *path)
+t_env			*install(char *path)
 {
 	t_env	*e;
 	char	*line;
 	char	**tmp;
-	int 	fd;
+	int		fd;
 
 	e = (t_env *)malloc(sizeof(t_env));
 	init_env(e);

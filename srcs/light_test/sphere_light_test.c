@@ -1,7 +1,19 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere_light_test.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 18:04:38 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:15:23 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	set_param(float *param, float *dir, t_sph *s, t_lght *l)
-{		
+#include "rtv1.h"
+
+static void		set_param(float *param, float *dir, t_sph *s, t_lght *l)
+{
 	param[0] = pow(dir[0], 2)
 		+ pow(dir[1], 2)
 		+ pow(dir[2], 2);
@@ -30,18 +42,18 @@ static float	solve(float *param)
 	}
 	else if (delt > 0)
 	{
-		tmp[0] = (-param[1] + sqrt(delt))/ (2 * param[0]);
-		tmp[1] = (-param[1] - sqrt(delt))/ (2 * param[0]);
-		if (tmp[0] > 0 && tmp[1] > 0) 
+		tmp[0] = (-param[1] + sqrt(delt)) / (2 * param[0]);
+		tmp[1] = (-param[1] - sqrt(delt)) / (2 * param[0]);
+		if (tmp[0] > 0 && tmp[1] > 0)
 			sol = (tmp[0] <= tmp[1]) ? tmp[0] : tmp[1];
-		else if ((tmp[0] > 0 && tmp[1] <= 0) 
+		else if ((tmp[0] > 0 && tmp[1] <= 0)
 				|| (tmp[1] > 0 && tmp[0] <= 0))
 			sol = (tmp[0] > 0) ? tmp[0] : tmp[1];
 	}
 	return (sol);
 }
 
-int	sphere_light_test(float *p, void *obj, t_sph *s, t_lght *l)
+int				sphere_light_test(float *p, void *obj, t_sph *s, t_lght *l)
 {
 	float	tmp[2];
 	float	param[6];
@@ -55,5 +67,4 @@ int	sphere_light_test(float *p, void *obj, t_sph *s, t_lght *l)
 	if ((tmp[1] = solve(param + 3)) == -42 || tmp[1] >= tmp[0])
 		return (1);
 	return (0);
-
 }

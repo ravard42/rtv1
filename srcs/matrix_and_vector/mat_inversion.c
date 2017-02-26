@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mat_inversion.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 18:16:02 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:18:46 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-float	det(float **mat)
+#include "rtv1.h"
+
+float		det(float **mat)
 {
 	return (mat[0][0] * mat[1][1] * mat[2][2]
 		- mat[0][0] * mat[1][2] * mat[2][1]
@@ -10,11 +22,11 @@ float	det(float **mat)
 		+ mat[0][2] * mat[1][0] * mat[2][1]);
 }
 
-float	**transpose(float **mat)
+float		**transpose(float **mat)
 {
 	float	tmp[3][3];
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = -1;
 	while (++i < 3)
@@ -33,11 +45,11 @@ float	**transpose(float **mat)
 	return (mat);
 }
 
-float 	**inverse(float **mat)
+float		**inverse(float **mat)
 {
 	float	tmp[3][3];
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	float	k;
 
 	i = -1;

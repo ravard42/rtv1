@@ -1,4 +1,16 @@
-# include <rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_plan.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 19:27:19 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 19:41:23 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <rtv1.h>
 
 static t_pln	*init_pln(t_obj *o)
 {
@@ -28,7 +40,7 @@ static t_pln	*init_pln(t_obj *o)
 	return (begin);
 }
 
-static void	read_input_data(float *tmp_save, char **inp, t_pln *p)
+static void		read_input_data(float *tmp_save, char **inp, t_pln *p)
 {
 	if (!ft_strcmp("origin", inp[0]))
 		load_vect(p->origin, inp[1]);
@@ -54,7 +66,7 @@ static void	read_input_data(float *tmp_save, char **inp, t_pln *p)
 		p->borne = load_vect(NULL, inp[1]);
 }
 
-static void	axe_translation(t_pln *p, float val)
+static void		axe_translation(t_pln *p, float val)
 {
 	float	tmp[3];
 
@@ -65,14 +77,14 @@ static void	axe_translation(t_pln *p, float val)
 		vectorial_multi(p->nor, -1, p->nor);
 }
 
-void	set_plan(char **tmp, t_obj *o)
+void			set_plan(char **tmp, t_obj *o)
 {
 	t_pln	*begin;
 	char	***input;
-	int	i;
+	int		i;
 	float	tmp_save[9];
 
-	begin = init_pln(o);	
+	begin = init_pln(o);
 	i = input_number(tmp);
 	input = (char ***)malloc(sizeof(char **) * i);
 	i = 0;

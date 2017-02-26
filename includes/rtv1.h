@@ -7,20 +7,19 @@
 # include <math.h>
 # include <mlx.h>
 # include "libft.h"
-# include <stdio.h>
 
-# define MAX_X		1000
-# define MAX_Y		1000
+# define MAX_X		70
+# define MAX_Y		70
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
 # define MAX_DIST	500000000
 # define PAS		15
 # define ROT		M_PI / 6
-# define BRI_ANGL	0.5
-# define BRI_INT	3.5
+# define BRI_ANGL	0.2
+# define BRI_INT	2
 
-
+/*
 # define EXIT 		65307
 # define RECULER 	101
 # define AVANCER 	113
@@ -33,8 +32,8 @@
 # define BAS2 		65364
 # define HAUT 		119
 # define HAUT2 		65362
- 
-/*
+*/ 
+
 # define EXIT 53
 # define RECULER 14
 # define AVANCER 12
@@ -47,7 +46,7 @@
 # define BAS2 125
 # define HAUT 13
 # define HAUT2 126
-*/
+
 
 typedef struct		s_cam
 {

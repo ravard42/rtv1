@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_cylindre.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 17:58:52 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:01:13 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	free_cylindre(t_cyl *cy)
+#include "rtv1.h"
+
+static void		free_cylindre(t_cyl *cy)
 {
 	int	i;
 
@@ -21,10 +33,9 @@ static void	free_cylindre(t_cyl *cy)
 		free(cy->borne);
 }
 
-
-int	free_all_cylindre(t_obj *o)
+int				free_all_cylindre(t_obj *o)
 {
-	t_cyl 		*begin;
+	t_cyl	*begin;
 
 	if (!o->cy)
 		return (0);

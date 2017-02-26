@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   global_light_test.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 18:04:18 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:13:43 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	save(t_env *e, void **tmp)
+#include "rtv1.h"
+
+static void			save(t_env *e, void **tmp)
 {
 	tmp[0] = e->o->s;
 	tmp[1] = e->o->p;
@@ -8,7 +20,7 @@ static void	save(t_env *e, void **tmp)
 	tmp[3] = e->o->co;
 }
 
-static void	recup(t_env *e, void **tmp)
+static void			recup(t_env *e, void **tmp)
 {
 	e->o->s = tmp[0];
 	e->o->p = tmp[1];
@@ -16,7 +28,7 @@ static void	recup(t_env *e, void **tmp)
 	e->o->co = tmp[3];
 }
 
-static void	test_all_object(int *light, float *p, void *obj, t_env *e)
+static void			test_all_object(int *light, float *p, void *obj, t_env *e)
 {
 	while (e->o->s != NULL &&
 			(*light = sphere_light_test(p, obj, e->o->s, e->l)))
@@ -30,13 +42,12 @@ static void	test_all_object(int *light, float *p, void *obj, t_env *e)
 	while (e->o->co != NULL && *light &&
 			(*light = cone_light_test(p, obj, e->o->co, e->l)))
 		e->o->co = e->o->co->next;
-
 }
 
-void	global_light_test(float *p, void *obj, t_env *e)
+void				global_light_test(float *p, void *obj, t_env *e)
 {
 	void	*tmp[4];
-	int	light[1];
+	int		light[1];
 	t_lght	*begin;
 
 	save(e, tmp);

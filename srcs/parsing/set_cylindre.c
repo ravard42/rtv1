@@ -1,4 +1,30 @@
-# include <rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_cylindre.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 19:26:29 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 19:39:51 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <rtv1.h>
+
+static void		init_var(t_cyl *cy)
+{
+	cy->origin = (float *)ft_memalloc(sizeof(float) * 3);
+	cy->axe = set_vect(NULL, 0, 0, 1);
+	cy->r = 1;
+	cy->color = 0xFFFFFF;
+	cy->lum = 1;
+	cy->bri = 1;
+	cy->ombre = 1;
+	cy->borne = NULL;
+	cy->id_light = 0;
+	cy->next = NULL;
+}
 
 static t_cyl	*init_cyl(t_obj *o)
 {
@@ -17,20 +43,11 @@ static t_cyl	*init_cyl(t_obj *o)
 		o->cy->next = (t_cyl *)malloc(sizeof(t_cyl));
 		o->cy = o->cy->next;
 	}
-	o->cy->origin = (float *)ft_memalloc(sizeof(float) * 3);
-	o->cy->axe = set_vect(NULL, 0, 0, 1);
-	o->cy->r = 1;
-	o->cy->color = 0xFFFFFF;
-	o->cy->lum = 1;
-	o->cy->bri = 1;
-	o->cy->ombre = 1;
-	o->cy->borne = NULL;
-	o->cy->id_light = 0;
-	o->cy->next = NULL;
+	init_var(o->cy);
 	return (begin);
 }
 
-static void	read_input_data(float *tmp_save, char **inp, t_cyl *cy)
+static void		read_input_data(float *tmp_save, char **inp, t_cyl *cy)
 {
 	if (!ft_strcmp("origin", inp[0]))
 		load_vect(cy->origin, inp[1]);
@@ -58,15 +75,14 @@ static void	read_input_data(float *tmp_save, char **inp, t_cyl *cy)
 		cy->id_light = ft_atof(inp[1]);
 }
 
-
-void	set_cylindre(char **tmp, t_obj *o)
+void			set_cylindre(char **tmp, t_obj *o)
 {
 	t_cyl	*begin;
 	char	***input;
-	int	i;
+	int		i;
 	float	tmp_save[8];
 
-	begin = init_cyl(o);	
+	begin = init_cyl(o);
 	i = input_number(tmp);
 	input = (char ***)ft_memalloc(sizeof(char **) * i);
 	i = 0;

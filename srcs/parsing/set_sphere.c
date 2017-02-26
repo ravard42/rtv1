@@ -1,4 +1,16 @@
-# include <rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_sphere.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 19:28:52 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 19:41:51 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <rtv1.h>
 
 static t_sph	*init_sphere(t_obj *o)
 {
@@ -28,7 +40,7 @@ static t_sph	*init_sphere(t_obj *o)
 	return (begin);
 }
 
-static void	read_input_data(float *tmp_save, char **inp, t_sph *s)
+static void		read_input_data(float *tmp_save, char **inp, t_sph *s)
 {
 	if (!ft_strcmp("origin", inp[0]))
 		load_vect(s->origin, inp[1]);
@@ -48,14 +60,13 @@ static void	read_input_data(float *tmp_save, char **inp, t_sph *s)
 		s->ombre = (int)ft_atof(inp[1]);
 	else if (!ft_strcmp("id_light", inp[0]))
 		s->id_light = ft_atof(inp[1]);
-
 }
 
-void	set_sphere(char **tmp, t_obj *o)
+void			set_sphere(char **tmp, t_obj *o)
 {
 	t_sph		*begin;
 	char		***input;
-	int		i;
+	int			i;
 	float		tmp_save[4];
 
 	begin = init_sphere(o);

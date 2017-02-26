@@ -1,4 +1,16 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   normal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 18:16:45 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:19:53 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 void	sph_normal(float *nor, float *p, t_sph *s)
 {
@@ -26,7 +38,7 @@ void	cyl_normal(float *nor, float *p, t_cyl *cy)
 void	con_normal(float *nor, float *p, t_con *co)
 {
 	float	tmp[3];
-	int	sign;
+	int		sign;
 	float	k;
 
 	tmp[0] = p[0] - co->origin[0];

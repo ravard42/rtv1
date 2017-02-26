@@ -1,6 +1,6 @@
 \cam origin:{1500,0,20} dir:{-5,0,2}
-cam origin:{250,0,80} dir:{-5,0,-1}
-\cam origin:{80,0,40} dir:{-5,0,-1}
+\cam origin:{250,0,80} dir:{-5,0,-1}
+cam origin:{80,0,40} dir:{-5,0,-1}
 
 #water
 plan couleur:0x0033FF
@@ -18,9 +18,12 @@ light origin:{-2000,-420,500}  id:1
 sphere origin:{-2000,-420,500} rayon:100 couleur:0xFFCC00 id_light:1 ombre:0 bri:0
 
 #sky
-plan origin:{0,0,1250} rot:1 rot_dir:{1,0,0} couleur:0x330066 lum:2.5 bri:1
+plan origin:{0,0,1250} rot:1 rot_dir:{1,0,0} couleur:0x7700AA lum:1.5
 
 #divine light
+light origin:{0,0,37} id:2
+light origin:{0,0,37} id:2
+light origin:{0,0,37} id:2
 light origin:{0,0,337} id:2
 light origin:{0,0,437} id:2
 light origin:{0,0,537} id:2

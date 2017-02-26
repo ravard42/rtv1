@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_cam.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 19:21:36 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 19:33:14 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	z_axe_cam_case(t_cam *c)
+#include "rtv1.h"
+
+static void		z_axe_cam_case(t_cam *c)
 {
 	int		sens;
 
@@ -14,7 +26,7 @@ static void	z_axe_cam_case(t_cam *c)
 		vectorial_product(c->base[1], c->base[2], c->base[0]);
 }
 
-static void	x_y_z_axe_cam_case(t_cam *c)
+static void		x_y_z_axe_cam_case(t_cam *c)
 {
 	int		sens;
 
@@ -38,7 +50,7 @@ static void	x_y_z_axe_cam_case(t_cam *c)
 	vectorial_product(c->base[1], c->base[2], c->base[0]);
 }
 
-void	set_cam_base(t_cam *c)
+void			set_cam_base(t_cam *c)
 {
 	ft_norme(c->base[2]);
 	if (c->base[2][0] == 0 && c->base[2][1] == 0)
@@ -47,7 +59,7 @@ void	set_cam_base(t_cam *c)
 		x_y_z_axe_cam_case(c);
 }
 
-static void	init_cam(t_env *e)
+static void		init_cam(t_env *e)
 {
 	int	i;
 
@@ -56,10 +68,10 @@ static void	init_cam(t_env *e)
 	e->c = (t_cam *)malloc(sizeof(t_cam));
 	e->c->pos = (float *)ft_memalloc(sizeof(float) * 3);
 	e->c->base = (float **)malloc(sizeof(float *) * 3);
-	e->c->r_dir = (float **)malloc(sizeof(float *) * MAX_X * MAX_Y);
-	e->c->r_dist = (float *)malloc(sizeof(float) * MAX_X * MAX_Y);
-	e->c->obj = (void **)malloc(sizeof(void *) * MAX_X * MAX_Y);
-	e->c->name = (char **)malloc(sizeof(char *) * MAX_X * MAX_Y);
+	e->c->r_dir = (float **)malloc(sizeof(float *) * (MAX_X * MAX_Y));
+	e->c->r_dist = (float *)malloc(sizeof(float) * (MAX_X * MAX_Y));
+	e->c->obj = (void **)malloc(sizeof(void *) * (MAX_X * MAX_Y));
+	e->c->name = (char **)malloc(sizeof(char *) * (MAX_X * MAX_Y));
 	i = -1;
 	while (++i < 3)
 		e->c->base[i] = (float *)ft_memalloc(sizeof(float) * 3);
@@ -72,10 +84,10 @@ static void	init_cam(t_env *e)
 	}
 }
 
-void	set_cam(char **tmp, t_env *e)
+void			set_cam(char **tmp, t_env *e)
 {
 	char	***input;
-	int	i;
+	int		i;
 
 	init_cam(e);
 	i = input_number(tmp);

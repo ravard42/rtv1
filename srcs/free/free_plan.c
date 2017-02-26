@@ -1,17 +1,28 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_plan.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 17:58:58 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:02:29 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	free_plan(t_pln *p)
+#include "rtv1.h"
+
+static void		free_plan(t_pln *p)
 {
 	free(p->nor);
 	free(p->origin);
 	if (p->borne)
-		free(p->borne);	
+		free(p->borne);
 }
 
-
-int	free_all_plan(t_obj *o)
+int				free_all_plan(t_obj *o)
 {
-	t_pln 		*begin;
+	t_pln	*begin;
 
 	if (!o->p)
 		return (0);
@@ -32,5 +43,3 @@ int	free_all_plan(t_obj *o)
 	o->p = NULL;
 	return (1);
 }
-
-

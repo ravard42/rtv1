@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 18:42:20 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:43:36 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	ft_exit(t_env *e)
+#include "rtv1.h"
+
+int		ft_exit(t_env *e)
 {
 	free_cam(e);
 	free_light(e);
@@ -18,7 +30,7 @@ int	ft_exit(t_env *e)
 	exit(0);
 }
 
-int	expose_hook(t_env *e)
+int		expose_hook(t_env *e)
 {
 	clear_img_dist_obj(e);
 	global_test(e);
@@ -27,9 +39,9 @@ int	expose_hook(t_env *e)
 	return (0);
 }
 
-int	key_hook(int keycode, t_env *e)
+int		key_hook(int keycode, t_env *e)
 {
-	float 	tmp[3];
+	float	tmp[3];
 
 	if (keycode == EXIT)
 		ft_exit(e);
@@ -50,5 +62,5 @@ int	key_hook(int keycode, t_env *e)
 	else if (keycode == HAUT || keycode == HAUT2)
 		rot_h(keycode, e);
 	expose_hook(e);
-	return (0);	
+	return (0);
 }

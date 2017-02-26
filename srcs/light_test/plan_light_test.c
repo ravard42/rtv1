@@ -1,4 +1,16 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plan_light_test.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 18:04:27 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:14:05 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 static float	solve(t_lght *l, float *dir, t_pln *p)
 {
@@ -13,7 +25,7 @@ static float	solve(t_lght *l, float *dir, t_pln *p)
 	return (tmp);
 }
 
-int	plan_light_test(float *p, void *obj, t_pln *pl, t_lght *l)
+int				plan_light_test(float *p, void *obj, t_pln *pl, t_lght *l)
 {
 	float	tmp[2];
 	float	dir[3];

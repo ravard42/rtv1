@@ -1,4 +1,16 @@
-# include <rtv1.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_cone.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 19:23:42 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 19:34:32 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rtv1.h"
 
 static t_con	*init_con(t_obj *o)
 {
@@ -28,7 +40,7 @@ static t_con	*init_con(t_obj *o)
 	return (begin);
 }
 
-static void	read_input_data(float *tmp_save, char **inp, t_con *co)
+static void		read_input_data(float *tmp_save, char **inp, t_con *co)
 {
 	if (!ft_strcmp("origin", inp[0]))
 		load_vect(co->origin, inp[1]);
@@ -52,20 +64,20 @@ static void	read_input_data(float *tmp_save, char **inp, t_con *co)
 		co->borne = load_vect(NULL, inp[1]);
 }
 
-void	set_cone(char **tmp, t_obj *o)
+void			set_cone(char **tmp, t_obj *o)
 {
 	t_con	*begin;
 	char	***input;
-	int	i;
+	int		i;
 	float	tmp_save[8];
 
-	begin = init_con(o);	
+	begin = init_con(o);
 	i = input_number(tmp);
 	input = (char ***)malloc(sizeof(char **) * i);
 	i = 0;
 	while (tmp[++i])
 		input[i - 1] = ft_strsplit(tmp[i], ':');
-	input[i - 1] = NULL;	
+	input[i - 1] = NULL;
 	ft_memset(tmp_save, 0, sizeof(float) * 8);
 	i = -1;
 	while (input[++i])

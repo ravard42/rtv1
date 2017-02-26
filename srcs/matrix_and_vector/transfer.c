@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   transfer.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 18:16:58 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:39:51 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	z_axe_case(float **base)
+#include "rtv1.h"
+
+static void		z_axe_case(float **base)
 {
 	int		sens;
 
@@ -9,7 +21,7 @@ static void	z_axe_case(float **base)
 	set_vect(base[1], -sens, 0, 0);
 }
 
-static void	x_y_z_axe_case(float **base)
+static void		x_y_z_axe_case(float **base)
 {
 	int		sens;
 
@@ -33,7 +45,7 @@ static void	x_y_z_axe_case(float **base)
 	vectorial_product(base[1], base[2], base[0]);
 }
 
-void	construct_transfer_mat(float **base)
+void			construct_transfer_mat(float **base)
 {
 	ft_norme(base[2]);
 	if (base[2][0] == 0 && base[2][1] == 0)
@@ -42,7 +54,7 @@ void	construct_transfer_mat(float **base)
 		x_y_z_axe_case(base);
 }
 
-void	set_cyl_transfer(t_cyl *cy)
+void			set_cyl_transfer(t_cyl *cy)
 {
 	int	i;
 
@@ -53,16 +65,16 @@ void	set_cyl_transfer(t_cyl *cy)
 		cy->t->mat[i] = (float *)malloc(sizeof(float) * 3);
 	cy->t->cam_pos = (float *)malloc(sizeof(float) * 3);
 	cy->t->obj_pos = (float *)malloc(sizeof(float) * 3);
-	cy->t->cam_r_dir = (float **)malloc(sizeof(float *) * MAX_X * MAX_Y);
+	cy->t->cam_r_dir = (float **)malloc(sizeof(float *) * (MAX_X * MAX_Y));
 	i = -1;
 	while (++i < MAX_X * MAX_Y)
 		cy->t->cam_r_dir[i] = (float *)malloc(sizeof(float) * 3);
-	vectorial_copy(cy->t->mat[2], cy->axe);	
+	vectorial_copy(cy->t->mat[2], cy->axe);
 	construct_transfer_mat(cy->t->mat);
 	inverse(cy->t->mat);
 }
 
-void	set_cone_transfer(t_con *co)
+void			set_cone_transfer(t_con *co)
 {
 	int	i;
 
@@ -73,7 +85,7 @@ void	set_cone_transfer(t_con *co)
 		co->t->mat[i] = (float *)malloc(sizeof(float) * 3);
 	co->t->cam_pos = (float *)malloc(sizeof(float) * 3);
 	co->t->obj_pos = (float *)malloc(sizeof(float) * 3);
-	co->t->cam_r_dir = (float **)malloc(sizeof(float *) * MAX_X * MAX_Y);
+	co->t->cam_r_dir = (float **)malloc(sizeof(float *) * (MAX_X * MAX_Y));
 	i = -1;
 	while (++i < MAX_X * MAX_Y)
 		co->t->cam_r_dir[i] = (float *)malloc(sizeof(float) * 3);

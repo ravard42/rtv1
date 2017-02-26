@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylindre_light_test.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 18:03:58 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:12:47 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	set_param(float *param, t_cyl *cy)
+#include "rtv1.h"
+
+static void		set_param(float *param, t_cyl *cy)
 {
 	param[0] = pow(cy->t->cam_r_dir[0][0], 2)
 		+ pow(cy->t->cam_r_dir[0][1], 2);
@@ -28,18 +40,18 @@ static float	solve(float *param)
 	}
 	else if (delt > 0)
 	{
-		tmp[0] = (-param[1] + sqrt(delt))/ (2 * param[0]);
-		tmp[1] = (-param[1] - sqrt(delt))/ (2 * param[0]);
-		if (tmp[0] > 0 && tmp[1] > 0) 
+		tmp[0] = (-param[1] + sqrt(delt)) / (2 * param[0]);
+		tmp[1] = (-param[1] - sqrt(delt)) / (2 * param[0]);
+		if (tmp[0] > 0 && tmp[1] > 0)
 			sol = (tmp[0] <= tmp[1]) ? tmp[0] : tmp[1];
-		else if ((tmp[0] > 0 && tmp[1] <= 0) 
+		else if ((tmp[0] > 0 && tmp[1] <= 0)
 				|| (tmp[1] > 0 && tmp[0] <= 0))
 			sol = (tmp[0] > 0) ? tmp[0] : tmp[1];
 	}
 	return (sol);
 }
 
-int	cylindre_light_test(float *p, void *obj, t_cyl *cy, t_lght *l)
+int				cylindre_light_test(float *p, void *obj, t_cyl *cy, t_lght *l)
 {
 	float	tmp[2];
 	float	param[3];
@@ -59,7 +71,7 @@ int	cylindre_light_test(float *p, void *obj, t_cyl *cy, t_lght *l)
 	{
 		tmp[0] = cy->t->cam_pos[2] + tmp[1]
 			* cy->t->cam_r_dir[0][2] - cy->t->obj_pos[2];
-		if ((tmp[0] < 0 && tmp[0] < cy->borne[0]) 
+		if ((tmp[0] < 0 && tmp[0] < cy->borne[0])
 				|| (tmp[0] > 0 && tmp[0] > cy->borne[1]))
 			return (1);
 	}

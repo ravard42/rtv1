@@ -1,6 +1,18 @@
-# include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_cone.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/26 17:58:47 by ravard            #+#    #+#             */
+/*   Updated: 2017/02/26 18:00:27 by ravard           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void	free_cone(t_con *co)
+#include "rtv1.h"
+
+static void		free_cone(t_con *co)
 {
 	int	i;
 
@@ -21,9 +33,9 @@ static void	free_cone(t_con *co)
 		free(co->borne);
 }
 
-int	free_all_cone(t_obj *o)
+int				free_all_cone(t_obj *o)
 {
-	t_con 		*begin;
+	t_con	*begin;
 
 	if (!o->co)
 		return (0);
