@@ -6,7 +6,7 @@
 /*   By: ravard <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/28 13:40:41 by ravard            #+#    #+#             */
-/*   Updated: 2017/02/28 13:45:52 by ravard           ###   ########.fr       */
+/*   Updated: 2017/02/28 15:01:17 by ravard           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <mlx.h>
 # include "libft.h"
 
-# define MAX_X		70
-# define MAX_Y		70
+# define MAX_X		350
+# define MAX_Y		350
 # define VP_WIDTH	1.0
 # define VP_HEIGHT	1.0
 # define VP_DIST	1.0
