@@ -29,21 +29,21 @@
 # define BRI_ANGL	0.2
 # define BRI_INT	2
 
-/*
-**# define EXIT 	65307
-**# define RECULER 	101
-**# define AVANCER 	113
-**# define ROT_D 	100
-**# define ROT_D2 	65363
-**# define ROT_G 	97
-**# define ROT_G2 	65361
-**# define DEMITOUR	32
-**# define BAS 		115
-**# define BAS2 	65364
-**# define HAUT 	119
-**# define HAUT2 	65362
-*/
 
+# define EXIT 	65307
+# define RECULER 	101
+# define AVANCER 	113
+# define ROT_D 	100
+# define ROT_D2 	65363
+# define ROT_G 	97
+# define ROT_G2 	65361
+# define DEMITOUR	32
+# define BAS 		115
+# define BAS2 	65364
+# define HAUT 	119
+# define HAUT2 	65362
+
+/*
 # define EXIT 53
 # define RECULER 14
 # define AVANCER 12
@@ -56,6 +56,7 @@
 # define BAS2 125
 # define HAUT 13
 # define HAUT2 126
+*/
 
 typedef struct			s_cam
 {

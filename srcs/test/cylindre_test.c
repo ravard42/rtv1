@@ -17,12 +17,10 @@ static void		set_param(int i, float *param, t_env *e)
 	param[0] = pow(e->o->cy->t->cam_r_dir[i][0], 2)
 		+ pow(e->o->cy->t->cam_r_dir[i][1], 2);
 	param[1] = 2 * (e->o->cy->t->cam_r_dir[i][0]
-			* (e->o->cy->t->cam_pos[0] - e->o->cy->t->obj_pos[0])
-			+ e->o->cy->t->cam_r_dir[i][1] * (e->o->cy->t->cam_pos[1]
-				- e->o->cy->t->obj_pos[1]));
-	param[2] = pow(e->o->cy->t->cam_pos[0]
-			- e->o->cy->t->obj_pos[0], 2)
-		+ pow(e->o->cy->t->cam_pos[1] - e->o->cy->t->obj_pos[1], 2)
+			* e->o->cy->t->cam_pos[0]
+			+ e->o->cy->t->cam_r_dir[i][1] * e->o->cy->t->cam_pos[1]);
+	param[2] = pow(e->o->cy->t->cam_pos[0], 2)
+		+ pow(e->o->cy->t->cam_pos[1], 2)
 		- pow(e->o->cy->r, 2);
 }
 
@@ -58,7 +56,7 @@ static void		sol_test(int i, float sol, t_env *e)
 	if (sol <= e->c->r_dist[i] && sol < MAX_DIST)
 	{
 		tmp = e->o->cy->t->cam_pos[2]
-			+ sol * e->o->cy->t->cam_r_dir[i][2] - e->o->cy->t->obj_pos[2];
+			+ sol * e->o->cy->t->cam_r_dir[i][2];
 		if (!e->o->cy->borne
 				|| (tmp < 0 && tmp >= e->o->cy->borne[0])
 				|| (tmp >= 0 && tmp <= e->o->cy->borne[1]))
@@ -76,8 +74,8 @@ int				cylindre_test(t_env *e)
 	float	param[3];
 	float	sol;
 
-	matrix_product(e->o->cy->t->cam_pos, e->o->cy->t->mat, e->c->pos);
 	matrix_product(e->o->cy->t->obj_pos, e->o->cy->t->mat, e->o->cy->origin);
+	vectorial_subtraction(e->o->cy->t->cam_pos, matrix_product(e->o->cy->t->cam_pos, e->o->cy->t->mat, e->c->pos), e->o->cy->t->obj_pos);
 	i = -1;
 	while (++i < MAX_X * MAX_Y)
 	{
